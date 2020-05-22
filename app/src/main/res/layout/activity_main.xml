@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/ffffff"
     android:layout_height="match_parent"
     tools:context=".uis.MainActivity">
 
@@ -10,7 +11,7 @@
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/main_rgroup"
+        android:layout_above="@+id/btntobus"
         android:background="@color/ttttt" />
 
     <FrameLayout
@@ -18,17 +19,21 @@
         android:layout_height="wrap_content">
 
 
-
     </FrameLayout>
+
     <Button
         android:id="@+id/btntobus"
+        android:padding="4dp"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:background="@mipmap/ic_launcher"
+        android:background="@null"
+        android:drawableTop="@mipmap/app_bar_trip"
         android:gravity="center"
+        android:text="出行"
         android:textColor="@color/b3886FB" />
+
     <RadioGroup
         android:id="@+id/main_rgroup"
         android:layout_width="match_parent"
@@ -48,10 +53,11 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:button="@null"
-            android:drawablePadding="5dp"
-            android:gravity="center"
+            android:drawableTop="@mipmap/app_title_home"
+            android:gravity="center_horizontal"
             android:text="首页"
             android:textColor="@color/b3886FB" />
+
 
         <RadioButton
             android:id="@+id/main_frag_benefit"
@@ -63,8 +69,8 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:button="@null"
-            android:drawablePadding="5dp"
-            android:gravity="center"
+            android:drawableTop="@mipmap/app_bar_quanyi"
+            android:gravity="center_horizontal"
             android:text="权益"
             android:textColor="@color/b3886FB" />
 
@@ -72,14 +78,9 @@
             android:id="@+id/main_frag_trip"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_weight="1.5"
             android:button="@null"
             android:gravity="center"
-            android:text="出行"
             android:textColor="@color/b3886FB" />
 
         <RadioButton
@@ -92,8 +93,8 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:button="@null"
-            android:drawablePadding="5dp"
-            android:gravity="center"
+            android:drawableTop="@mipmap/app_bar_life"
+            android:gravity="center_horizontal"
             android:text="生活"
             android:textColor="@color/b3886FB" />
 
@@ -102,13 +103,13 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:button="@null"
-            android:drawablePadding="5dp"
-            android:gravity="center"
+            android:drawableTop="@mipmap/app_bar_mine"
+            android:gravity="center_horizontal"
             android:text="我的"
             android:textColor="@color/b3886FB" />
     </RadioGroup>

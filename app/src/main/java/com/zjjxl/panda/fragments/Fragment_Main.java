@@ -1,6 +1,7 @@
 package com.zjjxl.panda.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -15,9 +16,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.uis.NFCPandaActivity;
 
 
-public class Fragment_Main extends Fragment {
+public class Fragment_Main extends Fragment implements View.OnClickListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -25,8 +27,9 @@ public class Fragment_Main extends Fragment {
 
     private String mParam1;
     private String mParam2;
-    private ImageView mButton;
-    private Button mButton2;
+
+
+    private Button mBtncard_savemoney;
 
     public Fragment_Main() {
         // Required empty public constructor
@@ -56,28 +59,41 @@ public class Fragment_Main extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment__main, container, false);
-        mButton = inflate.findViewById(R.id.btm);
-        mButton2 = inflate.findViewById(R.id.btm2);
+
+        initView(inflate);
+
 
         return inflate;
+    }
+
+    private void initView(View inflate) {
+
+
+        mBtncard_savemoney = inflate.findViewById(R.id.btncard_savemoney);
+
+        mBtncard_savemoney.setOnClickListener(this);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bitmap capture = capture(getActivity());
-                mButton.setImageBitmap(capture);
-            }
-        });
 
     }
 
-    public static Bitmap capture(Activity activity) {
-        activity.getWindow().getDecorView().setDrawingCacheEnabled(true);
-        Bitmap bmp = activity.getWindow().getDecorView().getDrawingCache();
-        return bmp;
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btncard_savemoney:
+                Intent intent = new Intent(getActivity(), NFCPandaActivity.class);
+                startActivity(intent);
+                break;
+
+        }
     }
+
+//    public static Bitmap capture(Activity activity) {
+//        activity.getWindow().getDecorView().setDrawingCacheEnabled(true);
+//        Bitmap bmp = activity.getWindow().getDecorView().getDrawingCache();
+//        return bmp;
+//    }
 }

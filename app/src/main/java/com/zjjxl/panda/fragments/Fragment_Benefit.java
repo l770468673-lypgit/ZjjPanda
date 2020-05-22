@@ -3,12 +3,15 @@ package com.zjjxl.panda.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.adapters.Trip_CardAdapter;
 
 
 public class Fragment_Benefit extends Fragment {
@@ -18,6 +21,11 @@ public class Fragment_Benefit extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+
+    private RecyclerView mTrip_recycle_list;
+    private RecyclerView mTrip_recycle_list2;
+    private Trip_CardAdapter mAdapte;
 
     public Fragment_Benefit() {
         // Required empty public constructor
@@ -41,10 +49,34 @@ public class Fragment_Benefit extends Fragment {
         }
     }
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__benefit, container, false);
+
+        View inflate = inflater.inflate(R.layout.fragment__benefit, container, false);
+        iniView(inflate);
+        return inflate;
+    }
+
+
+    private void iniView(View inflate) {
+        mTrip_recycle_list = inflate.findViewById(R.id.benefit_recycle_list);
+        mTrip_recycle_list2 = inflate.findViewById(R.id.benefit_recycle_list2);
+        mAdapte = new Trip_CardAdapter();
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        //设置布局管理器
+        mTrip_recycle_list.setLayoutManager(layoutManager);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        mTrip_recycle_list.setAdapter(mAdapte);
+
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getActivity());
+        mTrip_recycle_list2.setLayoutManager(layoutManager2);
+        layoutManager2.setOrientation(RecyclerView.HORIZONTAL);
+        mTrip_recycle_list2.setAdapter(mAdapte);
     }
 }

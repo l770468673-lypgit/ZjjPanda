@@ -12,6 +12,11 @@
 
 
     <color name="ttttt">#FBCDCD</color>
+    <color name="home_583821_color">#583821</color>
 
-
+    <color name="home_3B3B3B_color">#3B3B3B</color>
+    <color name="ff5d92">#FF5D92</color>
+    <color name="alert_text_color">#898989</color>
+    <color name="c8c8c">#8c8c8c</color>
+    <color name="f7f7f7">#F7F7F7</color>
 </resources>
