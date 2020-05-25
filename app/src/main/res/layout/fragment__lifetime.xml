@@ -3,13 +3,445 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ffffff"
     tools:context=".fragments.Fragment_Lifetime">
 
-　
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textStyle="bold"
-        android:textSize="40dp"
-        android:text="生活" />
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:id="@+id/life_toptitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_fragment_color">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:text="城市生活"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/life_lly_back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/life_toptitle"
+                android:background="@mipmap/life_img_topbak"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/life_lly_luyou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/life_toptitle"
+                android:orientation="horizontal"
+                android:padding="6dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/life_rely_tv_jingjinjilvyou"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="京津冀旅游"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_toRightOf="@+id/life_rely_tv_jingjinjilvyou"
+                            android:background="@mipmap/life_sanjiao" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/life_rely_tv_findword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/life_rely_tv_jingjinjilvyou"
+                        android:layout_marginTop="10dp"
+                        android:text="去发现更有趣的世界"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/life_rely_tv_findword"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#FFFFFF" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="天气晴，宜出行"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/life_lly_daoyou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/life_lly_luyou"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/trip_fragmentsearch_color"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/life_toptitle"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="#F7F7F7"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@mipmap/life_big_robot" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="智能小樽"
+                                    android:textColor="#333333"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="找美食，找景点"
+                                    android:textColor="#666666"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="#F7F7F7"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@mipmap/life_big_robot" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="智能客服"
+                                    android:textColor="#333333"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="各种投诉"
+                                    android:textColor="#666666"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="小遵为您推荐优选导游："
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="全部导游>"
+                        android:textColor="#333333"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/life_cop"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@mipmap/life_img1"
+                        android:scaleType="center" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:text="米自立"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:text="类别：专职导游"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:text="经验：5年经验"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:text="电话：15677889987"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/life_tuijiangonglue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/life_lly_daoyou"
+                android:background="@color/ffffff"
+                android:orientation="horizontal"
+                android:paddingTop="20dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_weight="1"
+                    android:background="@mipmap/life_img1"
+                    android:gravity="bottom|center"
+                    android:orientation="vertical"
+                    android:scaleType="center" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_weight="1"
+                    android:background="@mipmap/life_img2"
+                    android:gravity="bottom|center"
+                    android:orientation="vertical"
+                    android:scaleType="center" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_weight="1"
+                    android:background="@mipmap/life_img3"
+                    android:gravity="bottom|center"
+                    android:orientation="vertical"
+                    android:scaleType="center" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_weight="1"
+                    android:background="@mipmap/life_img4"
+                    android:gravity="bottom|center"
+                    android:orientation="vertical"
+                    android:scaleType="center" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/life_rely_anpai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/life_tuijiangonglue"
+                android:layout_margin="8dp"
+                android:background="@mipmap/life_yuanjiao"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/xingchengtviv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/life_small_robot" />
+
+                <TextView
+                    android:id="@+id/xingchengtv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_toRightOf="@+id/xingchengtviv"
+                    android:text="智能行程安排"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/xingchengtv1"
+                    android:layout_margin="4dp"
+                    android:layout_toRightOf="@+id/xingchengtviv"
+                    android:text="找美食、找景点、找酒店、找厕所"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/life_anpai_boxframe"
+                    android:gravity="center"
+                    android:text="一键安排"
+                    android:textColor="#3699FF"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/life_rely_anpai"
+                android:gravity="center">
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/life_img_zhoubian" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_toRightOf="@+id/xingchengtviv"
+                    android:text="周边推荐"
+                    android:textColor="#333333"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+    　
 </FrameLayout>

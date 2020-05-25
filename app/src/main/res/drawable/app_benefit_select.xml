@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="false" android:drawable="@mipmap/app_bar_quanyi"/>
+    <item android:state_checked="true" android:drawable="@mipmap/app_bar_quanyi_select"/>
+
+</selector>

@@ -12,12 +12,46 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
+    signingConfigs {
+        release {
+            //注意：该签名文件的备份在项目内，使用路径可以改变
+            storeFile file("../../ZjjPanda/zjjpanda.jks")
+            storePassword "123456"
+            keyAlias "zjjpd"
+            keyPassword "123456"
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+    }
+    lintOptions {
+        disable "ResourceType"
+        checkReleaseBuilds false
+        abortOnError false
+    }
     buildTypes {
+        debug {
+            //debug时使用release签名
+            signingConfig signingConfigs.release
+
+        }
+        lintOptions {
+            checkReleaseBuilds false
+            // Or, if you prefer, you can continue to check for errors in release builds,
+            // but continue the build even when errors are found:
+            abortOnError false
+            disable 'GoogleAppIndexingWarning'
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            signingConfig signingConfigs.release
         }
     }
 

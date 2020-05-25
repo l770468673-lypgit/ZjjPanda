@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -38,6 +39,7 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
     private RadioButton mMain_frag_life;
     private RadioButton mMain_frag_mine;
     private Button mBtntobus;
+    private boolean istraipclick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +56,15 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
     private void initGroup() {
 
         mMain_rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
                 switch (checkedId) {
                     case R.id.main_frag_home:
                         setIndexSelected(0);
+
+
                         break;
                     case R.id.main_frag_benefit:
                         setIndexSelected(1);
@@ -102,11 +107,19 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
         mMain_rgroup.getChildAt(0).performClick();//模拟点击第一个RB
     }
 
+
     private void initView() {
+
         mMain_container = findViewById(R.id.main_container);
         mMain_rgroup = findViewById(R.id.main_rgroup);
         mBtntobus = findViewById(R.id.btntobus);
         mMain_rgroup.setOnTouchListener(this);
+
+        if (istraipclick) {
+            mBtntobus.setTextColor(getResources().getColor(R.color.b3886FB ));
+        } else {
+            mBtntobus.setTextColor(getResources().getColor(R.color.b8C8C8C));
+        }
         mMain_frag_home = findViewById(R.id.main_frag_home);
         mMain_frag_benefit = findViewById(R.id.main_frag_benefit);
         mMain_frag_trip = findViewById(R.id.main_frag_trip);
@@ -119,6 +132,11 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
     private void setIndexSelected(int index) {
         if (mIndex == index) {
             return;
+        }
+        if(index==2){
+            mBtntobus.setTextColor(getResources().getColor(R.color.b3886FB));
+        }else {
+            mBtntobus.setTextColor(getResources().getColor(R.color.b8C8C8C ));
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();

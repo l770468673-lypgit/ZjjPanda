@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ffffff"
     tools:context=".fragments.Fragment_Mine">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/fA4A4A4">
+        android:background="@color/ffffff"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,21 +20,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/main_fragment_color"
                 android:orientation="vertical">
 
 
                 <LinearLayout
-                    android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:background="@mipmap/ic_launcher" />
+                        android:background="@mipmap/mine_headpic" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -43,69 +43,45 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="--- panda ---" />
+                            android:text="PANDA"
+                            android:textColor="#333333" />
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="80dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="--- 15689123357 ---" />
+                            android:text="15689123555"
+                            android:textColor="#333333"
+                            android:textSize="12sp" />
 
 
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:background="@mipmap/ic_launcher" />
+                        android:background="@mipmap/mine_bar_qr" />
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="6dp">
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@mipmap/ic_launcher"
-                        android:gravity="center" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/mine_banna"
+                        android:padding="4dp"
+                        android:scaleType="fitCenter" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:text="可用余额"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="6"
-                            android:gravity="left"
-                            android:text="89.00元" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="充值" />
-
-
-                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -116,77 +92,81 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/ffffff"
-                android:orientation="vertical"
-                android:paddingTop="20dp">
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="账单记录"
-                        android:textColor="@color/ttttt"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="账单记录"-->
+                <!--                        android:textColor="@color/ttttt"-->
+                <!--                        android:textStyle="bold" />-->
+                <!--                </LinearLayout>-->
+
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:background="@color/ffffff"-->
+                <!--                    android:orientation="horizontal"-->
+                <!--                    android:paddingTop="20dp">-->
+
+                <!--                    <Button-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:drawableTop="@mipmap/ic_launcher"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:text="充值记录"-->
+                <!--                        android:textColor="@color/ttttt" />-->
+
+
+                <!--                    <Button-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:drawableTop="@mipmap/ic_launcher"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:text="开卡记录"-->
+                <!--                        android:textColor="@color/ttttt" />-->
+
+
+                <!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:background="@color/ffffff"
-                    android:orientation="horizontal"
-                    android:paddingTop="20dp">
-
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
-                        android:gravity="center"
-                        android:text="充值记录"
-                        android:textColor="@color/ttttt" />
-
-
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
-                        android:gravity="center"
-                        android:text="开卡记录"
-                        android:textColor="@color/ttttt" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/ffffff"
-                    android:orientation="vertical"
-                    android:paddingTop="20dp">
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:padding="6dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="我的订单"
-                            android:textColor="@color/ttttt"
-                            android:textStyle="bold" />
+                            android:textColor="#333333" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:gravity="right"
-                            android:text="查看全部订 单"
-                            android:textColor="@color/ttttt" />
+                            android:text="查看全部订单"
+                            android:textColor="#999999"
+                            android:textSize="12sp" />
                     </RelativeLayout>
+
+                    <LinearLayout
+                        android:background="#EEEEEE"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -199,39 +179,47 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:drawableTop="@mipmap/ic_launcher"
+                            android:background="@null"
+                            android:drawableTop="@mipmap/mine_ticket"
+                            android:drawablePadding="6dp"
                             android:gravity="center"
-                            android:text="--- 开卡 ---"
-                            android:textColor="@color/ttttt" />
+                            android:text="门票"
+                            android:textColor="#333333" />
 
                         <Button
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:drawableTop="@mipmap/ic_launcher"
+                            android:background="@null"
+                            android:drawableTop="@mipmap/mine_bar_city"
+                            android:drawablePadding="6dp"
                             android:gravity="center"
-                            android:text="--- 开卡 ---"
-                            android:textColor="@color/ttttt" />
-
-
-                        <Button
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:drawableTop="@mipmap/ic_launcher"
-                            android:gravity="center"
-                            android:text="--- 开卡 ---"
-                            android:textColor="@color/ttttt" />
+                            android:text="酒店"
+                            android:textColor="#333333" />
 
 
                         <Button
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:drawableTop="@mipmap/ic_launcher"
+                            android:background="@null"
+                            android:drawableTop="@mipmap/mine_techan"
+                            android:drawablePadding="6dp"
                             android:gravity="center"
-                            android:text="--- 开卡 ---"
-                            android:textColor="@color/ttttt" />
+                            android:text="酒店"
+                            android:textColor="#333333" />
+
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawableTop="@mipmap/mine_gfood"
+                            android:drawablePadding="6dp"
+                            android:gravity="center"
+                            android:text="酒店"
+                            android:textColor="#333333" />
 
                     </LinearLayout>
 
@@ -243,39 +231,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:background="@mipmap/mine_banner2"
+                android:orientation="horizontal"
+                android:padding="6dp">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@mipmap/ic_launcher"
+
                     android:gravity="center" />
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/ffffff"
-                android:orientation="vertical"
-                android:paddingTop="20dp">
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="6dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="常用功能"
-                        android:textColor="@color/ttttt"
-                        android:textStyle="bold" />
+                        android:textColor="#333333" />
 
                 </RelativeLayout>
-
+                <LinearLayout
+                    android:background="#EEEEEE"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -287,41 +280,48 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/mine_fapiao"
+                        android:drawablePadding="6dp"
                         android:gravity="center"
-                        android:text="--- 开卡 ---"
-                        android:textColor="@color/ttttt" />
+                        android:text="我的发票"
+                        android:textColor="#333333" />
 
                     <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/mine_cahzhangdan"
+                        android:drawablePadding="6dp"
                         android:gravity="center"
-                        android:text="--- 开卡 ---"
-                        android:textColor="@color/ttttt" />
-
+                        android:text="我的账单"
+                        android:textColor="#333333" />
 
                     <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/mine_jifen"
+                        android:drawablePadding="6dp"
                         android:gravity="center"
-                        android:text="--- 开卡 ---"
-                        android:textColor="@color/ttttt" />
-
+                        android:text="我的积分"
+                        android:textColor="#333333" />
 
                     <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/mine_dizhi"
+                        android:drawablePadding="6dp"
                         android:gravity="center"
-                        android:text="--- 开卡 ---"
-                        android:textColor="@color/ttttt" />
+                        android:text="我的地址"
+                        android:textColor="#333333" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -333,39 +333,46 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/mine_kefu"
+                        android:drawablePadding="6dp"
                         android:gravity="center"
-                        android:text="--- 开卡 ---"
-                        android:textColor="@color/ttttt" />
+                        android:text="在线客服"
+                        android:textColor="#333333" />
 
                     <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/mine_memory"
+                        android:drawablePadding="6dp"
                         android:gravity="center"
-                        android:text="--- 开卡 ---"
-                        android:textColor="@color/ttttt" />
-
+                        android:text="我的发票"
+                        android:textColor="#333333" />
 
                     <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/mine_lianxiren"
+                        android:drawablePadding="6dp"
                         android:gravity="center"
-                        android:text="--- 开卡 ---"
-                        android:textColor="@color/ttttt" />
-
+                        android:text="我的联系人"
+                        android:textColor="#333333" />
 
                     <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableTop="@mipmap/ic_launcher"
+                        android:background="@null"
+                        android:drawableTop="@mipmap/mine_setting"
+                        android:drawablePadding="6dp"
                         android:gravity="center"
-                        android:text="--- 开卡 ---"
-                        android:textColor="@color/ttttt" />
+                        android:text="设置"
+                        android:textColor="#333333" />
+
 
                 </LinearLayout>
 
