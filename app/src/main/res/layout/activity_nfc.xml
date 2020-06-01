@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".uis.NFCPandaActivity">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_fragment_color">
+
+        <TextView
+            android:id="@+id/nfc_toptitle_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:padding="14dp"
+            android:text="返回"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="14dp"
+            android:text="公交充值"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
 
     <RelativeLayout
@@ -40,175 +68,202 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/lly_writeview"
+    <RelativeLayout
+        android:id="@+id/rely_nfc_bottomlly"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_marginTop="20dp"
         android:visibility="gone">
 
-
-        <!--        <include-->
-        <!--            layout="@layout/toptitlebar_layout_withtext"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content" />-->
-
         <LinearLayout
+            android:id="@+id/lly_writeview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/nfc_bottomlly"
             android:orientation="vertical">
+
+
+            <!--        <include-->
+            <!--            layout="@layout/toptitlebar_layout_withtext"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="@string/fragment_bycar_text_num"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/lly_writecardnum"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/app_name"
-                    android:textSize="20sp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="@string/fragment_bycar_text_num"
+                        android:textColor="#093B92"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/lly_writecardnum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="熊猫文旅通"
+                        android:textColor="#093B92"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="@string/fragment_bycar_text_money"
+                        android:textColor="#093B92"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/lly_writecmomey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textColor="#093B92"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
             </LinearLayout>
+
+
+            <GridView
+                android:id="@+id/money_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="@string/fragment_bycar_text_money"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/lly_writecmomey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <GridView
-            android:id="@+id/money_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="3" />
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/nfc_btnsaveothermoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/nfcact_grid_item_boxframe"
-                android:padding="10dp"
-                android:text="@string/nfcact_title_realpaymoney_othermoney"
-                android:textSize="14sp" />
-
-            <RelativeLayout
-                android:id="@+id/nfc_paymoney_bottomlly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"
+                android:layout_height="60dp"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:weightSum="5">
 
-                <EditText
-                    android:id="@+id/nfc_saveothermoney"
-                    android:layout_width="100dp"
+                <Button
+                    android:id="@+id/nfc_btnsaveothermoney"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_toLeftOf="@+id/paymoney_bottomlly3"
-                    android:hint=""
-                    android:inputType="number"
-                    android:text=""
+                    android:layout_weight="1"
+                    android:background="@drawable/nfcact_grid_item_boxframe"
+                    android:text="@string/nfcact_title_realpaymoney_othermoney"
+                    android:textColor="#093B92"
                     android:textSize="14sp" />
+
+                <RelativeLayout
+                    android:id="@+id/nfc_paymoney_bottomlly"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="3"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/nfc_saveothermoney"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:background="@null"
+                        android:gravity="bottom"
+                        android:hint=""
+                        android:inputType="number"
+                        android:text=""
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#093B92" />
+
+                </RelativeLayout>
 
                 <Button
                     android:id="@+id/paymoney_bottomlly3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="right"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/fragment_home_boxframe"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/nfcact_grid_item_boxframe"
+                    android:padding="10dp"
                     android:text="@string/nfcact_title_realpaymoney_commit"
-                    android:textColor="@color/c8c8c"
-                    android:textStyle="bold" />
+                    android:textColor="#093B92"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
-            </RelativeLayout>
+                <Button
+                    android:id="@+id/quancun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="圈存1分"
+                    android:visibility="gone" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/quancun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="圈存1分" />
+
         </LinearLayout>
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/nfc_bottomlly"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/nfc_bottomlly"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nfcact_title_fapiao"
-            android:textSize="14sp" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nfcact_title_tishi"
-            android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nfcact_title_fapiao"
+                android:textSize="14sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/moredispose_text_hist"
-            android:textSize="14sp" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nfcact_title_tishi"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/moredispose_text_hist"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
 
     <!--tuikuan  退款 全村 等操作 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -219,4 +274,4 @@
             android:text="退款" />
     </LinearLayout>
     <!--tuikuan  ppppppppppppp -->
-</RelativeLayout>
+</LinearLayout>

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zjjxl.panda.R;
-import com.zjjxl.panda.adapters.Trip_CardAdapter;
+import com.zjjxl.panda.adapters.Benefit_CardAdapter;
 
 
 public class Fragment_Benefit extends Fragment {
@@ -25,7 +25,7 @@ public class Fragment_Benefit extends Fragment {
 
     private RecyclerView mTrip_recycle_list;
     private RecyclerView mTrip_recycle_list2;
-    private Trip_CardAdapter mAdapte;
+    private Benefit_CardAdapter mAdapte;
 
     public Fragment_Benefit() {
         // Required empty public constructor
@@ -66,7 +66,7 @@ public class Fragment_Benefit extends Fragment {
     private void iniView(View inflate) {
         mTrip_recycle_list = inflate.findViewById(R.id.benefit_recycle_list);
         mTrip_recycle_list2 = inflate.findViewById(R.id.benefit_recycle_list2);
-        mAdapte = new Trip_CardAdapter();
+        mAdapte = new Benefit_CardAdapter();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         //设置布局管理器

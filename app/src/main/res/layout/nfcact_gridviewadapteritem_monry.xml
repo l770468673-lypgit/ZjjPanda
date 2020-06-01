@@ -22,6 +22,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:gravity="center"
+            android:textColor="#093B92"
             android:text="111111"
             android:textSize="20sp" />
 

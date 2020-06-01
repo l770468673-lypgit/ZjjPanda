@@ -1,13 +1,11 @@
 package com.zjjxl.panda.uis;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -16,15 +14,21 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.apps.XLBaseActivity;
+import com.zjjxl.panda.beans.SessioIdBean;
+import com.zjjxl.panda.beans.SmsCode;
 import com.zjjxl.panda.fragments.Fragment_Benefit;
 import com.zjjxl.panda.fragments.Fragment_Lifetime;
 import com.zjjxl.panda.fragments.Fragment_Main;
 import com.zjjxl.panda.fragments.Fragment_Mine;
 import com.zjjxl.panda.fragments.Fragment_Trip;
-import com.zjjxl.panda.utils.StatusBarUtil;
+import com.zjjxl.panda.https.HttpManager;
+import com.zjjxl.panda.utils.Contants;
+import com.zjjxl.panda.utils.ShareUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends XLBaseActivity implements View.OnTouchListener {
     private String TAG = "MainActivity";
@@ -51,6 +55,26 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
         initFragmentDate();
         initGroup();
 
+        getSessionID();
+    }
+
+    private void getSessionID() {
+
+        Call<SessioIdBean> sessionId = HttpManager.getInstance().getHttpClient3().getSessionId();
+        sessionId.enqueue(new Callback<SessioIdBean>() {
+            @Override
+            public void onResponse(Call<SessioIdBean> call, Response<SessioIdBean> response) {
+                if (response.body() != null) {
+                    String sessionId1 = response.body().getSessionId();
+                    ShareUtil.putString(Contants.APP_SESSIONIS, sessionId1);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SessioIdBean> call, Throwable t) {
+
+            }
+        });
     }
 
     private void initGroup() {
@@ -116,7 +140,7 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
         mMain_rgroup.setOnTouchListener(this);
 
         if (istraipclick) {
-            mBtntobus.setTextColor(getResources().getColor(R.color.b3886FB ));
+            mBtntobus.setTextColor(getResources().getColor(R.color.b3886FB));
         } else {
             mBtntobus.setTextColor(getResources().getColor(R.color.b8C8C8C));
         }
@@ -133,10 +157,10 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
         if (mIndex == index) {
             return;
         }
-        if(index==2){
+        if (index == 2) {
             mBtntobus.setTextColor(getResources().getColor(R.color.b3886FB));
-        }else {
-            mBtntobus.setTextColor(getResources().getColor(R.color.b8C8C8C ));
+        } else {
+            mBtntobus.setTextColor(getResources().getColor(R.color.b8C8C8C));
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();

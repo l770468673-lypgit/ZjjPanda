@@ -1,4 +1,4 @@
-package com.zjjxl.panda.uis;
+package com.zjjxl.panda.apps;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.utils.StatusBarUtil;
+// 获取sha1 命令
+//D:\Android\jdk18Install\jdk\bin\keytool -v -list -keystore C:\Users\Administrator\Desktop\ZjjPanda\zjjpanda.jks
 
 public class XLBaseActivity extends AppCompatActivity {
 

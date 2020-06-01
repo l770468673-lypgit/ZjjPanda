@@ -25,36 +25,44 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/mine_headpic" />
+                    <com.zjjxl.panda.utils.RatioImageView
+                        android:id="@+id/mine_minehead"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="fitCenter"
+                        android:layout_gravity="center"
+                        />
 
                     <LinearLayout
+                        android:id="@+id/rely_mine_tologin"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="6"
                         android:gravity="left"
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/min_login_nunm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="PANDA"
-                            android:textColor="#333333" />
+                            android:text="注册/登录"
+                            android:textColor="#333333"
+                            android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/min_login_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="15689123555"
+                            android:text="登录后有更多优惠"
                             android:textColor="#333333"
                             android:textSize="12sp" />
 
@@ -70,18 +78,30 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/mine_bannerpanda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="6dp">
+                    android:layout_margin="10dp"
+                    android:background="@mipmap/mine_banna"
+                    android:orientation="vertical">
 
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/mine_banna"
-                        android:padding="4dp"
-                        android:scaleType="fitCenter" />
+                        android:layout_height="0dp"
+                        android:layout_weight="2" />
 
+                    <Button
+                        android:id="@+id/mine_rely_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/mine_tologin_boxframe"
+                        android:text="立即激活"
+                        android:textColor="@color/ffffff" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -164,9 +184,9 @@
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:background="#EEEEEE"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp" />
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -206,7 +226,7 @@
                             android:drawableTop="@mipmap/mine_techan"
                             android:drawablePadding="6dp"
                             android:gravity="center"
-                            android:text="酒店"
+                            android:text="特产"
                             android:textColor="#333333" />
 
 
@@ -218,7 +238,7 @@
                             android:drawableTop="@mipmap/mine_gfood"
                             android:drawablePadding="6dp"
                             android:gravity="center"
-                            android:text="酒店"
+                            android:text="美食"
                             android:textColor="#333333" />
 
                     </LinearLayout>
@@ -265,10 +285,12 @@
                         android:textColor="#333333" />
 
                 </RelativeLayout>
+
                 <LinearLayout
-                    android:background="#EEEEEE"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp" />
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

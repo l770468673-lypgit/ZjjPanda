@@ -1,6 +1,7 @@
 package com.zjjxl.panda.fragments;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -13,10 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.uis.NFCPandaActivity;
+import com.zjjxl.panda.utils.Contants;
+import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.ToastUtils;
 
 
@@ -27,6 +32,8 @@ public class Fragment_Trip extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
     private TextView mTrip_tv_more;
+    private Button mBtncard_savemoney;
+    private TextView mTrip_cardrealmoney;
 
     public Fragment_Trip() {
         // Required empty public constructor
@@ -62,12 +69,21 @@ public class Fragment_Trip extends Fragment implements View.OnClickListener {
 
     private void initView(View inflate) {
         mTrip_tv_more = inflate.findViewById(R.id.trip_tv_more);
+        mBtncard_savemoney = inflate.findViewById(R.id.trip_btncard_savemoney);
+        mTrip_cardrealmoney = inflate.findViewById(R.id.trip_cardrealmoney);
         mTrip_tv_more.setOnClickListener(this);
+        mBtncard_savemoney.setOnClickListener(this);
+
     }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.trip_btncard_savemoney:
+                Intent intent = new Intent(getActivity(), NFCPandaActivity.class);
+                startActivity(intent);
+                break;
             case R.id.trip_tv_more:
 
                 setDialog();
@@ -125,4 +141,12 @@ public class Fragment_Trip extends Fragment implements View.OnClickListener {
         mCameraDialog.show();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        String cardmoney = ShareUtil.getString(Contants.CARD_REAL_MONEY);
+        if (cardmoney != null) {
+            mTrip_cardrealmoney.setText(cardmoney);
+        }
+    }
 }
