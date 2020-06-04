@@ -42,8 +42,7 @@ public interface ClientRestAPI {
     @FormUrlEncoded
     @POST("ui/register/sendVerificationCode.jspx")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
-    Call<SmsCode> sendVerificationCode(@Field("mobile") String mobile,
-                                       @Field("sessionId") String sessionId
+    Call<SmsCode> sendVerificationCode(@Field("mobile") String mobile
 
     );
 
@@ -52,8 +51,7 @@ public interface ClientRestAPI {
     @FormUrlEncoded
     @POST("ui/register/validate.jspx")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
-    Call<SmsCode> validate(@Field("smsActiveCode") String smsActiveCode,
-                           @Field("sessionId") String sessionId);
+    Call<SmsCode> validate(@Field("smsActiveCode") String smsActiveCode);
 
     //https://panda.stone3a.com/ui/mini/login/getSessionId.jspx?
 

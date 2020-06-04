@@ -55,7 +55,7 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
         initFragmentDate();
         initGroup();
 
-        getSessionID();
+//        getSessionID();
     }
 
     private void getSessionID() {

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -19,17 +20,23 @@ import com.zjjxl.panda.R;
 import com.zjjxl.panda.beans.LoginBean;
 import com.zjjxl.panda.beans.SmsCode;
 import com.zjjxl.panda.beans.regAppUser;
+import com.zjjxl.panda.https.ClientRestAPI;
 import com.zjjxl.panda.https.HttpCallback;
 import com.zjjxl.panda.https.HttpManager;
+import com.zjjxl.panda.interceptor.AddCookiesInterceptor;
+import com.zjjxl.panda.interceptor.ReceivedCookiesInterceptor;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.LUtils;
 import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.TimerUtils;
 import com.zjjxl.panda.utils.ToastUtils;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegistActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,12 +54,17 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
     private LinearLayout mRegist_lly_01;
     private LinearLayout mRegist_lly_02;
     private String mSessionis;
+    private Retrofit mRetrofitsend;
+    private ClientRestAPI mClientRestAPIsend;
+    private Retrofit mRetrofitVer;
+    private ClientRestAPI mClientRestAPIVer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
-
+        initSend();
+        initVer();
         initView();
 
 
@@ -79,6 +91,41 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
         mRegist_login_next.setOnClickListener(this);
         TimerUtils.initTimer(this, mBtn_yanzhengma, 60000, 1000);
         showDialog();
+
+
+    }
+
+    private void initSend() {
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new ReceivedCookiesInterceptor())
+                .build();
+
+        mRetrofitsend = new Retrofit.Builder()
+                .baseUrl("https://panda.stone3a.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+
+        mClientRestAPIsend = mRetrofitsend.create(ClientRestAPI.class);
+    }
+
+
+    //待会写
+    private void initVer() {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new AddCookiesInterceptor())
+                .build();
+
+        mRetrofitVer = new Retrofit.Builder()
+                .baseUrl("https://panda.stone3a.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+        mClientRestAPIVer = mRetrofitVer.create(ClientRestAPI.class);
+
+
     }
 
     @Override
@@ -210,25 +257,24 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
 
     private void vaLidateSmsCode(String trim) {
 
-
-        Call<SmsCode> validate = HttpManager.getInstance().getHttpClient3().validate(trim, mSessionis);
-        validate.enqueue(new Callback<SmsCode>() {
+        mClientRestAPIVer.validate(trim).enqueue(new Callback<SmsCode>() {
             @Override
             public void onResponse(Call<SmsCode> call, Response<SmsCode> response) {
 
                 if (response.body() != null) {
 
                     boolean data = response.body().isData();
-//                    if (data) {
-//                        mRegist_lly_01.setVisibility(View.GONE);
-//                        mRegist_lly_02.setVisibility(View.VISIBLE);
-//                        mReal_regist_phonenum.setText(mOkregPhonenum.getText().toString());
-//                    } else {
-//                        ToastUtils.showToast(RegistActivity.this, "验证码错误");
-//                    }
-                    mRegist_lly_01.setVisibility(View.GONE);
-                    mRegist_lly_02.setVisibility(View.VISIBLE);
-                    mReal_regist_phonenum.setText(mOkregPhonenum.getText().toString());
+                    if (data) {
+                        LUtils.d(TAG, "data==" + data + "== response.body()=" + response.body().getResult());
+                        mRegist_lly_01.setVisibility(View.GONE);
+                        mRegist_lly_02.setVisibility(View.VISIBLE);
+                        mReal_regist_phonenum.setText(mOkregPhonenum.getText().toString());
+                    } else {
+                        ToastUtils.showToast(RegistActivity.this, "验证码错误");
+                    }
+//                    mRegist_lly_01.setVisibility(View.GONE);
+//                    mRegist_lly_02.setVisibility(View.VISIBLE);
+//                    mReal_regist_phonenum.setText(mOkregPhonenum.getText().toString());
                 }
 
             }
@@ -243,18 +289,15 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
 
     private void getSmsCode(String mPhoneNum) {
         LUtils.d(TAG, "mPhoneNum==" + mPhoneNum);
-        Call<SmsCode> regAppUserCall =
-                HttpManager.getInstance().getHttpClient3().sendVerificationCode(mPhoneNum, mSessionis);
-        regAppUserCall.enqueue(new Callback<SmsCode>() {
+        mClientRestAPIsend.sendVerificationCode(mPhoneNum).enqueue(new Callback<SmsCode>() {
             @Override
             public void onResponse(Call<SmsCode> call, Response<SmsCode> response) {
-                LUtils.d(TAG, "onResponse==");
+
                 if (response.body() != null) {
-                    boolean data = response.body().isData();
-                    if (data) {
+                    String data = response.body().getResult();
+                    ToastUtils.showToast(RegistActivity.this, "data==" + data);
 
-                    }
-
+                    LUtils.d(TAG, "onResponse== data==" + data);
                 }
             }
 

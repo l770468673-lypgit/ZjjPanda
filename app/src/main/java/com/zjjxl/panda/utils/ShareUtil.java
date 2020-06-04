@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @
@@ -41,8 +43,18 @@ public class ShareUtil {
         editor.commit();
     }
 
+    public static void putStringSet(String str, HashSet<String> cookies) {
+        editor.putStringSet(str, cookies);
+
+        editor.commit();
+    }
+
+    public static HashSet<String> getStringSet(String cookie, HashSet<String> defValues) {
+        return (HashSet) sharedPreferences.getStringSet(cookie, defValues);
+    }
 
     public static String getString(String key) {
+
         return sharedPreferences.getString(key, null);
     }
 
