@@ -33,12 +33,13 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
     </RelativeLayout>
+
     <Button
         android:id="@+id/quancun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="圈存1分"
-        />
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/relay_recharge"
