@@ -62,7 +62,7 @@ public class LUtils {
     /**
      * 当前允许输出的日志级别
      */
-    private static final int OUT_STATE = 0;
+    private static final int OUT_STATE = 10;
     public static void v(String tag, String str) {
         if (OUT_STATE <= VERBOSE) {
             Log.v(tag, str);

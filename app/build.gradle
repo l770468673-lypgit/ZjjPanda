@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.zjjxl.panda"
         minSdkVersion 19
-        targetSdkVersion 22
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 
@@ -81,7 +81,6 @@ dependencies {
     implementation files('libs/AMap_Location_V4.8.0_20191210.jar')
     implementation files('libs/AMap_Search_V7.1.0_20191030.jar')
     implementation files('libs/Android_Map3D_SDK_V7.2.1_20200115.jar')
-
 
 
 }

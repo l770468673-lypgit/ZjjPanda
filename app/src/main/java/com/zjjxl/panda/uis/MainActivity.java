@@ -1,11 +1,21 @@
 package com.zjjxl.panda.uis;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +34,11 @@ import com.zjjxl.panda.fragments.Fragment_Mine;
 import com.zjjxl.panda.fragments.Fragment_Trip;
 import com.zjjxl.panda.https.HttpManager;
 import com.zjjxl.panda.utils.Contants;
+import com.zjjxl.panda.utils.LUtils;
 import com.zjjxl.panda.utils.ShareUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,11 +59,25 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
     private Button mBtntobus;
     private boolean istraipclick = false;
 
+    AlertDialog mPermissionDialog;
+    private int PERMISSION_CODE = 1000;
+    List<String> mPermissionList = new ArrayList<>();
+    private String[] permissions = new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CALL_PHONE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO,
+            //            Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        initPermission();
         initView();
 
         initFragmentDate();
@@ -58,6 +86,81 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
 //        getSessionID();
     }
 
+    private void initPermission() {
+        mPermissionList.clear();
+        //逐个判断是否还有未通过的权限
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(this, permissions[i]) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                mPermissionList.add(permissions[i]);//添加还未授予的权限到mPermissionList中
+            }
+        }
+        //申请权限
+        if (mPermissionList.size() > 0) {//有权限没有通过，需要申请
+            ActivityCompat.requestPermissions(this, permissions, PERMISSION_CODE);
+        } else {
+            //权限已经都通过了，可以将程序继续打开了
+//            initFid();
+        }
+
+
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        boolean hasPermissionDismiss = false;//有权限没有通过
+        if (PERMISSION_CODE == requestCode) {
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] == -1) {
+                    LUtils.d(TAG, "grantResults[i]==" + i);
+                    hasPermissionDismiss = true;
+                    break;
+                }
+            }
+        }
+        if (hasPermissionDismiss) {//如果有没有被允许的权限
+            showPermissionDialog();
+
+        } else {
+            //权限已经都通过了，可以将程序继续打开了
+//            initFid();
+        }
+
+
+    }
+
+    private void showPermissionDialog() {
+        if (mPermissionDialog == null) {
+            mPermissionDialog = new AlertDialog.Builder(this)
+                    .setMessage("已禁用权限，请手动授予")
+                    .setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cancelPermissionDialog();
+
+                            Uri packageURI = Uri.parse("package:" + "com.estone.bank.estone_appsmartlock");
+                            Intent intent = new Intent(Settings.
+                                    ACTION_APPLICATION_DETAILS_SETTINGS, packageURI);
+                            startActivity(intent);
+                            MainActivity.this.finish();
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //关闭页面或者做其他操作
+                            cancelPermissionDialog();
+                            MainActivity.this.finish();
+                        }
+                    })
+                    .create();
+        }
+        mPermissionDialog.show();
+
+    }
     private void getSessionID() {
 
         Call<SessioIdBean> sessionId = HttpManager.getInstance().getHttpClient3().getSessionId();
@@ -75,6 +178,10 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
 
             }
         });
+    }
+
+    private void cancelPermissionDialog() {
+        mPermissionDialog.cancel();
     }
 
     private void initGroup() {

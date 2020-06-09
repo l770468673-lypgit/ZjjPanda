@@ -96,7 +96,8 @@
         android:roundIcon="@mipmap/pandaapplogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".uis.SettingActivity"></activity>
+        <activity android:name=".uis.WebActivity"></activity>
+        <activity android:name=".uis.SettingActivity" />
         <activity android:name=".uis.RegistActivity" />
         <activity android:name=".uis.LoginActivity" />
         <activity android:name=".apps.XLBaseActivity" />
