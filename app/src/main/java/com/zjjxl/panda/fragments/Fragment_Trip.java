@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.uis.NFCPandaActivity;
+import com.zjjxl.panda.uis.ShowAccessChannelActivity;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.ToastUtils;
@@ -81,7 +82,7 @@ public class Fragment_Trip extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.trip_btncard_savemoney:
-                Intent intent = new Intent(getActivity(), NFCPandaActivity.class);
+                Intent intent = new Intent(getActivity(), ShowAccessChannelActivity.class);
                 startActivity(intent);
                 break;
             case R.id.trip_tv_more:

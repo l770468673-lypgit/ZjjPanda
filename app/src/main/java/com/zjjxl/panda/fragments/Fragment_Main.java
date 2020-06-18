@@ -30,6 +30,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.uis.NFCPandaActivity;
+import com.zjjxl.panda.uis.ShowAccessChannelActivity;
 import com.zjjxl.panda.utils.LUtils;
 
 import java.text.SimpleDateFormat;
@@ -128,7 +129,7 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btncard_savemoney:
-                Intent intent = new Intent(getActivity(), NFCPandaActivity.class);
+                Intent intent = new Intent(getActivity(), ShowAccessChannelActivity.class);
                 startActivity(intent);
                 break;
 

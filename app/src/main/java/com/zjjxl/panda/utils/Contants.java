@@ -9,4 +9,9 @@ public class Contants {
     public static String LOGIN_USER_HEAD = "login_user_head";
     public static String APP_SESSIONIS = "app_sessionis";
 
+
+
+    public static String ACCRESS_CHANNEL = "accress_channel";
+    public static String APP_STAUTS_PERMISSION = "app_stauts_permission";
+
 }

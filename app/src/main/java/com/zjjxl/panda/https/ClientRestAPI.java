@@ -1,6 +1,7 @@
 package com.zjjxl.panda.https;
 
 import com.zjjxl.panda.beans.LoginBean;
+import com.zjjxl.panda.beans.QueryCZCity;
 import com.zjjxl.panda.beans.SessioIdBean;
 import com.zjjxl.panda.beans.SmsCode;
 import com.zjjxl.panda.beans.regAppUser;
@@ -60,4 +61,9 @@ public interface ClientRestAPI {
     @GET("ui/mini/login/getSessionId.jspx")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
     Call<SessioIdBean> getSessionId();
+
+    //http://panda.stone3a.com/foreign/queryAccessChannelList.jspx
+    @GET("foreign/queryAccessChannelList.jspx")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    Call<QueryCZCity> queryAccessChannelList();
 }

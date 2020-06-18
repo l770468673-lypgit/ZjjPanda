@@ -12,8 +12,20 @@ import android.util.Log;
  * @备注：
  */
 public class LUtils {
-     private static String logContent;
+    private static String logContent;
+    /**
+     * 日志输出级别
+     */
+    private static final int VERBOSE = 1;
+    private static final int DEBUG = 2;
+    private static final int INFO = 3;
+    private static final int WARM = 4;
+    private static final int ERROR = 5;
 
+    /**
+     * 当前允许输出的日志级别
+     */
+    private static final int OUT_STATE = 10;
 
     private static int LOG_MAXLENGTH = 2000;
 
@@ -33,6 +45,7 @@ public class LUtils {
             }
         }
     }
+
     public static void showlogcat(String tag, String msg) {
         if (tag == null || tag.length() == 0 || msg == null || msg.length() == 0)
             return;
@@ -50,19 +63,7 @@ public class LUtils {
         }
     }
 
-    /**
-     * 日志输出级别
-     */
-    private static final int VERBOSE = 1;
-    private static final int DEBUG = 2;
-    private static final int INFO = 3;
-    private static final int WARM = 4;
-    private static final int ERROR = 5;
 
-    /**
-     * 当前允许输出的日志级别
-     */
-    private static final int OUT_STATE = 10;
     public static void v(String tag, String str) {
         if (OUT_STATE <= VERBOSE) {
             Log.v(tag, str);

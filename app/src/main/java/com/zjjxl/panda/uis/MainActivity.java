@@ -161,24 +161,24 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
         mPermissionDialog.show();
 
     }
-    private void getSessionID() {
-
-        Call<SessioIdBean> sessionId = HttpManager.getInstance().getHttpClient3().getSessionId();
-        sessionId.enqueue(new Callback<SessioIdBean>() {
-            @Override
-            public void onResponse(Call<SessioIdBean> call, Response<SessioIdBean> response) {
-                if (response.body() != null) {
-                    String sessionId1 = response.body().getSessionId();
-                    ShareUtil.putString(Contants.APP_SESSIONIS, sessionId1);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SessioIdBean> call, Throwable t) {
-
-            }
-        });
-    }
+//    private void getSessionID() {
+//
+//        Call<SessioIdBean> sessionId = HttpManager.getInstance().getHttpClient3().getSessionId();
+//        sessionId.enqueue(new Callback<SessioIdBean>() {
+//            @Override
+//            public void onResponse(Call<SessioIdBean> call, Response<SessioIdBean> response) {
+//                if (response.body() != null) {
+//                    String sessionId1 = response.body().getSessionId();
+//                    ShareUtil.putString(Contants.APP_SESSIONIS, sessionId1);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<SessioIdBean> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
     private void cancelPermissionDialog() {
         mPermissionDialog.cancel();
