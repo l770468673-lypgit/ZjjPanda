@@ -75,6 +75,7 @@ import com.zjjxl.panda.beans.bean_person;
 import com.zjjxl.panda.https.HttpCallback;
 import com.zjjxl.panda.https.HttpManager;
 import com.zjjxl.panda.interfaces.ParamConst;
+import com.zjjxl.panda.utils.Bitmap2NV21;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.KeyboardUtils;
 import com.zjjxl.panda.utils.LUtils;
@@ -82,6 +83,7 @@ import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.StatusBarUtil;
 import com.zjjxl.panda.utils.ToastUtils;
 import com.zjjxl.panda.utils.readIDcardUtils;
+import com.zkteco.android.IDReader.IDCardPhoto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -303,7 +305,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_activiting);
 
-//        StatusBarUtil.setDrawable(this, R.drawable.mine_title_jianbian);
+        //        StatusBarUtil.setDrawable(this, R.drawable.mine_title_jianbian);
         activeEngine(null);
         initNfc();
         initEid();
@@ -455,8 +457,8 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         WindowManager wm1 = this.getWindowManager();
         int width1 = wm1.getDefaultDisplay().getWidth() - 30;
 
-//        mSave_imageview_back = findViewById(R.id.chongzhinfc_imageview_back);
-//        mChongzhinfc_textView = findViewById(R.id.chongzhinfc_textView);
+        //        mSave_imageview_back = findViewById(R.id.chongzhinfc_imageview_back);
+        //        mChongzhinfc_textView = findViewById(R.id.chongzhinfc_textView);
         mCard_bind_yanzhengma = findViewById(R.id.card_bind_yanzhengma);
 
         //        mCardact_idnumn = findViewById(R.id.cardact_idnumn);
@@ -510,14 +512,14 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         layoutParams.width = width1;
         layoutParams.height = width1;
 
-//        mChongzhinfc_textView.setText(R.string.cardactive_title_eidact);
+        //        mChongzhinfc_textView.setText(R.string.cardactive_title_eidact);
         mPandacard_pleaseon.setText(R.string.cardactive_idcardreadover);
         mCardact_pleaseon.setText(R.string.cardactive_idxcrad_read);
 
         mCard_bind_yanzhengma.setOnClickListener(this);
         mLly_bindfailed.setOnClickListener(this);
         mLly_bindsuccess.setOnClickListener(this);
-//        mSave_imageview_back.setOnClickListener(this);
+        //        mSave_imageview_back.setOnClickListener(this);
         mCardactive_nextstep.setOnClickListener(this);
         mRely_readcard.setOnClickListener(this);
         mPanda_nextstep.setOnClickListener(this);
@@ -550,7 +552,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.chongzhinfc_imageview_back:
+            //            case R.id.chongzhinfc_imageview_back:
             case R.id.lly_bindfailed:
                 finish();
                 break;
@@ -558,7 +560,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
 
                 if (mPhonenums.getText().toString().trim().length() == 11 && mPandacard_cardnum.getText().toString().trim().length() > 1) {
 
-//                    AddCards();
+                    //                    AddCards();
 
                 } else {
                     ToastUtils.showToast(this, "---------输入不正确 -----------");
@@ -627,57 +629,57 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
 
     }
 
-//    public void commiyPhone() {
-//
-//        Call<bindSuccessBean> resourcesBeanCall = HttpManager.getInstance().getHttpClient().mbindCard
-//                (mPandacard_cardnum.getText().toString(), mPhonenums.getText().toString(), mLly_okname.getText().toString().trim(), "");
-//        resourcesBeanCall.enqueue(new Callback<bindSuccessBean>() {
-//            @Override
-//            public void onResponse(Call<bindSuccessBean> call, Response<bindSuccessBean> response) {
-//                bindSuccessBean body = response.body();
-//                if (body != null) {
-//                    if (body.getCode() == 1) {
-//                        ToastUtils.showToast(CardActiviting.this, body.getMsg());
-//
-//                        finish();
-//                        Intent intent = new Intent(CardActiviting.this, MainPandaActivity.class);
-//                        startActivity(intent);
-//                    } else {
-//                        ToastUtils.showToast(CardActiviting.this, body.getMsg());
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<bindSuccessBean> call, Throwable t) {
-//
-//            }
-//        });
-//    }
-//
-//    public void AddCards() {
-//        Call<bean_addCards> bean_personCall = HttpManager.getInstance().getHttpClient().addCard(mMAppletNo, code4num);
-//        bean_personCall.enqueue(new Callback<bean_addCards>() {
-//            @Override
-//            public void onResponse(Call<bean_addCards> call, Response<bean_addCards> response) {
-//                if (response.body() != null) {
-//                    if (response.body() != null) {
-//                        int code = response.body().getCode();
-//                        if (code == 1) {
-//                            commiyPhone();
-//                        } else {
-//                            ToastUtils.showToast(CardActiviting.this, response.body().getMsg());
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<bean_addCards> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    //    public void commiyPhone() {
+    //
+    //        Call<bindSuccessBean> resourcesBeanCall = HttpManager.getInstance().getHttpClient().mbindCard
+    //                (mPandacard_cardnum.getText().toString(), mPhonenums.getText().toString(), mLly_okname.getText().toString().trim(), "");
+    //        resourcesBeanCall.enqueue(new Callback<bindSuccessBean>() {
+    //            @Override
+    //            public void onResponse(Call<bindSuccessBean> call, Response<bindSuccessBean> response) {
+    //                bindSuccessBean body = response.body();
+    //                if (body != null) {
+    //                    if (body.getCode() == 1) {
+    //                        ToastUtils.showToast(CardActiviting.this, body.getMsg());
+    //
+    //                        finish();
+    //                        Intent intent = new Intent(CardActiviting.this, MainPandaActivity.class);
+    //                        startActivity(intent);
+    //                    } else {
+    //                        ToastUtils.showToast(CardActiviting.this, body.getMsg());
+    //                    }
+    //                }
+    //            }
+    //
+    //            @Override
+    //            public void onFailure(Call<bindSuccessBean> call, Throwable t) {
+    //
+    //            }
+    //        });
+    //    }
+    //
+    //    public void AddCards() {
+    //        Call<bean_addCards> bean_personCall = HttpManager.getInstance().getHttpClient().addCard(mMAppletNo, code4num);
+    //        bean_personCall.enqueue(new Callback<bean_addCards>() {
+    //            @Override
+    //            public void onResponse(Call<bean_addCards> call, Response<bean_addCards> response) {
+    //                if (response.body() != null) {
+    //                    if (response.body() != null) {
+    //                        int code = response.body().getCode();
+    //                        if (code == 1) {
+    //                            commiyPhone();
+    //                        } else {
+    //                            ToastUtils.showToast(CardActiviting.this, response.body().getMsg());
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //
+    //            @Override
+    //            public void onFailure(Call<bean_addCards> call, Throwable t) {
+    //
+    //            }
+    //        });
+    //    }
 
 
     @Override
@@ -912,7 +914,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
                         } else {
                             msg = "ProcessCode:" + errorCode;
                         }
-                        LUtils.d(TAG, "   msg===，"+msg );
+                        LUtils.d(TAG, "   msg===，" + msg);
                         faceHelper.setName(requestId, msg);
                         retryLivenessDetectDelayed(requestId);
                     } else {
@@ -1057,22 +1059,20 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
                     mCardact_pleaseon.setText(R.string.cardactive_idxcrad_ok);
                     mCardactive_nextstep.setVisibility(View.VISIBLE);
                     LUtils.showlogcat(TAG, "extra.getPicture()==" + extra.getPicture());
-//                    byte[] bytes = readIDcardUtils.hexStr2byte(extra.getPicture());
-//                    Bitmap bitmap = readIDcardUtils.readByteMap(bytes);
-//                    LUtils.showlogcat(TAG, "bytes.toString ==" + Arrays.toString(bytes));
-                    byte[] bytes = Base64.decode(extra.getPicture(), Base64.DEFAULT);
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
-//                    mBit2map = Bitmap2NV21.bitmapZoomByScale(bitmap, 2, 2);
+
+                    Bitmap bitmap = IDCardPhoto.getIDCardPhoto(HexString2Bytes(extra.getPicture()));
+
+                    mBit2map = Bitmap2NV21.bitmapZoomByScale(bitmap, 2, 2);
                     //                    cardact_iamgv.setImageBitmap(mBit2map);
 
-//                    mNv21 = Bitmap2NV21.bitmapToNv21(mBit2map, mBit2map.getWidth(), mBit2map.getHeight());
-                    //  LUtils.d(TAG, "extra.nv21===" + mNv21);
-//                    LUtils.d(TAG, "extra.nv21===" + mNv21.length);
+                    mNv21 = Bitmap2NV21.bitmapToNv21(mBit2map, mBit2map.getWidth(), mBit2map.getHeight());
+                    LUtils.d(TAG, "extra.nv21===" + mNv21);
+                    LUtils.d(TAG, "extra.nv21===" + mNv21.length);
 
                     if (faceHelper != null) {
                         //requestI
-//                      registerFace(mNv21,faceHelper.onPreviewFrame(mNv21, mBit2map.getWidth(), mBit2map.getHeight()));
+                        registerFace(mNv21, faceHelper.onPreviewFrame(mNv21, mBit2map.getWidth(), mBit2map.getHeight()));
 
                     } else {
                         LUtils.d(TAG, "faceHelper == null");
@@ -1186,23 +1186,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
 
     }
 
-    private void stopeid2trancard2() {
 
-        mFaceactive_nextstep.setVisibility(View.VISIBLE);
-        eeeererer.setText(R.string.cardactive_faceover);
-        readCode = 0;
-        eid.disableReaderMode();
-        eid = null;
-        mAnimaition.stop();
-//        clearLeftFace(faceHelper.onPreviewFrame(mNv21, mBit2map.getWidth(), mBit2map.getHeight()));
-        unInitEngine();
-//        drawHelper = null;
-//        if (cameraHelper != null) {
-//            cameraHelper.stop();
-//
-//        }
-
-    }
     /**
      * 将map中key对应的value增1回传
      *
@@ -1303,10 +1287,6 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
             String name = faceHelper.getName(facePreviewInfoList.get(i).getTrackId());
             LUtils.d(TAG, "drawPreviewInfo  -name ====" + name);
 
-            //------------
-
-            stopeid2trancard2();
-//            ----
             Integer liveness = livenessMap.get(facePreviewInfoList.get(i).getTrackId());
             Integer recognizeStatus = requestFeatureStatusMap.get(facePreviewInfoList.get(i).getTrackId());
             LUtils.d(TAG, "void  drawPreviewInfo(facePreviewInfoList)");
@@ -1451,5 +1431,24 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
             LUtils.d(TAG, "s.length()===" + s.length());
             code4num = s.toString();
         }
+    }
+
+    private static int parse(char c) {
+        if (c >= 'a')
+            return (c - 'a' + 10) & 0x0f;
+        if (c >= 'A')
+            return (c - 'A' + 10) & 0x0f;
+        return (c - '0') & 0x0f;
+    }
+
+    public static byte[] HexString2Bytes(String hexstr) {
+        byte[] b = new byte[hexstr.length() / 2];
+        int j = 0;
+        for (int i = 0; i < b.length; i++) {
+            char c0 = hexstr.charAt(j++);
+            char c1 = hexstr.charAt(j++);
+            b[i] = (byte) ((parse(c0) << 4) | parse(c1));
+        }
+        return b;
     }
 }
