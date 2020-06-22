@@ -12,7 +12,7 @@
     <color name="b2C8EF1">#28AAF6</color>
     <color name="b8C8C8C">#8C8C8C</color>
 
-
+    <color name="B2D5C2">#80000000</color>
 
     <color name="ttttt">#FBCDCD</color>
     <color name="home_583821_color">#583821</color>
@@ -22,4 +22,20 @@
     <color name="alert_text_color">#898989</color>
     <color name="c8c8c">#8c8c8c</color>
     <color name="f7f7f7">#F7F7F7</color>
+    <color name="c8ef1">#2C8EF1</color>
+
+
+    <color name="login_back">#41B5F8</color>
+    <color name="login_back2">#02466E</color>
+    <color name="B2D5C">#2B2D5C</color>
+
+    <color name="ffffff85">#D9FFFFFF</color>
+    <color name="FAF6F4F4">#FAF6F4F4</color>
+    <color name="a515C6F">#515C6F</color>
+    <color name="B23008">#B23008</color>
+
+    <color name="dadada">#DADADA</color>
+    <color name="f3f3f3">#F3F3F3</color>
+    <color name="fcc932">#FCC932</color>
+
 </resources>

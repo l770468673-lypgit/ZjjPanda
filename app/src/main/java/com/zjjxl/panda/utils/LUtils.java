@@ -25,7 +25,7 @@ public class LUtils {
     /**
      * 当前允许输出的日志级别
      */
-    private static final int OUT_STATE = 10;
+    private static final int OUT_STATE = 0;
 
     private static int LOG_MAXLENGTH = 2000;
 
@@ -49,9 +49,10 @@ public class LUtils {
     public static void showlogcat(String tag, String msg) {
         if (tag == null || tag.length() == 0 || msg == null || msg.length() == 0)
             return;
-        int segmentSize = 9 * 1024;
+        int segmentSize = 10 * 1024;
         long length = msg.length();
-        if (length <= segmentSize) {// 长度小于等于限制直接打印 Log.e(tag, msg);
+        if (length <= segmentSize) {// 长度小于等于限制直接打印
+            Log.e(tag, msg);
         } else {
             while (msg.length() > segmentSize) {// 循环分段打印日志 String
                 logContent = msg.substring(0, segmentSize);

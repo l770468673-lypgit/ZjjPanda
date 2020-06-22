@@ -45,8 +45,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/home_tv_location"
                         android:background="@mipmap/home_location"
-                        android:gravity="left"
-                        />
+                        android:gravity="left" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -54,8 +53,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:background="@mipmap/hone_xiaoxi"
-                        android:gravity="right"
-                       />
+                        android:gravity="right" />
 
 
                 </RelativeLayout>
@@ -99,6 +97,7 @@
                         android:textColor="@color/ffffff" />
 
                     <Button
+                        android:id="@+id/main_opencard"
                         android:layout_width="0dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"

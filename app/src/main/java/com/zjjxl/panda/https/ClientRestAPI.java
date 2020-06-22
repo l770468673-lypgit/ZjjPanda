@@ -4,6 +4,7 @@ import com.zjjxl.panda.beans.LoginBean;
 import com.zjjxl.panda.beans.QueryCZCity;
 import com.zjjxl.panda.beans.SessioIdBean;
 import com.zjjxl.panda.beans.SmsCode;
+import com.zjjxl.panda.beans.bean_person;
 import com.zjjxl.panda.beans.regAppUser;
 
 import retrofit2.Call;
@@ -20,7 +21,11 @@ import retrofit2.http.Query;
  */
 public interface ClientRestAPI {
 
-
+    @FormUrlEncoded
+    @POST("guard/entranceGuard")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    Call<bean_person> QueryIdCard(@Field("actionId") String actionId,
+                                  @Field("reqId") String reqId);
     //    1.用户注册接口
 //    接口地址： /foreign/registerAppUser.jspx
     @FormUrlEncoded

@@ -30,6 +30,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.uis.NFCPandaActivity;
+import com.zjjxl.panda.uis.OpenCardActivity;
 import com.zjjxl.panda.uis.ShowAccessChannelActivity;
 import com.zjjxl.panda.utils.LUtils;
 
@@ -50,6 +51,7 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
 
     private Button mBtncard_savemoney;
     private TextView mHome_tv_location;
+    private Button mMain_opencard;
 
     public Fragment_Main() {
         // Required empty public constructor
@@ -90,9 +92,11 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
 
 
         mBtncard_savemoney = inflate.findViewById(R.id.btncard_savemoney);
+        mMain_opencard = inflate.findViewById(R.id.main_opencard);
         mHome_tv_location = inflate.findViewById(R.id.home_tv_location);
 
         mBtncard_savemoney.setOnClickListener(this);
+        mMain_opencard.setOnClickListener(this);
         initLocation();
     }
 
@@ -131,6 +135,10 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
             case R.id.btncard_savemoney:
                 Intent intent = new Intent(getActivity(), ShowAccessChannelActivity.class);
                 startActivity(intent);
+                break;
+                case R.id.main_opencard:
+                Intent intent2 = new Intent(getActivity(), OpenCardActivity.class);
+                startActivity(intent2);
                 break;
 
         }

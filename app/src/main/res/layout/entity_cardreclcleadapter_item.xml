@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:layout_height="100dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_weight="1"
+        android:background="@mipmap/home_jjj_yikatong"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/rntity_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/kaika_circle" />
+
+            <TextView
+                android:id="@+id/rntity_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@+id/rntity_img"
+                android:text="京津冀一卡通"
+                android:textColor="@color/ffffff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rntity_tv1"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@+id/rntity_img"
+                android:text="包含1000多家景区可游玩"
+                android:textColor="@color/ffffff"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/rntityrely_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_alignBaseline="@+id/home_lly_title"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="right"
+                android:background="@drawable/home_toshop_boxframe"
+                android:gravity="center"
+                android:text="激活"
+                android:textColor="@color/ffffff" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:paddingBottom="20dp"
+                android:text="包含1000多家景区可游玩"
+                android:textColor="@color/ffffff"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

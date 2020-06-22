@@ -96,7 +96,8 @@
         android:roundIcon="@mipmap/pandaapplogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".uis.ShowAccessChannelActivity"></activity>
+        <activity android:name=".uis.CardActiviting"></activity>
+        <activity android:name=".uis.eIDActivity" />
         <activity
             android:name=".uis.WelcomeActivit"
             android:launchMode="singleTask">
@@ -123,9 +124,15 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".uis.MainActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <activity
             android:name=".uis.NFCPandaActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".uis.OpenCardActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".uis.ShowAccessChannelActivity"
             android:launchMode="singleTask" />
 
         <meta-data
