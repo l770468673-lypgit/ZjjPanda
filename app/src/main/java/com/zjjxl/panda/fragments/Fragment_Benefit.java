@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.adapters.Benefit_CardAdapter;
+import com.zjjxl.panda.utils.StatusBarUtil;
 
 
 public class Fragment_Benefit extends Fragment {
@@ -56,12 +57,18 @@ public class Fragment_Benefit extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
+        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
         View inflate = inflater.inflate(R.layout.fragment__benefit, container, false);
         iniView(inflate);
         return inflate;
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
+        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
+    }
 
     private void iniView(View inflate) {
         mTrip_recycle_list = inflate.findViewById(R.id.benefit_recycle_list);

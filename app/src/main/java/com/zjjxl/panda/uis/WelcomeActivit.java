@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.apps.XLBaseActivity;
 import com.zjjxl.panda.utils.AppStatus;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.ShareUtil;
@@ -25,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WelcomeActivit extends AppCompatActivity implements View.OnClickListener {
+public class WelcomeActivit extends XLBaseActivity implements View.OnClickListener {
 
     private ImageView mWelcomeimg;
     private WelcomeHandler mHandler;

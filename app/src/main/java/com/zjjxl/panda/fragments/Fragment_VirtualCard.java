@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.adapters.EntityCradAdapter;
 import com.zjjxl.panda.uis.eIDActivity;
+import com.zjjxl.panda.utils.StatusBarUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,11 +60,20 @@ public class Fragment_VirtualCard extends Fragment implements EntityCradAdapter.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
+        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
         View inflate = inflater.inflate(R.layout.fragment__entity_crad, container, false);
         initView(inflate);
         return inflate;
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
+        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
     }
 
     private void initView(View inflate) {

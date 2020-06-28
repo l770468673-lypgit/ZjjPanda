@@ -1,5 +1,6 @@
 package com.zjjxl.panda.uis;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -29,17 +30,19 @@ public class OpenCardActivity extends XLBaseActivity implements View.OnClickList
     private MPagerAdapter mPagerAdapter;
     private TextView mOpencard_back;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        android:background="@drawable/trip_fragment_color"/
+        //        android:background="@drawable/trip_fragment_color"/
         setContentView(R.layout.activity_open_card);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.black));
+//            window.setStatusBarColor(getResources().getColor(R.color.black));
+            window.setTitleColor(R.color.black);
         }
+
         initView();
     }
 

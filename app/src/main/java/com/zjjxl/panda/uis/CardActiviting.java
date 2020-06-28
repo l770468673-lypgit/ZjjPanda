@@ -286,6 +286,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
     private EditText mCard_bind_password;
     private Button mCard_bind_commit;
     private RelativeLayout mRelay_bindphone;
+    private RelativeLayout mRelay_bindphone2;
     private byte[] mNv21;
     private Bitmap mBit2map;
     private Button mCard_bind_yanzhengma;
@@ -298,14 +299,24 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
     private EditText mBind_card_checkcode;
     private LinearLayout mLly_yanzhengma;
     private AnimationDrawable mAnimaition;
+    private Button mCardactivity_btnuserinfo;
+    private EditText mCard_ed_cardnum;
+    private EditText mCard_ed_phone;
+    private EditText mCard_ed_name;
+    private TextView mJihuo_back;
+    private TextView mJihuo_back2;
+    private TextView mJihuo_back3;
+    private TextView mJihuo_back4;
+    private TextView mJihuo_back5;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_activiting);
-
-        //        StatusBarUtil.setDrawable(this, R.drawable.mine_title_jianbian);
+        StatusBarUtil.setDrawable(this, R.drawable.trip_fragmentsearch_color);
+        StatusBarUtil.setStatusBarLightMode(this.getWindow());
+        //StatusBarUtil.setDrawable(this, R.drawable.mine_title_jianbian);
         activeEngine(null);
         initNfc();
         initEid();
@@ -316,6 +327,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
 
         ActivityCompat.requestPermissions(this, NEEDED_PERMISSIONS, ACTION_REQUEST_PERMISSIONS);
         readCode = 0;
+
     }
 
 
@@ -467,12 +479,24 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         mLly_okname = findViewById(R.id.lly_okname);
         mCardactive_nextstep = findViewById(R.id.cardactive_nextstep);
 
+        mJihuo_back = findViewById(R.id.jihuo_back);
+        mJihuo_back2 = findViewById(R.id.jihuo_back2);
+        mJihuo_back3 = findViewById(R.id.jihuo_back3);
+        mJihuo_back4 = findViewById(R.id.jihuo_back4);
+        mJihuo_back5 = findViewById(R.id.jihuo_back5);
+
+        mJihuo_back.setOnClickListener(this);
+        mJihuo_back2.setOnClickListener(this);
+        mJihuo_back3.setOnClickListener(this);
+        mJihuo_back4.setOnClickListener(this);
+        mJihuo_back5.setOnClickListener(this);
 
         // 三个布局
         mRely_readcard = findViewById(R.id.rely_readcard);
         mRelay_pandacard = findViewById(R.id.relay_pandacard);
         mRely_facehead = findViewById(R.id.rely_facehead);
         mRelay_bindphone = findViewById(R.id.relay_bindphone);
+        mRelay_bindphone2 = findViewById(R.id.relay_bindphone2);
 
         //2 cameraview
         mFramlay_allfaceview = findViewById(R.id.framlay_allfaceview);
@@ -497,6 +521,13 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         mCard_bind_password = findViewById(R.id.card_bind_password);
         mCard_bind_commit = findViewById(R.id.card_bind_commit);
         mLly_bindsuccess = findViewById(R.id.lly_bindsuccess);
+
+
+        // 确定信息 新布局
+        mCard_ed_name = findViewById(R.id.card_ed_name);
+        mCard_ed_phone = findViewById(R.id.card_ed_phone);
+        mCard_ed_cardnum = findViewById(R.id.card_ed_cardnum);
+        mCardactivity_btnuserinfo = findViewById(R.id.cardactivity_btnuserinfo);
 
 
         ViewGroup.LayoutParams layoutParamsf = mFramlay_allfaceview.getLayoutParams();
@@ -524,6 +555,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         mRely_readcard.setOnClickListener(this);
         mPanda_nextstep.setOnClickListener(this);
         mFaceactive_nextstep.setOnClickListener(this);
+        mCardactivity_btnuserinfo.setOnClickListener(this);
 
         mCard_bind_commit.setOnClickListener(this);
         eeeererer = findViewById(R.id.eeeererer);
@@ -554,7 +586,15 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         switch (v.getId()) {
             //            case R.id.chongzhinfc_imageview_back:
             case R.id.lly_bindfailed:
+            case R.id.jihuo_back:
+            case R.id.jihuo_back2:
+            case R.id.jihuo_back3:
+            case R.id.jihuo_back4:
+            case R.id.jihuo_back5:
                 finish();
+                break;
+            case R.id.cardactivity_btnuserinfo:
+
                 break;
             case R.id.lly_bindsuccess:
 
@@ -598,13 +638,21 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
                 break;
             case R.id.panda_nextstep:
                 mRelay_pandacard.setVisibility(View.GONE);
-                mRelay_bindphone.setVisibility(View.VISIBLE);
-                if (ShareUtil.getString(Contants.SERNAME_PHONE) != null) {
-                    mCard_bind_phonenum.setText(ShareUtil.getString(Contants.SERNAME_PHONE));
+                //                mRelay_bindphone.setVisibility(View.VISIBLE);//、、、、========
+                mRelay_bindphone2.setVisibility(View.VISIBLE);//、、、、========
+                //                if (ShareUtil.getString(Contants.SERNAME_PHONE) != null) {
+                //                    mCard_bind_phonenum.setText(ShareUtil.getString(Contants.SERNAME_PHONE));
+                //                }
+                //                mPandacard_cardnum.setText(mMAppletNo);
+                //                mPhonenums.setText(ShareUtil.getString(Contants.SERNAME_PHONE));
+                //                mLly_okname.setText(mName);
+
+                mCard_ed_name.setText(mName);
+                if (ShareUtil.getString(Contants.LOGIN_USER_PHONE) != null) {
+                    mCard_ed_phone.setText(ShareUtil.getString(Contants.LOGIN_USER_PHONE));
                 }
-                mPandacard_cardnum.setText(mMAppletNo);
-                mPhonenums.setText(ShareUtil.getString(Contants.SERNAME_PHONE));
-                mLly_okname.setText(mName);
+
+                mCard_ed_cardnum.setText(mMAppletNo);
                 break;
             case R.id.faceactive_nextstep:
                 mRelay_pandacard.setVisibility(View.VISIBLE);
@@ -1044,6 +1092,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
                     bean_person.ExtraBean extra = bo.getExtra();
                     bean_person.ExtraBean.ResBean status = extra.getRes();
                     String idType = status.getIdType();
+
                     if ("01".equals(idType)) {
                         //  main_tv_idcard.setText(idType + "身份证");
                     } else {

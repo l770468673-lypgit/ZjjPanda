@@ -26,20 +26,20 @@ public class Contants {
      */
     public static final int VERTICAL_OFFSET = 0;
 
-    public static final String SERNAME_PHONE = "username_phone";
-    public static final String SERNAME_PASS = "username_pass";
-    public static final String WXLOGIN_UNID = "wxlogin_unid";
-    public static final String APPISlOGIN = "appislogin";
-    public static final String CARDISBIND = "cardisbind";
-    public static final String DEFAULTCARDISBIND = "defaultcardisbind";
-
-    public static final String ACT_TITLENAME = "act_titlename";
-    public static final String WECHAT_USERID = "wechat_userid";
-    public static final String ORGMEMBERID = "orgmemberid";
-    public static final String USERMEMBERID = "UserMemberId";
-
-    public static final String ACT_BUNUM = "act_bunum";
-    public static final String vxAPPID = "wx066b02355bf9f39b";
+//    public static final String SERNAME_PHONE = "username_phone";
+//    public static final String SERNAME_PASS = "username_pass";
+//    public static final String WXLOGIN_UNID = "wxlogin_unid";
+//    public static final String APPISlOGIN = "appislogin";
+//    public static final String CARDISBIND = "cardisbind";
+//    public static final String DEFAULTCARDISBIND = "defaultcardisbind";
+//
+//    public static final String ACT_TITLENAME = "act_titlename";
+//    public static final String WECHAT_USERID = "wechat_userid";
+//    public static final String ORGMEMBERID = "orgmemberid";
+//    public static final String USERMEMBERID = "UserMemberId";
+//
+//    public static final String ACT_BUNUM = "act_bunum";
+//    public static final String vxAPPID = "wx066b02355bf9f39b";
 
 
 }

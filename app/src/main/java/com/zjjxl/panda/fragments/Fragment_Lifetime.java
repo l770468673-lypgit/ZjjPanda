@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.utils.StatusBarUtil;
 
 public class Fragment_Lifetime extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -44,6 +45,8 @@ public class Fragment_Lifetime extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
+        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
         return inflater.inflate(R.layout.fragment__lifetime, container, false);
     }
 }

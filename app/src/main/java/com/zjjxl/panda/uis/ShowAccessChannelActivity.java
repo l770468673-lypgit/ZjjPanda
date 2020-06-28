@@ -14,6 +14,7 @@ import com.zjjxl.panda.https.HttpCallback;
 import com.zjjxl.panda.https.HttpManager;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.LUtils;
+import com.zjjxl.panda.utils.StatusBarUtil;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class ShowAccessChannelActivity extends AppCompatActivity implements Acce
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.setDrawable(this, R.drawable.trip_fragmentsearch_color);
+        StatusBarUtil.setStatusBarLightMode(this.getWindow());
         setContentView(R.layout.activity_show_access_channel);
         initView();
 

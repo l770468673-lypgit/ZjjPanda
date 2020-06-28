@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ffffff"
     tools:context=".uis.CardActiviting">
 
     <LinearLayout
@@ -19,11 +20,39 @@
             android:layout_height="match_parent"
             android:visibility="visible">
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/cardactivity_top1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/jihuo_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:padding="20dp"
+                    android:text="返回"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/login_to_regist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:padding="20dp"
+                    android:text="@string/cardactive_startread1"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
+                android:layout_below="@+id/cardactivity_top1"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
                 <!--                <TextView-->
                 <!--                    android:id="@+id/cardact_idnumn"-->
@@ -47,20 +76,21 @@
                     android:id="@+id/cardact_pleaseon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="16dp"
                     android:gravity="center"
                     android:text="@string/cardactive_idxcrad_read"
                     android:textColor="#292929"
-                    android:textSize="30dp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="16dp"
                     android:gravity="center"
                     android:text="@string/cardactive_idxcrad_read2"
                     android:textColor="#292929"
-                    android:textSize="12dp" />
+                    android:textSize="14dp" />
 
                 <TextView
 
@@ -69,7 +99,7 @@
                     android:gravity="center"
                     android:text="@string/cardactive_idxcrad_read3"
                     android:textColor="#292929"
-                    android:textSize="12dp" />
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -92,10 +122,10 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/login_travel_btn"
                 android:gravity="center"
-                android:textColor="@color/ffffff"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
                 android:text="@string/cardactive_nextstep"
+                android:textColor="@color/ffffff"
                 android:visibility="gone" />
 
         </RelativeLayout>
@@ -107,11 +137,38 @@
             android:layout_height="match_parent"
             android:visibility="gone">
 
+            <RelativeLayout
+                android:id="@+id/cardactivity_top2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/jihuo_back2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:padding="20dp"
+                    android:text="返回"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:padding="20dp"
+                    android:text="@string/cardactive_startread2"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+
+            </RelativeLayout>
 
             <FrameLayout
                 android:id="@+id/framlay_allfaceview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/cardactivity_top2"
                 android:layout_centerHorizontal="true">
 
                 <TextureView
@@ -167,10 +224,10 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/login_travel_btn"
                 android:gravity="center"
-                android:textColor="@color/ffffff"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
                 android:text="@string/cardactive_nextstep"
+                android:textColor="@color/ffffff"
                 android:visibility="gone" />
 
 
@@ -184,8 +241,36 @@
             android:visibility="gone">
 
             <RelativeLayout
+                android:id="@+id/cardactivity_top3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/jihuo_back3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:padding="20dp"
+                    android:text="返回"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:padding="20dp"
+                    android:text="@string/cardactive_startread3"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardactivity_top3">
 
                 <LinearLayout
                     android:id="@+id/lly_111"
@@ -233,7 +318,8 @@
                         android:gravity="center"
                         android:text="22121122"
                         android:textColor="#292929"
-                        android:textSize="30dp" />
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
 
 
                     <TextView
@@ -278,7 +364,8 @@
                         android:gravity="center"
                         android:text="@string/cardactive_idcardreadover4"
                         android:textColor="#292929"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/bind_card_checkcode"
@@ -309,10 +396,10 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/login_travel_btn"
                 android:gravity="center"
-                android:textColor="@color/ffffff"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
                 android:text="@string/cardactive_idcardreadover6"
+                android:textColor="@color/ffffff"
                 android:visibility="gone" />
 
         </RelativeLayout>
@@ -324,10 +411,39 @@
             android:layout_height="match_parent"
             android:visibility="gone">
 
+            <RelativeLayout
+                android:id="@+id/cardactivity_top4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/jihuo_back4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:padding="20dp"
+                    android:text="返回"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/login_to_regist4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:padding="20dp"
+                    android:text="@string/cardactive_startread4"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+
+            </RelativeLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:layout_below="@+id/cardactivity_top4"
                 android:orientation="vertical"
                 android:padding="10dp"
                 android:visibility="gone">
@@ -478,6 +594,7 @@
                 android:id="@+id/usermsg"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_below="@+id/cardactivity_top4"
                 android:layout_margin="20dp"
                 android:background="@drawable/fragment_home_boxframe"
                 android:gravity="center"
@@ -564,6 +681,174 @@
                     android:layout_weight="1"
                     android:background="@drawable/nextsetup"
                     android:text="@string/eidactivity_msgfa"
+                    android:textColor="@color/ffffff" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relay_bindphone2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F8F7F6"
+            android:visibility="gone">
+
+
+            <RelativeLayout
+                android:id="@+id/cardactivity_top5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/ffffff">
+
+                <TextView
+                    android:id="@+id/jihuo_back5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:padding="20dp"
+                    android:text="返回"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/login_to_regist5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:padding="20dp"
+                    android:text="@string/cardactive_startread4"
+                    android:textColor="#262626"
+                    android:textSize="20sp" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/cardactivity_userinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardactivity_top5"
+                android:layout_margin="20dp"
+                android:background="@color/ffffff"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="基本信息"
+                        android:textColor="#999999" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#F8F7F6" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/card_ed_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@null"
+                        android:text="姓名"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#F8F7F6" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="手机"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/card_ed_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@null"
+                        android:text="12346546465"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#F8F7F6" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="卡号"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/card_ed_cardnum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@null"
+                        android:text="13213213132312"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/cardactivity_btnuserinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardactivity_userinfo"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/nextsetup"
+                    android:text="@string/eidactivity_msgok"
                     android:textColor="@color/ffffff" />
 
             </LinearLayout>

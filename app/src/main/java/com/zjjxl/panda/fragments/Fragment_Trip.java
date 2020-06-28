@@ -23,6 +23,7 @@ import com.zjjxl.panda.uis.NFCPandaActivity;
 import com.zjjxl.panda.uis.ShowAccessChannelActivity;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.ShareUtil;
+import com.zjjxl.panda.utils.StatusBarUtil;
 import com.zjjxl.panda.utils.ToastUtils;
 
 
@@ -62,6 +63,8 @@ public class Fragment_Trip extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
+        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
         View inflate = inflater.inflate(R.layout.fragment__trip, container, false);
         initView(inflate);
         return inflate;

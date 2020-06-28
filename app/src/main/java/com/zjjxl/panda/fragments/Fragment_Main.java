@@ -33,7 +33,11 @@ import com.zjjxl.panda.R;
 import com.zjjxl.panda.uis.NFCPandaActivity;
 import com.zjjxl.panda.uis.OpenCardActivity;
 import com.zjjxl.panda.uis.ShowAccessChannelActivity;
+import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.LUtils;
+import com.zjjxl.panda.utils.ShareUtil;
+import com.zjjxl.panda.utils.StatusBarUtil;
+import com.zjjxl.panda.utils.ToastUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,6 +59,7 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
     private Button mMain_opencard;
     private LinearLayout mFragment_main_bycard1;
     private LinearLayout mFragment_main_bycard2;
+    private String mLogin_phone;
 
     public Fragment_Main() {
         // Required empty public constructor
@@ -83,8 +88,10 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
         View inflate = inflater.inflate(R.layout.fragment__main, container, false);
-
+        mLogin_phone = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
         initView(inflate);
 
 
@@ -138,21 +145,26 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btncard_savemoney:
-                Intent intent = new Intent(getActivity(), ShowAccessChannelActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.main_opencard:
-                Intent intent2 = new Intent(getActivity(), OpenCardActivity.class);
-                startActivity(intent2);
-                break;
-            case R.id.fragment_main_bycard1:
-            case R.id.fragment_main_bycard2:
-                toWeChatproject();
-                break;
+        if (mLogin_phone != null) {
+            switch (v.getId()) {
+                case R.id.btncard_savemoney:
+                    Intent intent = new Intent(getActivity(), ShowAccessChannelActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.main_opencard:
+                    Intent intent2 = new Intent(getActivity(), OpenCardActivity.class);
+                    startActivity(intent2);
+                    break;
+                case R.id.fragment_main_bycard1:
+                case R.id.fragment_main_bycard2:
+                    toWeChatproject();
+                    break;
 
+            }
+        } else {
+            ToastUtils.showToast(getActivity(), "请登录后再试");
         }
+
     }
 
 
@@ -201,11 +213,11 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
             }
         }
     }
-//    public static Bitmap capture(Activity activity) {
-//        activity.getWindow().getDecorView().setDrawingCacheEnabled(true);
-//        Bitmap bmp = activity.getWindow().getDecorView().getDrawingCache();
-//        return bmp;
-//    }
+    //    public static Bitmap capture(Activity activity) {
+    //        activity.getWindow().getDecorView().setDrawingCacheEnabled(true);
+    //        Bitmap bmp = activity.getWindow().getDecorView().getDrawingCache();
+    //        return bmp;
+    //    }
 
 
     @Override

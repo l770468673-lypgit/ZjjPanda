@@ -23,7 +23,7 @@
     <string name="eidactivity_shiming2">○ 请准备好身份证、熊猫卡</string>
     <string name="eidactivity_shiming3">○ 以及具备NFC功能的手机</string>
     <string name="eidactivity_sadd">添加</string>
-    <string name="eidactivity_eidreg">激活</string>
+    <string name="eidactivity_eidreg">卡片激活</string>
     <string name="eidactivity_eidname">数字身份</string>
     <string name="eidactivity_shimingshenfen">○ 您的熊猫卡将嵌入eID数字身份，实现实名认证。</string>
     <string name="eidactivity_iagrees">我同意</string>
@@ -51,7 +51,7 @@
 
 
     <string name="cardactive_title_eidact">添加卡片</string>
-    <string name="cardactive_idxcrad_read">请贴身份证...</string>
+    <string name="cardactive_idxcrad_read">请将您的身份证置于手机背面</string>
     <string name="cardactive_idxcrad_read2">请将身份证靠进手机所示识别</string>
     <string name="cardactive_idxcrad_read3">识别过程中请勿离开身份证</string>
     <string name="cardactive_idxcrad_start">读取中，请勿移动</string>
@@ -67,6 +67,11 @@
     <string name="cardactive_idcardreadover6">确认校验码</string>
     <string name="cardactive_faceover">人脸识别成功</string>
     <string name="cardactive_infinding">正在识别人脸</string>
+    <string name="cardactive_startread1">读取身份证1/3</string>
+    <string name="cardactive_startread2">读取身份证2/3</string>
+    <string name="cardactive_startread3">读取身份证3/3</string>
+    <string name="cardactive_startread4">信息确认</string>
+
 
 
     <string name="cardactive_cardsisbind">已绑卡</string>
