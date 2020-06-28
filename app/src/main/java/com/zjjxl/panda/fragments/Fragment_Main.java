@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -52,6 +53,8 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
     private Button mBtncard_savemoney;
     private TextView mHome_tv_location;
     private Button mMain_opencard;
+    private LinearLayout mFragment_main_bycard1;
+    private LinearLayout mFragment_main_bycard2;
 
     public Fragment_Main() {
         // Required empty public constructor
@@ -94,9 +97,13 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
         mBtncard_savemoney = inflate.findViewById(R.id.btncard_savemoney);
         mMain_opencard = inflate.findViewById(R.id.main_opencard);
         mHome_tv_location = inflate.findViewById(R.id.home_tv_location);
+        mFragment_main_bycard1 = inflate.findViewById(R.id.fragment_main_bycard1);
+        mFragment_main_bycard2 = inflate.findViewById(R.id.fragment_main_bycard2);
 
         mBtncard_savemoney.setOnClickListener(this);
         mMain_opencard.setOnClickListener(this);
+        mFragment_main_bycard1.setOnClickListener(this);
+        mFragment_main_bycard2.setOnClickListener(this);
         initLocation();
     }
 
@@ -136,9 +143,13 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
                 Intent intent = new Intent(getActivity(), ShowAccessChannelActivity.class);
                 startActivity(intent);
                 break;
-                case R.id.main_opencard:
+            case R.id.main_opencard:
                 Intent intent2 = new Intent(getActivity(), OpenCardActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.fragment_main_bycard1:
+            case R.id.fragment_main_bycard2:
+                toWeChatproject();
                 break;
 
         }

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -34,6 +35,7 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
     private RatioImageView mMine_minehead;
     private TextView mMin_login_nunm;
     private TextView mMin_login_name;
+    private Button mFragment_mine_kabao;
 
     public Fragment_Mine() {
     }
@@ -72,12 +74,14 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
         mMine_minehead = inflate.findViewById(R.id.mine_minehead);
         mMin_login_nunm = inflate.findViewById(R.id.min_login_nunm);
         mMin_login_name = inflate.findViewById(R.id.min_login_name);
+        mFragment_mine_kabao = inflate.findViewById(R.id.fragment_mine_kabao);
 
 
 
 
         mMine_minehead.setOnClickListener(this);
         mRely_mine_tologin.setOnClickListener(this);
+        mFragment_mine_kabao.setOnClickListener(this);
     }
 
     @Override
@@ -111,6 +115,9 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
             case R.id.mine_minehead:
                 Intent intents = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intents);
+                break;
+                case R.id.fragment_mine_kabao:
+
                 break;
         }
     }
