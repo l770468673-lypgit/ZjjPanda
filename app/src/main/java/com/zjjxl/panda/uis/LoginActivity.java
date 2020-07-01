@@ -71,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     ShareUtil.putString(Contants.LOGIN_USER_PHONE, response.body().getUserInfo().getMobile());
                                     ShareUtil.putString(Contants.LOGIN_USER_NAME, response.body().getUserInfo().getUserName());
                                     ShareUtil.putString(Contants.LOGIN_USER_HEAD, response.body().getUserInfo().getPhoto());
+                                    ShareUtil.putString(Contants.LOGIN_ORGMEMBERID, response.body().getUserInfo().getOrgMemberId());
+                                    ShareUtil.putString(Contants.LOGIN_USERMEMBERID, response.body().getUserInfo().getUserMemberId());
                                     finish();
                                 } else {
                                     ToastUtils.showToast(LoginActivity.this, response.body().getMsg());

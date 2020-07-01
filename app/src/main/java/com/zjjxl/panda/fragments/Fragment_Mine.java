@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.uis.CardListActivity;
 import com.zjjxl.panda.uis.LoginActivity;
 import com.zjjxl.panda.uis.SettingActivity;
 import com.zjjxl.panda.utils.Contants;
@@ -33,6 +34,7 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
     private LinearLayout mRely_mine_tologin;
+    private RelativeLayout mIne_rely_cardlist;
     private RatioImageView mMine_minehead;
     private TextView mMin_login_nunm;
     private TextView mMin_login_name;
@@ -69,12 +71,13 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
         StatusBarUtil.setDrawable(getActivity(), R.drawable.fragment_bennefit_boxframe);
 
         View inflate = inflater.inflate(R.layout.fragment__mine, container, false);
-        mLogin_phone = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
+
         initView(inflate);
         return inflate;
     }
 
     private void initView(View inflate) {
+        mIne_rely_cardlist = inflate.findViewById(R.id.mine_rely_cardlist);
         mRely_mine_tologin = inflate.findViewById(R.id.rely_mine_tologin);
         mMine_minehead = inflate.findViewById(R.id.mine_minehead);
         mMin_login_nunm = inflate.findViewById(R.id.min_login_nunm);
@@ -84,12 +87,16 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
 
         mMine_minehead.setOnClickListener(this);
         mRely_mine_tologin.setOnClickListener(this);
+        mIne_rely_cardlist.setOnClickListener(this);
         mFragment_mine_kabao.setOnClickListener(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        mLogin_phone = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
+
         StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
         StatusBarUtil.setDrawable(getActivity(), R.drawable.fragment_bennefit_boxframe);
         String stringph = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
@@ -126,9 +133,15 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
                 case R.id.fragment_mine_kabao:
 
                     break;
+                case R.id.mine_rely_cardlist:
+                    Intent incard = new Intent(getActivity(), CardListActivity.class);
+                    startActivity(incard);
+                    break;
             }
         } else {
             ToastUtils.showToast(getActivity(), "请登录后再试");
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
         }
     }
 }

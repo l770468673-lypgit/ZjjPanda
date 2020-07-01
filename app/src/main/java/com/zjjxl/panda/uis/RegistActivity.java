@@ -242,6 +242,8 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                             ShareUtil.putString(Contants.LOGIN_USER_PHONE, response.body().getUserInfo().getMobile());
                             ShareUtil.putString(Contants.LOGIN_USER_NAME, response.body().getUserInfo().getUserName());
                             ShareUtil.putString(Contants.LOGIN_USER_HEAD, response.body().getUserInfo().getPhoto());
+                            ShareUtil.putString(Contants.LOGIN_ORGMEMBERID, response.body().getUserInfo().getOrgMemberId());
+                            ShareUtil.putString(Contants.LOGIN_USERMEMBERID, response.body().getUserInfo().getUserMemberId());
                             finish();
                         }
                     }

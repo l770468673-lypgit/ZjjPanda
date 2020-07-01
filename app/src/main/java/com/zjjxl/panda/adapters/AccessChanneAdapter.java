@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +21,7 @@ public class AccessChanneAdapter extends RecyclerView.Adapter<AccessChanneAdapte
 
     private Context mContext;
     private List<QueryCZCity.ExtraBean> Mextra;
-    private String TAG="AccessChanneAdapter";
+    private String TAG = "AccessChanneAdapter";
 
     public AccessChanneAdapter(Context context) {
         mContext = context;
@@ -53,9 +54,14 @@ public class AccessChanneAdapter extends RecyclerView.Adapter<AccessChanneAdapte
         QueryCZCity.ExtraBean extraBean = Mextra.get(position);
         final String accessChannel = extraBean.getAccessChannel();
         String cityName = extraBean.getCityName();
-        LUtils.d(TAG,"cityName==="+cityName);
-        LUtils.d(TAG,"accessChannel==="+accessChannel);
+        LUtils.d(TAG, "cityName===" + cityName);
+        LUtils.d(TAG, "accessChannel===" + accessChannel);
         holder.mAccess_card_title.setText(cityName + "一卡通");
+        if (cityName.equals("双阳")) {
+            holder.mAccess_bgimg.setBackgroundResource(R.mipmap.chongzhi_img1);
+        } else {
+            holder.mAccess_bgimg.setBackgroundResource(R.mipmap.chongzhi_img2);
+        }
         holder.mAccess_rely_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,9 +83,11 @@ public class AccessChanneAdapter extends RecyclerView.Adapter<AccessChanneAdapte
 
         private final TextView mAccess_card_title;
         private final Button mAccess_rely_btn;
+        private final ImageView mAccess_bgimg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            mAccess_bgimg = itemView.findViewById(R.id.access_bgimg);
             mAccess_card_title = itemView.findViewById(R.id.access_card_title);
             mAccess_rely_btn = itemView.findViewById(R.id.access_rely_btn);
         }

@@ -8,6 +8,8 @@ public class Contants {
     public static String LOGIN_USER_NAME = "login_user_name";
     public static String LOGIN_USER_HEAD = "login_user_head";
     public static String APP_SESSIONIS = "app_sessionis";
+    public static String LOGIN_ORGMEMBERID = "login_orgmemberid";
+    public static String LOGIN_USERMEMBERID = "login_usermemberid";
 
 
 

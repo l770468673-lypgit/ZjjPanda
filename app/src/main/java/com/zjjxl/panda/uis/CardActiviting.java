@@ -22,6 +22,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -38,6 +39,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.arcsoft.face.ActiveFileInfo;
 import com.arcsoft.face.AgeInfo;
 import com.arcsoft.face.ErrorInfo;
@@ -49,6 +52,7 @@ import com.arcsoft.face.VersionInfo;
 import com.arcsoft.face.enums.DetectFaceOrientPriority;
 import com.arcsoft.face.enums.DetectMode;
 import com.arcsoft.face.enums.RuntimeABI;
+import com.blankj.utilcode.util.LogUtils;
 import com.crb.cttic.pay.card.bean.CardInfoGather;
 import com.crb.cttic.pay.device.SmartCardNfcTag;
 import com.crb.cttic.pay.utils.ReadCardUtils;
@@ -71,7 +75,10 @@ import com.zjjxl.panda.arcesoft.LivenessType;
 import com.zjjxl.panda.arcesoft.RecognizeColor;
 import com.zjjxl.panda.arcesoft.RequestFeatureStatus;
 import com.zjjxl.panda.arcesoft.RequestLivenessStatus;
+import com.zjjxl.panda.beans.BindCardIsBean;
+import com.zjjxl.panda.beans.QueryCZCity;
 import com.zjjxl.panda.beans.bean_person;
+import com.zjjxl.panda.beans.bindcardBean;
 import com.zjjxl.panda.https.HttpCallback;
 import com.zjjxl.panda.https.HttpManager;
 import com.zjjxl.panda.interfaces.ParamConst;
@@ -81,6 +88,7 @@ import com.zjjxl.panda.utils.KeyboardUtils;
 import com.zjjxl.panda.utils.LUtils;
 import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.StatusBarUtil;
+import com.zjjxl.panda.utils.TimerUtils;
 import com.zjjxl.panda.utils.ToastUtils;
 import com.zjjxl.panda.utils.readIDcardUtils;
 import com.zkteco.android.IDReader.IDCardPhoto;
@@ -88,6 +96,7 @@ import com.zkteco.android.IDReader.IDCardPhoto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -101,7 +110,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CardActiviting extends XLBaseActivity implements View.OnClickListener, ViewTreeObserver.OnGlobalLayoutListener, TextWatcher {
@@ -258,6 +271,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
     //    private ImageView cardact_iamgv;
     private TextView mCardact_pleaseon;
     private Button mCardactive_nextstep;
+    private Button mCard_btn_yanzhengma;
     private RelativeLayout mRely_readcard;
 
     private ImageView mImage_facehead;
@@ -300,14 +314,23 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
     private LinearLayout mLly_yanzhengma;
     private AnimationDrawable mAnimaition;
     private Button mCardactivity_btnuserinfo;
+    private ImageView mCard_userinfo_img;
     private EditText mCard_ed_cardnum;
+    private EditText mCard_code_success;
+    private EditText mCard_ed_sex;
     private EditText mCard_ed_phone;
+    private EditText mCard_ed_bindcardnum;
     private EditText mCard_ed_name;
     private TextView mJihuo_back;
+    private TextView mJihuo_back6;
     private TextView mJihuo_back2;
     private TextView mJihuo_back3;
     private TextView mJihuo_back4;
     private TextView mJihuo_back5;
+    private String mIdnum;
+    private String mSex;
+    private String mBindcode;
+    private LinearLayout mRelay_bindphonefinal;
 
 
     @Override
@@ -478,8 +501,10 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         mCardact_pleaseon = findViewById(R.id.cardact_pleaseon);
         mLly_okname = findViewById(R.id.lly_okname);
         mCardactive_nextstep = findViewById(R.id.cardactive_nextstep);
+        mCard_btn_yanzhengma = findViewById(R.id.card_btn_yanzhengma);
 
         mJihuo_back = findViewById(R.id.jihuo_back);
+        mJihuo_back6 = findViewById(R.id.jihuo_back6);
         mJihuo_back2 = findViewById(R.id.jihuo_back2);
         mJihuo_back3 = findViewById(R.id.jihuo_back3);
         mJihuo_back4 = findViewById(R.id.jihuo_back4);
@@ -490,6 +515,8 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         mJihuo_back3.setOnClickListener(this);
         mJihuo_back4.setOnClickListener(this);
         mJihuo_back5.setOnClickListener(this);
+        mJihuo_back6.setOnClickListener(this);
+        mCard_btn_yanzhengma.setOnClickListener(this);
 
         // 三个布局
         mRely_readcard = findViewById(R.id.rely_readcard);
@@ -527,9 +554,14 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         mCard_ed_name = findViewById(R.id.card_ed_name);
         mCard_ed_phone = findViewById(R.id.card_ed_phone);
         mCard_ed_cardnum = findViewById(R.id.card_ed_cardnum);
+        mCard_ed_sex = findViewById(R.id.card_ed_sex);
+        mCard_ed_bindcardnum = findViewById(R.id.card_ed_bindcardnum);
         mCardactivity_btnuserinfo = findViewById(R.id.cardactivity_btnuserinfo);
+        mCard_userinfo_img = findViewById(R.id.card_userinfo_img);
+        mCard_code_success = findViewById(R.id.card_code_success);
+        mRelay_bindphonefinal = findViewById(R.id.relay_bindphonefinal);
 
-
+        TimerUtils.initTimer(this, mCard_btn_yanzhengma, 60000, 1000);
         ViewGroup.LayoutParams layoutParamsf = mFramlay_allfaceview.getLayoutParams();
         layoutParamsf.width = width1;
         layoutParamsf.height = width1;
@@ -591,23 +623,25 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
             case R.id.jihuo_back3:
             case R.id.jihuo_back4:
             case R.id.jihuo_back5:
+            case R.id.jihuo_back6:
                 finish();
                 break;
             case R.id.cardactivity_btnuserinfo:
-
+                userBindCard();
+                break;
+            case R.id.card_btn_yanzhengma:
+                TimerUtils.TimerStart();
+                getPhoneCode();
                 break;
             case R.id.lly_bindsuccess:
 
                 if (mPhonenums.getText().toString().trim().length() == 11 && mPandacard_cardnum.getText().toString().trim().length() > 1) {
-
                     //                    AddCards();
-
                 } else {
                     ToastUtils.showToast(this, "---------输入不正确 -----------");
                 }
                 break;
             case R.id.card_bind_yanzhengma:
-
                 //                if (mCard_bind_phonenum.getText().toString().trim().length() == 11) {
                 //                    TimerUtils.initTimer(this, mCard_bind_yanzhengma, 60000, 1000);
                 //                    TimerUtils.TimerStart();
@@ -646,13 +680,19 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
                 //                mPandacard_cardnum.setText(mMAppletNo);
                 //                mPhonenums.setText(ShareUtil.getString(Contants.SERNAME_PHONE));
                 //                mLly_okname.setText(mName);
-
+                mBindcode = mBind_card_checkcode.getText().toString().trim();
+                mCard_ed_bindcardnum.setText(mBindcode);
+//                mBind_card_checkcode.setText(mBindcode);
                 mCard_ed_name.setText(mName);
+                mCard_ed_sex.setText(mIdnum);
+                mCard_userinfo_img.setImageBitmap(mBit2map);
+
                 if (ShareUtil.getString(Contants.LOGIN_USER_PHONE) != null) {
                     mCard_ed_phone.setText(ShareUtil.getString(Contants.LOGIN_USER_PHONE));
                 }
 
                 mCard_ed_cardnum.setText(mMAppletNo);
+
                 break;
             case R.id.faceactive_nextstep:
                 mRelay_pandacard.setVisibility(View.VISIBLE);
@@ -675,6 +715,77 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
                 break;
         }
 
+    }
+
+    //    cardNum：卡号，
+//    bindingCode：绑定码，
+//    fullName：姓名，
+//    sex：性别，
+//    idNumber：身份证号码，
+//    phone：电话，
+//    userLogo：照片，
+//    phoneVerifycode：验证码，
+//    userMemberId：用户memberId}
+//    性别  1男  2女
+    private void userBindCard() {
+        String sex = "1";
+        if (mSex == "男") {
+            sex = "1";
+        } else if (mSex == "女") {
+            sex = "2";
+        }
+        bindcardBean bindcardBean = new bindcardBean(ShareUtil.getString(Contants.LOGIN_USERMEMBERID),
+                "3104895111100002002", mBindcode, mName, sex, mIdnum, mCard_ed_phone.getText().toString().trim()
+                , "Im user  pic ",
+                mCard_code_success.getText().toString().trim());
+        LUtils.showlogcat(TAG, " bindcardBean.toString()==" + bindcardBean.toString());
+
+        Call<BindCardIsBean> queryCZCityCall = HttpManager.getInstance().getHttpClient3().
+                userBindCard2(bindcardBean.toString());
+        queryCZCityCall.enqueue(new Callback<BindCardIsBean>() {
+            @Override
+            public void onResponse(Call<BindCardIsBean> call, Response<BindCardIsBean> response) {
+                if (response.body() != null) {
+                    boolean status = response.body().isStatus();
+                    if (status) {
+                        mRelay_bindphone2.setVisibility(View.GONE);
+                        mRelay_bindphonefinal.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BindCardIsBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getPhoneCode() {
+        if (mCard_ed_phone.getText().toString().trim() != null) {
+            String Card_ed_phone = mCard_ed_phone.getText().toString().trim();
+            LUtils.d(TAG, "mCard_ed_phone.toString()==" + Card_ed_phone);
+            Call<QueryCZCity> phoneVerifyCode = HttpManager.getInstance().getHttpClient3().
+                    getPhoneVerifyCode(Card_ed_phone);
+            phoneVerifyCode.enqueue(new Callback<QueryCZCity>() {
+                @Override
+                public void onResponse(Call<QueryCZCity> call, Response<QueryCZCity> response) {
+                    if (response != null) {
+                        boolean status = response.body().isStatus();
+                        if (status) {
+                            ToastUtils.showToast(CardActiviting.this, "发送成功");
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<QueryCZCity> call, Throwable t) {
+
+                }
+            });
+
+        }
     }
 
     //    public void commiyPhone() {
@@ -771,7 +882,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
     @Override
     protected void onPause() {
         super.onPause();
-
+        TimerUtils.TimerStop("发送验证码");
         if (null != nfcAdapter) {
             nfcAdapter.disableForegroundDispatch(this);
         }
@@ -1104,6 +1215,8 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
                     //                    String idnum = status.getIdnum();
                     //                    mCardact_idnumn.setText(idnum);
                     mName = status.getName();
+                    mIdnum = status.getIdnum();
+                    mSex = status.getSex();
 
                     mCardact_pleaseon.setText(R.string.cardactive_idxcrad_ok);
                     mCardactive_nextstep.setVisibility(View.VISIBLE);

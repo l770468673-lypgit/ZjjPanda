@@ -1,14 +1,21 @@
 package com.zjjxl.panda.https;
 
+import com.zjjxl.panda.beans.BindCardIsBean;
 import com.zjjxl.panda.beans.LoginBean;
+import com.zjjxl.panda.beans.QueryBindCradbean;
 import com.zjjxl.panda.beans.QueryCZCity;
 import com.zjjxl.panda.beans.SessioIdBean;
 import com.zjjxl.panda.beans.SmsCode;
 import com.zjjxl.panda.beans.bean_person;
 import com.zjjxl.panda.beans.regAppUser;
 
+import java.util.Map;
+
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -71,4 +78,33 @@ public interface ClientRestAPI {
     @GET("foreign/queryAccessChannelList.jspx")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
     Call<QueryCZCity> queryAccessChannelList();
+
+
+    //获取验证码
+    // @FormUrlEncoded
+    //    @POST("ui/register/validate.jspx")
+    //    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+
+     @FormUrlEncoded
+    @POST("foreign/getPhoneVerifyCode.jspx")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    Call<QueryCZCity> getPhoneVerifyCode(@Field("userPhone") String userPhone );
+
+    @POST("/foreign/userBindCard.jspx")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    Call<QueryCZCity> userBindCard(@Body RequestBody body);
+
+    @FormUrlEncoded
+    @POST("/foreign/queryUserInfoByUserMid.jspx")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    Call<QueryBindCradbean> queryUserInfoByUserMid(@Field("userMid") String userMid );
+
+    @FormUrlEncoded
+    @POST("/foreign/userBindCard.jspx")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    Call<BindCardIsBean> userBindCard2(@Field("userJson") String userJson);
+
+
+
+
 }

@@ -30,6 +30,7 @@ public class HttpManager {
 
     private final static String CONNECT_LOGIN3 = "https://panda.stone3a.com/";
 
+
     private static HttpManager sHttpManager;
 
 

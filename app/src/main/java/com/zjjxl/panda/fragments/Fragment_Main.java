@@ -30,6 +30,7 @@ import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.uis.LoginActivity;
 import com.zjjxl.panda.uis.NFCPandaActivity;
 import com.zjjxl.panda.uis.OpenCardActivity;
 import com.zjjxl.panda.uis.ShowAccessChannelActivity;
@@ -91,11 +92,17 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
         StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
         StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
         View inflate = inflater.inflate(R.layout.fragment__main, container, false);
-        mLogin_phone = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
+
         initView(inflate);
 
 
         return inflate;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mLogin_phone = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
     }
 
     private void initView(View inflate) {
@@ -163,6 +170,8 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
             }
         } else {
             ToastUtils.showToast(getActivity(), "请登录后再试");
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
         }
 
     }

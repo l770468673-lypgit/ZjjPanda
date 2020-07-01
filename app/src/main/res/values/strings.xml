@@ -68,10 +68,11 @@
     <string name="cardactive_faceover">人脸识别成功</string>
     <string name="cardactive_infinding">正在识别人脸</string>
     <string name="cardactive_startread1">读取身份证1/3</string>
-    <string name="cardactive_startread2">读取身份证2/3</string>
-    <string name="cardactive_startread3">读取身份证3/3</string>
+    <string name="cardactive_startread2">人证活体识别中2/3</string>
+    <string name="cardactive_startread3">识别熊猫卡3/3</string>
     <string name="cardactive_startread4">信息确认</string>
-
+    <string name="cardactive_jihuoend">激活完成</string>
+    <string name="cardactive_showmycard">查看我的熊猫卡</string>
 
 
     <string name="cardactive_cardsisbind">已绑卡</string>
