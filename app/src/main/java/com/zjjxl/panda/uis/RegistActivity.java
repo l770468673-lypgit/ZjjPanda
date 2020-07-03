@@ -28,6 +28,7 @@ import com.zjjxl.panda.interceptor.ReceivedCookiesInterceptor;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.LUtils;
 import com.zjjxl.panda.utils.ShareUtil;
+import com.zjjxl.panda.utils.StatusBarUtil;
 import com.zjjxl.panda.utils.TimerUtils;
 import com.zjjxl.panda.utils.ToastUtils;
 
@@ -62,6 +63,9 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        StatusBarUtil.setStatusBarLightMode(getWindow());
+        StatusBarUtil.setDrawable(this, R.drawable.fragment_bennefit_boxframe);
         setContentView(R.layout.activity_regist);
         initSend();
         initVer();

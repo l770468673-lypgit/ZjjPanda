@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ffffff"
     android:orientation="vertical"
     tools:context=".uis.NFCPandaActivity">
 
     <RelativeLayout
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/main_fragment_color">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/nfc_toptitle_back"
@@ -20,17 +19,17 @@
             android:gravity="center"
             android:padding="14dp"
             android:text="返回"
-            android:textColor="#FFFFFF"
+            android:textColor="#262626"
             android:textSize="20sp" />
 
         <TextView
-
+            android:id="@+id/nfc_titlename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="14dp"
             android:text="公交充值"
-            android:textColor="#FFFFFF"
+            android:textColor="#262626"
             android:textSize="20sp" />
     </RelativeLayout>
 
@@ -89,65 +88,67 @@
             android:orientation="vertical">
 
 
-            <!--        <include-->
-            <!--            layout="@layout/toptitlebar_layout_withtext"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content" />-->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
-                        android:gravity="center"
-                        android:text="@string/fragment_bycar_text_num"
-                        android:textColor="#093B92"
-                        android:textSize="20sp" />
+                    android:layout_marginLeft="20dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/lly_writecardnum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="熊猫文旅通"
-                        android:textColor="#093B92"
-                        android:textSize="20sp" />
+                        android:text="1626627323665"
+                        android:textColor="#262626"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/fragment_bycar_text_money"
+                        android:textColor="#999999"
+                        android:textSize="14sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#f5f5f5"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
-                        android:gravity="center"
-                        android:text="@string/fragment_bycar_text_money"
-                        android:textColor="#093B92"
-                        android:textSize="20sp" />
+                        android:gravity="center_vertical"
+                        android:text="@string/eidactivity_yue"
+                        android:textColor="#666666"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/lly_writecmomey"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:textColor="#093B92"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center_vertical"
+                        android:text="35"
+                        android:textColor="#D53529"
                         android:textSize="16sp" />
                 </LinearLayout>
-
             </LinearLayout>
 
 
@@ -257,6 +258,99 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lly_savesuccess"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:background="@mipmap/nfc_savesuccess"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="充值成功！"
+            android:textColor="#32C660"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#F5F5F5"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="充值卡号" />
+
+                <TextView
+                    android:id="@+id/nfc_save_cardnum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="123123123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="充值金额" />
+
+                <TextView
+                    android:id="@+id/nfc_save_cardmoney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="222" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/nfcact_nextstep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/login_travel_btn"
+            android:gravity="center"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="@string/moredispose_backtoact"
+            android:textColor="@color/ffffff"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 
     <!--tuikuan  退款 全村 等操作 -->

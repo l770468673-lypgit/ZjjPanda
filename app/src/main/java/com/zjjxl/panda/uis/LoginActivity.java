@@ -37,6 +37,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        StatusBarUtil.setDrawable(this, R.drawable.mine_fragment_color);
+        StatusBarUtil.setStatusBarLightMode(getWindow());
+        StatusBarUtil.setDrawable(this, R.drawable.fragment_bennefit_boxframe);
         setContentView(R.layout.activity_login);
 
         initView();

@@ -36,6 +36,7 @@ import com.zjjxl.panda.https.HttpManager;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.LUtils;
 import com.zjjxl.panda.utils.ShareUtil;
+import com.zjjxl.panda.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +76,7 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
+         setContentView(R.layout.activity_main);
         initPermission();
         initView();
 
@@ -162,7 +162,6 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
 
     }
 //    private void getSessionID() {
-//
 //        Call<SessioIdBean> sessionId = HttpManager.getInstance().getHttpClient3().getSessionId();
 //        sessionId.enqueue(new Callback<SessioIdBean>() {
 //            @Override
@@ -172,7 +171,6 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
 //                    ShareUtil.putString(Contants.APP_SESSIONIS, sessionId1);
 //                }
 //            }
-//
 //            @Override
 //            public void onFailure(Call<SessioIdBean> call, Throwable t) {
 //
@@ -194,22 +192,26 @@ public class MainActivity extends XLBaseActivity implements View.OnTouchListener
                 switch (checkedId) {
                     case R.id.main_frag_home:
                         setIndexSelected(0);
-
-
+                        StatusBarUtil.setDrawable(MainActivity.this, R.drawable.mine_title_color);
                         break;
                     case R.id.main_frag_benefit:
                         setIndexSelected(1);
+                        StatusBarUtil.setDrawable(MainActivity.this, R.drawable.mine_title_color);
                         break;
 
                     case R.id.main_frag_trip:
                         setIndexSelected(2);
+                        StatusBarUtil.setDrawable(MainActivity.this, R.drawable.mine_title_color);
                         break;
 
                     case R.id.main_frag_life:
                         setIndexSelected(3);
+                        StatusBarUtil.setDrawable(MainActivity.this, R.drawable.mine_title_color);
                         break;
                     case R.id.main_frag_mine:
                         setIndexSelected(4);
+                        StatusBarUtil.setStatusBarLightMode(getWindow());
+                        StatusBarUtil.setDrawable(MainActivity.this, R.drawable.fragment_bennefit_boxframe);
                         break;
                     default:
                         break;

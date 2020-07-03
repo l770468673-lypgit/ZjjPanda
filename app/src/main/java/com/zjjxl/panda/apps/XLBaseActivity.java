@@ -25,5 +25,6 @@ public class XLBaseActivity extends AppCompatActivity {
             }
         }
         StatusBarUtil.setDrawable(this, R.drawable.mine_title_color);
+        StatusBarUtil.MIUISetStatusBarLightMode(getWindow(), true);
     }
 }

@@ -11,11 +11,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.apps.XLBaseActivity;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.RatioImageView;
 import com.zjjxl.panda.utils.ShareUtil;
 
-public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingActivity extends XLBaseActivity implements View.OnClickListener {
 
     private RelativeLayout mLife_toptitle;
     private RatioImageView mSetting_heanimg;

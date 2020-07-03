@@ -7,13 +7,14 @@
 
     <string name="nfc_read_card_wait_alert">打开手机NFC功能\n将卡片贴于手机背面NFC感应区\n（若卡片无反应，移动卡片寻找NFC感应区）</string>
     <string name="fragment_bycar_text_num">卡号 ：</string>
-    <string name="fragment_bycar_text_money">账户余额 ：</string>
+    <string name="fragment_bycar_text_money">当前充值卡号 ：</string>
     <string name="nfcact_title_realpaymoney_othermoney"> 其他金额 </string>
     <string name="nfcact_title_realpaymoney"> 实付金额  ： </string>
     <string name="nfcact_title_realpaymoney_commit"> 立即充值 </string>
     <string name="nfcact_title_fapiao">发票信息 |</string>
     <string name="nfcact_title_tishi"> 温馨提示 |</string>
     <string name="moredispose_text_hist">充值记录</string>
+    <string name="moredispose_backtoact">返回首页</string>
 
     <string name="login_wx_querycode">获取验证码</string>
     <string name="login_wx_editokphone">输入错误,请重试</string>
@@ -32,6 +33,7 @@
 
 
     <string name="eidactivity_bindphone">手机:  </string>
+    <string name="eidactivity_yue">余额:  </string>
     <string name="eidactivity_bindcard">卡号:  </string>
     <string name="eidactivity_msgok">信息确认</string>
     <string name="eidactivity_msgfa">信息错误</string>
@@ -59,7 +61,7 @@
     <string name="cardactive_idxcrad_ok">读取成功</string>
     <string name="cardactive_nextin">正在取卡</string>
     <string name="cardactive_nextstep">下一步</string>
-    <string name="cardactive_idcardreadover">请贴熊猫卡......</string>
+     <string name="cardactive_idcardreadover">请贴熊猫卡......</string>
     <string name="cardactive_idcardreadover2">请将熊猫卡靠近进手机所示识别</string>
     <string name="cardactive_idcardreadover3">识别过程中请勿离开熊猫卡</string>
     <string name="cardactive_idcardreadover4">请输入卡片上图层后的校验码</string>

@@ -12,9 +12,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.apps.XLBaseActivity;
 import com.zjjxl.panda.utils.LUtils;
 
-public class WebActivity extends AppCompatActivity {
+public class WebActivity extends XLBaseActivity {
 
     private WebView mWeb_textword;
     private String TAG = "WebActivity";

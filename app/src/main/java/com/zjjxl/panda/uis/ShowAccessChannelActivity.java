@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.adapters.AccessChanneAdapter;
+import com.zjjxl.panda.apps.XLBaseActivity;
 import com.zjjxl.panda.beans.QueryCZCity;
 import com.zjjxl.panda.https.HttpCallback;
 import com.zjjxl.panda.https.HttpManager;
@@ -22,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShowAccessChannelActivity extends AppCompatActivity implements AccessChanneAdapter.AccessItenClick {
+public class ShowAccessChannelActivity extends XLBaseActivity implements AccessChanneAdapter.AccessItenClick {
 
     private RecyclerView mAccess_recycle;
     private AccessChanneAdapter mAdapter;

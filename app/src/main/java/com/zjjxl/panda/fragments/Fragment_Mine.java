@@ -90,6 +90,13 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
         mIne_rely_cardlist.setOnClickListener(this);
         mFragment_mine_kabao.setOnClickListener(this);
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.fragment_bennefit_boxframe);
+    }
+
 
     @Override
     public void onResume() {
@@ -97,8 +104,7 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
 
         mLogin_phone = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
 
-        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
-        StatusBarUtil.setDrawable(getActivity(), R.drawable.fragment_bennefit_boxframe);
+
         String stringph = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
         if (stringph != null) {
             mMin_login_nunm.setText(stringph);
@@ -116,6 +122,7 @@ public class Fragment_Mine extends Fragment implements View.OnClickListener {
                     into(mMine_minehead);
         }
     }
+
 
     @Override
     public void onClick(View v) {

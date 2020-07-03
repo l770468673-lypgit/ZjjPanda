@@ -1,5 +1,6 @@
 package com.zjjxl.panda.adapters;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,8 +75,12 @@ public class GridViewAdapter extends BaseAdapter {
 
         if (position == location) {
             holder.gradviewid.setBackground(mActivity.getDrawable(R.drawable.nfcact_grid_itemclock_boxframe));
+            holder.realmoney.setTextColor(Color.parseColor("#29A2F5"));
+
         } else {
-            holder.gradviewid.setBackground(mActivity.getDrawable(R.drawable.nfcact_grid_item_boxframe));
+
+            holder.realmoney.setTextColor(Color.parseColor("#333333"));
+            holder.gradviewid.setBackground(mActivity.getDrawable(R.drawable.nfcact_grid_item_boxframe2));
         }
 
 

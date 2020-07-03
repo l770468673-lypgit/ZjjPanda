@@ -2,6 +2,7 @@ package com.zjjxl.panda.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
@@ -21,7 +22,7 @@ import java.lang.reflect.Method;
 public class StatusBarUtil {
 
     private static final int FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view;
-
+    public static int navigationHeight = 0;
     /**
      * 设置状态栏 Drawable,比如渐变色
      *
@@ -227,4 +228,6 @@ public class StatusBarUtil {
         }
         return result;
     }
+
+
 }
