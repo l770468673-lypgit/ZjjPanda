@@ -24,8 +24,12 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!--  -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" /> <!--  -->
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
@@ -97,9 +101,17 @@
         android:roundIcon="@mipmap/pandaapplogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".uis.CardListActivity" android:launchMode="singleTask"/>
-        <activity android:name=".uis.CardActiviting"  android:launchMode="singleTask"/>
-        <activity android:name=".uis.eIDActivity"  android:launchMode="singleTask"/>
+        <activity android:name=".uis.ShuangYSaveMoneyActivity"></activity>
+        <activity android:name=".uis.ForgetPassActivity" />
+        <activity
+            android:name=".uis.CardListActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".uis.CardActiviting"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".uis.eIDActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".uis.WelcomeActivit"
             android:launchMode="singleTask">
@@ -141,7 +153,18 @@
             android:name="com.amap.api.v2.apikey"
             android:value="3821206ae0958bbca46340b4800fdcdb" />
 
-        <service android:name="com.amap.api.location.APSService" />
+        <service android:name="com.amap.api.location.APSService" /> <!-- 支付宝 begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
     </application>
 
 </manifest>

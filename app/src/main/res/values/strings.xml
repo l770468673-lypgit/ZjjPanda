@@ -61,7 +61,7 @@
     <string name="cardactive_idxcrad_ok">读取成功</string>
     <string name="cardactive_nextin">正在取卡</string>
     <string name="cardactive_nextstep">下一步</string>
-     <string name="cardactive_idcardreadover">请贴熊猫卡......</string>
+    <string name="cardactive_idcardreadover">请贴熊猫卡......</string>
     <string name="cardactive_idcardreadover2">请将熊猫卡靠近进手机所示识别</string>
     <string name="cardactive_idcardreadover3">识别过程中请勿离开熊猫卡</string>
     <string name="cardactive_idcardreadover4">请输入卡片上图层后的校验码</string>

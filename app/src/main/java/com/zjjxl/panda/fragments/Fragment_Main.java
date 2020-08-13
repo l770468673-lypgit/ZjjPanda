@@ -34,6 +34,7 @@ import com.zjjxl.panda.uis.LoginActivity;
 import com.zjjxl.panda.uis.NFCPandaActivity;
 import com.zjjxl.panda.uis.OpenCardActivity;
 import com.zjjxl.panda.uis.ShowAccessChannelActivity;
+import com.zjjxl.panda.uis.ShuangYSaveMoneyActivity;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.LUtils;
 import com.zjjxl.panda.utils.ShareUtil;
@@ -55,6 +56,7 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
     private String mParam2;
 
 
+    private Button mBtn_eidbind;
     private Button mBtncard_savemoney;
     private TextView mHome_tv_location;
     private Button mMain_opencard;
@@ -108,12 +110,14 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
     private void initView(View inflate) {
 
 
+        mBtn_eidbind = inflate.findViewById(R.id.btn_eidbind);
         mBtncard_savemoney = inflate.findViewById(R.id.btncard_savemoney);
         mMain_opencard = inflate.findViewById(R.id.main_opencard);
         mHome_tv_location = inflate.findViewById(R.id.home_tv_location);
         mFragment_main_bycard1 = inflate.findViewById(R.id.fragment_main_bycard1);
         mFragment_main_bycard2 = inflate.findViewById(R.id.fragment_main_bycard2);
 
+        mBtn_eidbind.setOnClickListener(this);
         mBtncard_savemoney.setOnClickListener(this);
         mMain_opencard.setOnClickListener(this);
         mFragment_main_bycard1.setOnClickListener(this);
@@ -152,7 +156,7 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
 
     @Override
     public void onClick(View v) {
-        if (mLogin_phone != null) {
+//        if (mLogin_phone != null) {
             switch (v.getId()) {
                 case R.id.btncard_savemoney:
                     Intent intent = new Intent(getActivity(), ShowAccessChannelActivity.class);
@@ -162,17 +166,21 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
                     Intent intent2 = new Intent(getActivity(), OpenCardActivity.class);
                     startActivity(intent2);
                     break;
+                case R.id.btn_eidbind:
+                    Intent intent3= new Intent(getActivity(), ShuangYSaveMoneyActivity.class);
+                    startActivity(intent3);
+                    break;
                 case R.id.fragment_main_bycard1:
                 case R.id.fragment_main_bycard2:
                     toWeChatproject();
                     break;
 
             }
-        } else {
-            ToastUtils.showToast(getActivity(), "请登录后再试");
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
-        }
+//        } else {
+//            ToastUtils.showToast(getActivity(), "请登录后再试");
+//            Intent intent = new Intent(getActivity(), LoginActivity.class);
+//            startActivity(intent);
+//        }
 
     }
 

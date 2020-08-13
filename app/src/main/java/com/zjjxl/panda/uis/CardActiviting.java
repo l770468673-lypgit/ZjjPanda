@@ -34,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -476,14 +477,15 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
         LUtils.e(TAG, "initNfc  1 ");
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
-            //            tv.setText("设备不支持NFC");
+           ToastUtils.showToast(this,"设备不支持NFC");
             return;
         }
         if (!nfcAdapter.isEnabled()) {
-            // tv.setText("请在系统设置中先启用NFC功能");
+            ToastUtils.showToast(this,"请在系统设置中先启用NFC功能");
             return;
         }
-        pi = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        pi = PendingIntent.getActivity(this, 0, new Intent(this,
+                getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
     }
 

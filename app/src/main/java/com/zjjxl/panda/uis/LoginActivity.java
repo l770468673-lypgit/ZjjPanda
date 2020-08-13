@@ -28,6 +28,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private TextView mLogin_back;
     private TextView mLogin_to_regist;
+    private TextView mChangepass;
+    private TextView mForgetpass;
     private EditText mLogin_phonenum;
     private EditText mLogin_password;
     private Button mLogin_logindenglu;
@@ -51,6 +53,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLogin_password = findViewById(R.id.login_password);
         mLogin_logindenglu = findViewById(R.id.login_logindenglu);
         mLogin_passvisvilit = findViewById(R.id.login_passvisvilit);
+        mChangepass = findViewById(R.id.changepass);
+        mForgetpass = findViewById(R.id.forgetpass);
+
+        mChangepass.setOnClickListener(this);
+        mForgetpass.setOnClickListener(this);
         mLogin_back.setOnClickListener(this);
         mLogin_to_regist.setOnClickListener(this);
         mLogin_passvisvilit.setOnClickListener(this);
@@ -96,6 +103,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.login_passvisvilit:
                 mLogin_phonenum.setText("");
+                break;
+            case R.id.changepass:
+                Intent inc = new Intent(this, ForgetPassActivity.class);
+                inc.putExtra("ForgetPassActivity", 1);
+                startActivity(inc);
+                break;
+            case R.id.forgetpass:
+                Intent inf = new Intent(this, ForgetPassActivity.class);
+                inf.putExtra("ForgetPassActivity", 2);
+                startActivity(inf);
                 break;
             case R.id.login_back:
                 finish();
