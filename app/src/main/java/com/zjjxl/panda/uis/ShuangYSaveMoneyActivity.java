@@ -27,6 +27,8 @@ import com.heyue.pay.protocol.PayRequestRec;
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.beans.Bean_BaseCard;
 import com.zjjxl.panda.beans.Bean_zjjCreateOrder;
+
+import com.zjjxl.panda.beans.CardRentApply_Bean;
 import com.zjjxl.panda.beans.PramDetal_Bean;
 import com.zjjxl.panda.https.HttpManager;
 import com.zjjxl.panda.utils.LUtils;
@@ -45,7 +47,7 @@ import retrofit2.http.HTTP;
 public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.OnClickListener {
     private String TAG = "ShuangYSaveMoneyActivity";
     private Button mSavem;
-    private Button mChaxun;
+    private Button mkaika;
     private Button mPayquery;
     private Button mQancun;
     private Button mCreateoeder;
@@ -67,7 +69,7 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
     private String mIssuer_code;
     private String mCredit_no;
     private String mMCardid;
-
+    private Long mNowtime;
 
 
     @Override
@@ -78,13 +80,13 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         mPayquery = findViewById(R.id.payquery);
         mQancun = findViewById(R.id.quancun);
         mSavem = findViewById(R.id.savem);
-        mChaxun = findViewById(R.id.cahxun);
+        mkaika = findViewById(R.id.kaika);
         mCreateoeder = findViewById(R.id.createoeder);
         mTextv1 = findViewById(R.id.textv1);
 
         mPayquery.setOnClickListener(this);
         mQancun.setOnClickListener(this);
-        mChaxun.setOnClickListener(this);
+        mkaika.setOnClickListener(this);
         mSavem.setOnClickListener(this);
         mCreateoeder.setOnClickListener(this);
         initEventAndData();
@@ -127,11 +129,13 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         mParcelableExtra = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         if (mParcelableExtra != null) {
             BalanceData data = CardManager.getInfoData(mParcelableExtra);
-            mMCardid = data.card_id;
-            LUtils.d(TAG,"==========卡号是===="+mMCardid);
-            mTextv1.setText("卡号是：==" + mMCardid);
-//{"status":true,"msg":"成功","data":{"trace_id":"20200812230824343",
-// "biz_type":"SERV_CARD_RENT_APP","code":"2001","message":"卡片随机数非法。"}}
+            if (data != null) {
+                mMCardid = data.card_id;
+                LUtils.d(TAG, "==========卡号是====" + mMCardid);
+                mTextv1.setText("卡号是：==" + mMCardid);
+            }
+            //{"status":true,"msg":"成功","data":{"trace_id":"20200812230824343",
+            // "biz_type":"SERV_CARD_RENT_APP","code":"2001","message":"卡片随机数非法。"}}
         }
     }
 
@@ -144,13 +148,17 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
             case R.id.savem:
                 tozhifuSave();
                 break;
-            case R.id.cahxun:
-//                toQuery();
+            case R.id.kaika:
+                //                toQuery();
+                ToastUtils.showToast(this, "正在开卡");
+                mNowtime = System.currentTimeMillis();
+                requestOpenCardDialog();
                 break;
             case R.id.quancun:
                 quancun();
                 break;
             case R.id.payquery:
+                //平台参数同步
                 paramDetail();
                 break;
         }
@@ -246,15 +254,18 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
     }
 
     private void quancun() {
+        if (mParcelableExtra == null) {
+            return;
+        }
         mData = CardManager.charge(mParcelableExtra, 0.01, false, null);
         if (mData != null) {
             //校验是否能圈存
             //后台需要校验的话在此进行校验 否则就走后面一步
             if (mData.isOpen.equals(STATE_OPEN)) {
+
             } else {
                 //提示开卡
-                ToastUtils.showToast(this,"正在开卡");
-                requestOpenCardDialog();
+                ToastUtils.showToast(this, "请先开卡");
             }
 
         } else {
@@ -264,20 +275,71 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
 
     }
 
-    private void kaiKa() {
+    //开卡申请
+    private void OpencardApply() {
         LUtils.d(TAG, " mOpenCardData.domNo" + mOpenCardData.domNo);
-        Long nowtime = System.currentTimeMillis();
-        Call<Bean_BaseCard> bean_baseCardCall = HttpManager.getInstance().getHttpClient3()
+
+        Call<CardRentApply_Bean> CardRentApply_BeanCall = HttpManager.getInstance().getHttpClient3()
                 .cardRentApply(
                         mUnit_code, mTerminal_no,
                         mCity_code, mIssuer_code,
-                        "接入商业务单号", "0"+mMCardid, mOpenCardData.cardType,
-                        new SimpleDateFormat("yyyy-MM-dd").format(new Date(nowtime)),
+                        "接入商业务单号", "0" + mMCardid, mOpenCardData.cardType,
+                        new SimpleDateFormat("yyyy-MM-dd").format(new Date(mNowtime)),
                         "2040-12-31", mOpenCardData.domNo, "00",
                         0.00, "1", "1500");
+        CardRentApply_BeanCall.enqueue(new Callback<CardRentApply_Bean>() {
+            @Override
+            public void onResponse(Call<CardRentApply_Bean> call, Response<CardRentApply_Bean> response) {
+                if (response.body() != null) {
+                    try {
+                        String mode_command = response.body().getData().getData().getMode_command();
+                        int account_no = response.body().getData().getData().getAccount_no();
+                        String terminal_seq = response.body().getData().getData().getTerminal_seq();
+                        String mode_version = response.body().getData().getData().getMode_version();
+                        String server_time = response.body().getData().getData().getServer_time();
+                        if (mode_command != null) {
+                            boolean success = CardManager.commitRequestOpenCard(mParcelableExtra, mode_command);
+                            if (success) {
+                                OpencardCommit(account_no, terminal_seq, server_time, mode_version, "0");
+                                LUtils.d(TAG, "------------success--------" + success);
+                                ToastUtils.showToast(ShuangYSaveMoneyActivity.this, "开卡成功");
+                            } else {
+                                OpencardCommit(account_no, terminal_seq, server_time, mode_version, "1");
+                                LUtils.d(TAG, "------------success--------" + success);
+                                ToastUtils.showToast(ShuangYSaveMoneyActivity.this, "开卡失败");
+                            }
+
+                        }
+                    }catch (Exception e){
+                        ToastUtils.showToast(ShuangYSaveMoneyActivity.this, response.body().getData().getMessage());
+
+                    }finally {
+                        ToastUtils.showToast(ShuangYSaveMoneyActivity.this, response.body().getData().getMessage());
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CardRentApply_Bean> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    //开卡提交
+    private void OpencardCommit(int accountNo, String terminalSeq, String server_time, String mode_version, String status) {
+        Call<Bean_BaseCard> bean_baseCardCall = HttpManager.getInstance().getHttpClient3().cardRentConfirm(
+                mUnit_code, mTerminal_no, mCity_code, mIssuer_code, mOut_trade_no, "", "0" + mMCardid,
+                mOpenCardData.cardType, accountNo, server_time, terminalSeq, mode_version, status
+        );
         bean_baseCardCall.enqueue(new Callback<Bean_BaseCard>() {
             @Override
             public void onResponse(Call<Bean_BaseCard> call, Response<Bean_BaseCard> response) {
+
 
             }
 
@@ -287,54 +349,32 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
             }
         });
 
-
     }
 
     private void requestOpenCardDialog() {
-//        获取开卡请求的基本参数
+        //        获取开卡请求的基本参数
         mOpenCardData = CardManager.requestOpenCard(mParcelableExtra);
         Log.e(TAG, " mOpenCardData =" + mOpenCardData.issuerCode);
         Log.e(TAG, " mOpenCardData " + mOpenCardData.cardId);
         Log.e(TAG, " mOpenCardData " + mOpenCardData.cardType);
         Log.e(TAG, " mOpenCardData " + mOpenCardData.algorithmType);
+        OpencardApply();
 
-        kaiKa();
-//
-
-        /**
-         *    @Field("unit_code") String unit_code,
-         *       @Field("terminal_no") String terminal_no,
-         *       @Field("city_code") String city_code,
-         *       @Field("issuer_code") String issuer_code,
-         *       @Field("out_trade_no") String out_trade_no,
-         *       @Field("card_no") String card_no,
-         *       @Field("card_type") String card_type,
-         *       @Field("card_seq") String card_seq,
-         *       @Field("trade_time") String trade_time,
-         *       @Field("balance_pre") String balance_pre,
-         *       @Field("trade_amount") String trade_amount,
-         *       @Field("card_random") String card_random,
-         *       @Field("card_mac") String card_mac,
-         *       @Field("algorithm_type") String algorithm_type,
-         *       @Field("mode_version") String mode_version);
-         */
-        //cardChargeApply  租卡申请
-//       HttpManager.getInstance().getHttpClient3().cardChargeApply();
     }
 
-//    private void toQuery() {
-//        //在您app需要查询订单的地方调用TSM查询订单的方法
-//        HashMap params = new HashMap();
-//        params.put("out_trade_no", mOut_trade_no);//订单号
-//        TSMPay.reqOrderStatus(params, new BaseSubscriber<PayRequestRec>() {
-//            @Override
-//            public void onNext(PayRequestRec payRequestRec) {
-//                //服务器返回结果
-//                super.onNext(payRequestRec);
-//                Log.e(TAG, "toQuery   支付服务器返回结果  payAli: " + payRequestRec);
-//            }
-//        });
-//    }
+    //    private void toQuery() {
+    //        //在您app需要查询订单的地方调用TSM查询订单的方法
+    //        HashMap params = new HashMap();
+    //        params.put("out_trade_no", mOut_trade_no);//订单号
+    //        TSMPay.reqOrderStatus(params, new BaseSubscriber<PayRequestRec>() {
+    //            @Override
+    //            public void onNext(PayRequestRec payRequestRec) {
+    //                //服务器返回结果
+    //                super.onNext(payRequestRec);
+    //                Log.e(TAG, "toQuery   支付服务器返回结果  payAli: " + payRequestRec);
+    //            }
+    //        });
+    //    }
 
     BaseCallback mlistener = new BaseCallback() {
         @Override
@@ -361,7 +401,7 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         params.put("trade_amount", "0.01");//必传字段 交易金额（单位元）
         params.put("subject", mSubject);//必传字段   交易说明（subject不能超过16）
         params.put("user_id", "15689123357");//非//非必传字段(根据业务要求有的话就传入；否则不需要传) 接入商后台结果通知地址必传字段
-//        params.put("notify_url", "");
+        //        params.put("notify_url", "");
         TSMPay.payRequest(this, params, mlistener,
                 new Alipay.AlipayResultCallBack() {
                     @Override

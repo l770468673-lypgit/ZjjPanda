@@ -13,12 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="23333333" />
+
     <Button
         android:id="@+id/payquery"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="平台参数同步"
-        />    <Button
+        android:text="必须执行平台参数同步"
+        />
+
+    <Button
+        android:id="@+id/kaika"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="开卡" />   <Button
         android:id="@+id/createoeder"
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -30,12 +37,7 @@
         android:layout_height="70dp"
         android:text="支付订单"
        />
-    <Button
-        android:id="@+id/cahxun"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="查询订单"
-         />
+
     <Button
         android:id="@+id/quancun"
         android:layout_width="match_parent"

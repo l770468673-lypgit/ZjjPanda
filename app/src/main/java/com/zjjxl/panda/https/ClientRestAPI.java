@@ -3,6 +3,7 @@ package com.zjjxl.panda.https;
 import com.zjjxl.panda.beans.Bean_BaseCard;
 import com.zjjxl.panda.beans.Bean_zjjCreateOrder;
 import com.zjjxl.panda.beans.BindCardIsBean;
+import com.zjjxl.panda.beans.CardRentApply_Bean;
 import com.zjjxl.panda.beans.LoginBean;
 import com.zjjxl.panda.beans.PramDetal_Bean;
 import com.zjjxl.panda.beans.QueryBindCradbean;
@@ -268,7 +269,7 @@ public interface ClientRestAPI {
                                         @Field("out_trade_no") String out_trade_no,
                                         @Field("card_no") String card_no,
                                         @Field("card_type") String card_type,
-                                        @Field("account_no") String account_no,
+                                        @Field("account_no") int account_no,
                                         @Field("trade_time") String trade_time,
                                         @Field("terminal_seq") String terminal_seq,
                                         @Field("ard_status") String ard_status,
@@ -304,22 +305,22 @@ public interface ClientRestAPI {
     @FormUrlEncoded
     @POST("api/card/cardRentApply.jspx")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
-    Call<Bean_BaseCard> cardRentApply(@Field("unit_code") String unit_code,
-                                      @Field("terminal_no") String terminal_no,
-                                      @Field("city_code") String city_code,
-                                      @Field("issuer_code") String issuer_code,
-                                      @Field("out_trade_no") String out_trade_no,
+    Call<CardRentApply_Bean> cardRentApply(@Field("unit_code") String unit_code,
+                                           @Field("terminal_no") String terminal_no,
+                                           @Field("city_code") String city_code,
+                                           @Field("issuer_code") String issuer_code,
+                                           @Field("out_trade_no") String out_trade_no,
 
-                                      @Field("card_no") String card_no,
-                                      @Field("card_type") String card_type,
-                                      @Field("date_begin") String date_begin,
-                                      @Field("date_end") String date_end,
+                                           @Field("card_no") String card_no,
+                                           @Field("card_type") String card_type,
+                                           @Field("date_begin") String date_begin,
+                                           @Field("date_end") String date_end,
 
-                                      @Field("card_random") String card_random,
-                                      @Field("mode_type") String mode_type,
-                                      @Field("deposit_amount") double  deposit_amount,
-                                      @Field("algorithm_type") String algorithm_type ,
-                                      @Field("mode_version") String mode_version );
+                                           @Field("card_random") String card_random,
+                                           @Field("mode_type") String mode_type,
+                                           @Field("deposit_amount") double  deposit_amount,
+                                           @Field("algorithm_type") String algorithm_type ,
+                                           @Field("mode_version") String mode_version );
     //    、、------------------------  //用户卡信息同步------------------------------
 
     /**
