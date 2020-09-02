@@ -301,7 +301,7 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
 
                 if (response.body() != null) {
                     String data = response.body().getResult();
-                    ToastUtils.showToast(RegistActivity.this, "data==" + data);
+//                    ToastUtils.showToast(RegistActivity.this, "data==" + data);
 
                     LUtils.d(TAG, "onResponse== data==" + data);
                 }

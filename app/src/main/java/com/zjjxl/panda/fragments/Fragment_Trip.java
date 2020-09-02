@@ -19,8 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjjxl.panda.R;
-import com.zjjxl.panda.uis.NFCPandaActivity;
-import com.zjjxl.panda.uis.ShowAccessChannelActivity;
+ import com.zjjxl.panda.uis.ShowAccessChannelActivity;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.StatusBarUtil;
@@ -93,25 +92,25 @@ public class Fragment_Trip extends Fragment implements View.OnClickListener {
                 setDialog();
                 break;
             case R.id.btn_chongzhijilu:
-                ToastUtils.showToast(getActivity(), "btn_chongzhijilu");
-                break;
+
+
             case R.id.btn_chegnchejilu:
-                ToastUtils.showToast(getActivity(), "btn_chegnchejilu");
-                break;
+
+
             case R.id.btn_jingqujilu:
-                ToastUtils.showToast(getActivity(), "btn_jingqujilu");
-                break;
+
+
             case R.id.btn_xiaofeijilu:
-                ToastUtils.showToast(getActivity(), "btn_xiaofeijilu");
-                break;
+
+
             case R.id.btn_shiyongshuoming:
-                ToastUtils.showToast(getActivity(), "btn_shiyongshuoming");
+
                 break;
             case R.id.btn_kefuzhongxi:
-                ToastUtils.showToast(getActivity(), "btn_kefuzhongxi");
-                break;
+
+
             case R.id.btn_calcle:
-                ToastUtils.showToast(getActivity(), "btn_calcle");
+                ToastUtils.showToast(getActivity(), "正在开发中");
                 break;
 
         }

@@ -1,5 +1,6 @@
 package com.zjjxl.panda.adapters;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -11,9 +12,9 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
-
 import com.zjjxl.panda.R;
-import com.zjjxl.panda.uis.NFCPandaActivity;
+
+import com.zjjxl.panda.uis.ShuangYSaveMoneyActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -22,12 +23,17 @@ public class GridViewAdapter extends BaseAdapter {
     private static String TAG = "GridViewAdapter";
 
 
-    private NFCPandaActivity mActivity;
-    private int location=100;
+    private Activity mActivity;
+    private int location = 100;
 
-    private List<Map<String, String>> mData_list;
+    private List<Map<String, Object>> mData_list;
 
-    public GridViewAdapter(NFCPandaActivity nfcActivity) {
+
+//    public GridViewAdapter(NFCPandaActivity nfcActivity) {
+//        this.mActivity = nfcActivity;
+//    }
+
+    public GridViewAdapter(ShuangYSaveMoneyActivity nfcActivity) {
         this.mActivity = nfcActivity;
     }
 
@@ -35,13 +41,14 @@ public class GridViewAdapter extends BaseAdapter {
         location = position;
     }
 
-    public void setData_list(List<Map<String, String>> data_list) {
+    public void setData_list(List<Map<String, Object>> data_list) {
         if (data_list.size() > 0) {
             this.mData_list = data_list;
             this.notifyDataSetChanged();
 
         }
     }
+
 
     @Override
     public int getCount() {

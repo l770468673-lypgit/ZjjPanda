@@ -83,10 +83,13 @@ public class ShowAccessChannelActivity extends XLBaseActivity implements AccessC
     @Override
     public void setClickSave(String s) {
 
-        Bundle bundle = new Bundle();
-        bundle.putString(Contants.ACCRESS_CHANNEL, s);
-        Intent intent = new Intent(this, NFCPandaActivity.class);
-        intent.putExtras(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putString(Contants.ACCRESS_CHANNEL, s);
+//        Intent intent = new Intent(this, NFCPandaActivity.class);
+//        intent.putExtras(bundle);
+//        startActivity(intent);//
+
+        Intent intent = new Intent(this, ShuangYSaveMoneyActivity.class);
         startActivity(intent);
     }
 

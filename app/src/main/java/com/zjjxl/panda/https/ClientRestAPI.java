@@ -3,6 +3,7 @@ package com.zjjxl.panda.https;
 import com.zjjxl.panda.beans.Bean_BaseCard;
 import com.zjjxl.panda.beans.Bean_zjjCreateOrder;
 import com.zjjxl.panda.beans.BindCardIsBean;
+import com.zjjxl.panda.beans.CardCharge_bean;
 import com.zjjxl.panda.beans.CardRentApply_Bean;
 import com.zjjxl.panda.beans.LoginBean;
 import com.zjjxl.panda.beans.PramDetal_Bean;
@@ -143,21 +144,22 @@ public interface ClientRestAPI {
     //充值申请
 
     /**
-     * //    String unit_code; // 单元编号 平台参数同步接口获得，与卡城市参数一致
-     * //    String terminal_no; // 虚拟终端号 平台参数同步接口获得，与卡城市参数一致
-     * //    String city_code; // 城市代码
-     * //    String issuer_code; // 发卡机构标识
-     * //    String out_trade_no; // 接入商业务单号
-     * //    String card_no; // 卡应用序列号
-     * //    String card_type; // 卡类型
-     * //    String card_seq; // 卡交易序号
-     * //    String trade_time; // 交易日期时间 格式：yyyy-MM-dd’T’HH:mm:ss
-     * //    double balance_pre; // 卡片交易前余额 单位：元，无余额0.00
-     * //    double trade_amount; // 交易金额 单位：元，如：2.00
-     * //    String card_random; // 卡随机数
-     * //    String card_mac; // MAC1
-     * //    String algorithm_type; // 加密算法标识 国际算法:0,国密算法:1
-     * //    String mode_version; // 交易版本号 当前：1500
+     *
+     * String unit_code; // 单元编号 平台参数同步接口获得，与卡城市参数一致
+     * String terminal_no; // 虚拟终端号 平台参数同步接口获得，与卡城市参数一致
+     * String city_code; // 城市代码
+     * String issuer_code; // 发卡机构标识
+     * String out_trade_no; // 接入商业务单号
+     * String card_no; // 卡应用序列号
+     * String card_type; // 卡类型
+     * String card_seq; // 卡交易序号
+     * String trade_time; // 交易日期时间 格式：yyyy-MM-dd’T’HH:mm:ss
+     * double balance_pre; // 卡片交易前余额 单位：元，无余额0.00
+     * double trade_amount; // 交易金额 单位：元，如：2.00
+     * String card_random; // 卡随机数
+     * String card_mac; // MAC1
+     * String algorithm_type; // 加密算法标识 国际算法:0,国密算法:1
+     * String mode_version; // 交易版本号 当前：1500
      * ==
      * //    {
      * //        "status": "true/false",
@@ -168,21 +170,21 @@ public interface ClientRestAPI {
     @FormUrlEncoded
     @POST("api/card/cardChargeApply.jspx")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
-    Call<Bean_BaseCard> cardChargeApply(@Field("unit_code") String unit_code,
-                                        @Field("terminal_no") String terminal_no,
-                                        @Field("city_code") String city_code,
-                                        @Field("issuer_code") String issuer_code,
-                                        @Field("out_trade_no") String out_trade_no,
-                                        @Field("card_no") String card_no,
-                                        @Field("card_type") String card_type,
-                                        @Field("card_seq") String card_seq,
-                                        @Field("trade_time") String trade_time,
-                                        @Field("balance_pre") String balance_pre,
-                                        @Field("trade_amount") String trade_amount,
-                                        @Field("card_random") String card_random,
-                                        @Field("card_mac") String card_mac,
-                                        @Field("algorithm_type") String algorithm_type,
-                                        @Field("mode_version") String mode_version);
+    Call<CardCharge_bean> cardChargeApply(@Field("unit_code") String unit_code,
+                                          @Field("terminal_no") String terminal_no,
+                                          @Field("city_code") String city_code,
+                                          @Field("issuer_code") String issuer_code,
+                                          @Field("out_trade_no") String out_trade_no,
+                                          @Field("card_no") String card_no,
+                                          @Field("card_type") String card_type,
+                                          @Field("card_seq") String card_seq,
+                                          @Field("trade_time") String trade_time,
+                                          @Field("balance_pre") double balance_pre,
+                                          @Field("trade_amount") double trade_amount,
+                                          @Field("card_random") String card_random,
+                                          @Field("card_mac") String card_mac,
+                                          @Field("algorithm_type") String algorithm_type,
+                                          @Field("mode_version") String mode_version);
 
 
 //    、、------------------------  //充值提交------------------------------
@@ -226,11 +228,11 @@ public interface ClientRestAPI {
                                           @Field("card_type") String card_type,
                                           @Field("card_seq") String card_seq,
                                           @Field("trade_time") String trade_time,
-                                          @Field("balance_aft") String balance_aft,
-                                          @Field("trade_amount") String trade_amount,
+                                          @Field("balance_aft") double balance_aft,
+                                          @Field("trade_amount") double trade_amount,
                                           @Field("trade_tac") String trade_tac,
-                                          @Field("card_status") String card_status,
-                                          @Field("mode_version") String mode_version);
+                                          @Field("mode_version") String mode_version,
+                                          @Field("card_status") String card_status);
 
     //    、、------------------------  //租卡提交------------------------------
 //    接口地址 *
@@ -272,36 +274,31 @@ public interface ClientRestAPI {
                                         @Field("account_no") int account_no,
                                         @Field("trade_time") String trade_time,
                                         @Field("terminal_seq") String terminal_seq,
-                                        @Field("ard_status") String ard_status,
-                                        @Field("mode_version") String mode_version);
+                                        @Field("mode_version") String mode_version,
+                                        @Field("card_status") String card_status
+    );
 
 
     //    、、------------------------  //租卡申请------------------------------
 
     /**
-     * //    String unit_code; // 单元编号 平台参数同步接口获得，与卡城市参数一致
-     * //    String terminal_no; // 虚拟终端编号 平台参数同步接口获得，与卡城市参数一致
-     * //    String city_code; // 城市代码
-     * //    String issuer_code; // 发卡机构标识
-     * //    String out_trade_no; // 接入商业务单号 trade_no与out_trade_no二选一或都传
-     * //    String terminal_seq; // 终端交易序号 申请返回
-     * //    String card_no; // 卡应用序列号
-     * //    String card_type; // 卡类型
-     * //    String card_seq; // 卡交易序号
-     * //    String trade_time; // 交易日期时间 格式：yyyy-MM-dd’T’HH:mm:ss
-     * //    double balance_aft; // 卡片交易后余额 单位：元，无为 0.00
-     * //    double trade_amount; // 交易金额
-     * //    String trade_tac; // 交易验证码
-     * //    String mode_version; // 交易版本号
-     * //    String card_status; // 写卡状态 0：成功 1表示失败
-     * //
-     * //    返回数据
-     * //    {
-     * //        "status": "true/false",
-     * //            "msg": "系统返回消息",
-     * //            "data": "参考附件长白行TSM-支付及业务接口 充值提交返回值"
-     * //    }
+     * String unit_code 单元编号 平台参数同步接口获得，与卡城市参数一致
+     * String terminal_no 虚拟终端号 平台参数同步接口获得，与卡城市参数一致
+     * String city_code 城市代码
+     * String issuer_code 发卡机构标识
+     * String out_trade_no 接入商业务单号(非必输)
+     * String card_no 卡应用序列号
+     * String card_type 卡类型
+     * String date_begin 售卡起始日期 格式：yyyy-MM-dd
+     * String date_end 售卡有效日期 格式：yyyy-MM-dd
+     * String card_random 卡随机数
+     * String mode_type 售卡模式 00押金/01工本
+     * double deposit_amount 押金/工本金额
+     * String algorithm_type 加密算法标识 国际算法:0,国密算法:1
+     * String mode_version 售卡版本号 当前：1500(2.0.4)
+     * @return
      */
+
     @FormUrlEncoded
     @POST("api/card/cardRentApply.jspx")
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
@@ -458,12 +455,13 @@ public interface ClientRestAPI {
     //-----------------------支付订单退款----------------------------------
 
     /**
-     * String trade_no; // 平台订单号 TSM平台订单号与业务订单号可以全传，必须传一个。 创建原样返回
-     * String out_trade_no; // 业务订单号 TSM平台订单号与业务订单号可以全传，必须传一个。创建原样返回
-     * double trade_amount; // 退款金额
-     * String out_refund_no; // 业务退款单号 （非必输）
-     * String trade_time; // 退款时间 yyyy-MM-dd’T’HH: （非必输）
-     * String modify_status; // 变更状态 REFUND:对订单进行退款
+
+     String trade_no; // 平台订单号 TSM平台订单号与业务订单号可以全传，必须传一个。 创建原样返回
+     String out_trade_no; // 业务订单号 TSM平台订单号与业务订单号可以全传，必须传一个。创建原样返回
+     double trade_amount; // 退款金额
+     String out_refund_no; // 业务退款单号 （非必输）
+     String trade_time; // 退款时间 yyyy-MM-dd’T’HH: （非必输）
+     String modify_status; // 变更状态 REFUND:对订单进行退款
      * 返回数据
      * {
      * "status": "true/false",
@@ -478,9 +476,9 @@ public interface ClientRestAPI {
     Call<Bean_BaseCard> payOrderRefund(@Field("trade_no") String trade_no,
                                        @Field("out_trade_no") String out_trade_no,
                                        @Field("trade_amount") double trade_amount,
-                                       @Field("out_refund_no") double out_refund_no,
-                                       @Field("trade_time") double trade_time,
-                                       @Field("modify_status") double modify_status
+                                       @Field("out_refund_no") String out_refund_no,
+                                       @Field("trade_time") String trade_time,
+                                       @Field("modify_status") String modify_status
     );
 
     //-------------------------支付订单关闭-----------------
@@ -566,134 +564,6 @@ public interface ClientRestAPI {
                                      @Field("ext_info") String ext_info);
 
 //
-//    //-------充值提交-------
-//
-//    /**
-//     * String unit_code; // 单元编号 平台参数同步接口获得，与卡城市参数一致
-//     * String terminal_no; // 虚拟终端编号 平台参数同步接口获得，与卡城市参数一致
-//     * String city_code; // 城市代码
-//     * String issuer_code; // 发卡机构标识
-//     * String out_trade_no; // 接入商业务单号 trade_no与out_trade_no二选一或都传
-//     * String terminal_seq; // 终端交易序号 申请返回
-//     * String card_no; // 卡应用序列号
-//     * String card_type; // 卡类型
-//     * String card_seq; // 卡交易序号
-//     * String trade_time; // 交易日期时间 格式：yyyy-MM-dd’T’HH:mm:ss
-//     * double balance_aft; // 卡片交易后余额 单位：元，无为 0.00
-//     * double trade_amount; // 交易金额
-//     * String trade_tac; // 交易验证码
-//     * String mode_version; // 交易版本号
-//     * String card_status; // 写卡状态 0：成功 1表示失败
-//     * 
-//     * 返回数据
-//     * {
-//     * "status": "true/false",
-//     * "msg": "系统返回消息",
-//     * "data": "参考附件长白行TSM-支付及业务接口 充值提交返回值"
-//     * }
-//     */
-//    @FormUrlEncoded
-//    @POST("api/card/cardChargeConfirm.jspx")
-//    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
-//    Call<Bean_BaseCard> cardChargeConfirm(@Field("unit_code") String unit_code,
-//                                          @Field("terminal_no") String terminal_no,
-//                                          @Field("city_code") String city_code,
-//                                          @Field("issuer_code") String issuer_code,
-//                                          @Field("out_trade_no") String out_trade_no,
-//                                          @Field("terminal_seq") String terminal_seq,
-//                                          @Field("card_no") String card_no,
-//                                          @Field("card_type") String card_type,
-//                                          @Field("card_seq") String card_seq,
-//                                          @Field("trade_time") String trade_time,
-//                                          @Field("balance_aft") double balance_aft,
-//                                          @Field("trade_amount") double trade_amount,
-//                                          @Field("trade_tac") String trade_tac,
-//                                          @Field("mode_version") String mode_version,
-//                                          @Field("card_status") String card_status
-//    );
-//
-//
-//    //-------充值申请
-//
-//    /**
-//     * String unit_code; // 单元编号 平台参数同步接口获得，与卡城市参数一致
-//     * String terminal_no; // 虚拟终端号 平台参数同步接口获得，与卡城市参数一致
-//     * String city_code; // 城市代码
-//     * String issuer_code; // 发卡机构标识
-//     * String out_trade_no; // 接入商业务单号
-//     * String card_no; // 卡应用序列号
-//     * String card_type; // 卡类型
-//     * String card_seq; // 卡交易序号
-//     * String trade_time; // 交易日期时间 格式：yyyy-MM-dd’T’HH:mm:ss
-//     * double balance_pre; // 卡片交易前余额 单位：元，无余额0.00
-//     * double trade_amount; // 交易金额 单位：元，如：2.00
-//     * String card_random; // 卡随机数
-//     * String card_mac; // MAC1
-//     * String algorithm_type; // 加密算法标识 国际算法:0,国密算法:1
-//     * String mode_version; // 交易版本号 当前：1500
-//     * 
-//     * 返回数据
-//     * {
-//     * "status": "true/false",
-//     * "msg": "系统返回消息",
-//     * "data": "参考附件长白行TSM-支付及业务接口 充值申请返回值"
-//     * }
-//     */
-//    @FormUrlEncoded
-//    @POST("api/card/cardChargeApply.jspx")
-//    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
-//    Call<Bean_BaseCard> cardChargeApply(@Field("unit_code") String unit_code,
-//                                        @Field("terminal_no") String terminal_no,
-//                                        @Field("city_code") String city_code,
-//                                        @Field("issuer_code") String issuer_code,
-//                                        @Field("out_trade_no") String out_trade_no,
-//                                        @Field("card_no") String card_no,
-//                                        @Field("card_type") String card_type,
-//                                        @Field("card_seq") String card_seq,
-//                                        @Field("trade_time") String trade_time,
-//                                        @Field("balance_aft") double balance_aft,
-//                                        @Field("trade_amount") double trade_amount,
-//                                        @Field("card_random") String card_random,
-//                                        @Field("card_mac") String card_mac,
-//                                        @Field("algorithm_type") String algorithm_type,
-//                                        @Field("mode_version") String mode_version
-//    );
-//
-//    /**
-//     * 租卡提交
-//     * String unit_code; // 单元编号 平台参数同步接口获得，与卡城市参数一致
-//     * String terminal_no; // 终端号 平台参数同步接口获得，与卡城市参数一致
-//     * String city_code; // 城市代码
-//     * String issuer_code; // 发卡机构标识
-//     * String trade_no; // TSM平台单号 trade_no与out_trade_no二选一或都传
-//     * String out_trade_no; // 接入商业务单号 trade_no与out_trade_no二选一或都传
-//     * String card_no; // 卡应用序列号
-//     * String card_type; // 卡类型
-//     * int account_no; // 账户ID 申请原样回传
-//     * String trade_time; // 交易日期时间 格式：yyyy-MM-dd’T’HH:mm:ss，租卡申请原样回传
-//     * String terminal_seq; // 终端交易序号 申请原样回传
-//     * String mode_version; // 售卡版本号 当前：1500
-//     * String ard_status; // 写卡状态 0：成功 1表示失败
-//     * 
-//     * 返回数据
-//     */
-//    @FormUrlEncoded
-//    @POST("api/card/cardRentConfirm.jspx")
-//    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
-//    Call<Bean_BaseCard> cardRentConfirm(@Field("unit_code") String unit_code,
-//                                        @Field("terminal_no") String terminal_no,
-//                                        @Field("city_code") String city_code,
-//                                        @Field("issuer_code") String issuer_code,
-//                                        @Field("out_trade_no") String out_trade_no,
-//                                        @Field("card_no") String card_no,
-//                                        @Field("card_type") String card_type,
-//                                        @Field("trade_time") String trade_time,
-//                                        @Field("account_no") int account_no,
-//                                        @Field("terminal_seq") String terminal_seq,
-//                                        @Field("card_mac") String card_mac,
-//                                        @Field("ard_status") String ard_status,
-//                                        @Field("mode_version") String mode_version
-//    );
 
 
 }

@@ -77,7 +77,7 @@ public class Fragment_EntityCrad extends Fragment implements EntityCradAdapter.E
         mEntity_recycle.setLayoutManager(layoutManager);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         mEntity_recycle.setAdapter(mAdapte);
-        mAdapte.setDate(4);
+        mAdapte.setDate(1);
 
         mAdapte.setAccessItenClick(this);
     }

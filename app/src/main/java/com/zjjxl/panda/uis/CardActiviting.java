@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -54,11 +55,13 @@ import com.arcsoft.face.enums.DetectFaceOrientPriority;
 import com.arcsoft.face.enums.DetectMode;
 import com.arcsoft.face.enums.RuntimeABI;
 import com.blankj.utilcode.util.LogUtils;
-import com.crb.cttic.pay.card.bean.CardInfoGather;
-import com.crb.cttic.pay.device.SmartCardNfcTag;
-import com.crb.cttic.pay.utils.ReadCardUtils;
+//import com.crb.cttic.pay.card.bean.CardInfoGather;
+//import com.crb.cttic.pay.device.SmartCardNfcTag;
+//import com.crb.cttic.pay.utils.ReadCardUtils;
 import com.eidlink.idocr.sdk.EidLinkSE;
 import com.eidlink.idocr.sdk.EidLinkSEFactory;
+import com.heyue.adpu_manager.module.BalanceData;
+import com.heyue.adpu_manager.nfc.CardManager;
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.apps.XLBaseActivity;
 import com.zjjxl.panda.arcesoft.CameraHelper;
@@ -640,7 +643,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
                 if (mPhonenums.getText().toString().trim().length() == 11 && mPandacard_cardnum.getText().toString().trim().length() > 1) {
                     //                    AddCards();
                 } else {
-                    ToastUtils.showToast(this, "---------输入不正确 -----------");
+                    ToastUtils.showToast(this, "输入不正确");
                 }
                 break;
             case R.id.card_bind_yanzhengma:
@@ -776,6 +779,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
                         boolean status = response.body().isStatus();
                         if (status) {
                             ToastUtils.showToast(CardActiviting.this, "发送成功");
+
                         }
 
                     }
@@ -894,30 +898,29 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        SmartCardNfcTag ctticReader = SmartCardNfcTag.getInstance(intent);
+//        SmartCardNfcTag ctticReader = SmartCardNfcTag.getInstance(intent);
+        Parcelable mParcelableExtra = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         LUtils.i(TAG, "readCode===" + readCode);
         switch (readCode) {
 
             case 0:
-                //读卡
-                ReadCardUtils.getInstance().getReadCardInfo(CardActiviting.this, "", ctticReader, new ReadCardUtils.ReadCardUtilsListener() {
-                    @Override
-                    public void readCardFail(int errCode, String errMes) {
-                        ToastUtils.showToast(CardActiviting.this, "读卡失败 errCode =" + errCode + "errMes=" + errMes);
-                        LUtils.i(TAG, errMes);
-                    }
-
-                    @Override
-                    public void readCardSuccess(CardInfoGather cardInfoGather) {
-                        //                        ToastUtils.showToast(CardActiviting.this, "读卡成功" + cardInfoGather.toString());
-                        setResult(RESULT_OK, new Intent().putExtra(ParamConst.CARD_INFO_GATHER, cardInfoGather));
-                        LUtils.i(TAG, cardInfoGather.toString());
-                        mMAppletNo = cardInfoGather.getPublicBasicInfo().getAppletNo();
+                BalanceData data = CardManager.getInfoData(mParcelableExtra);
+                if (data != null) {
+                  String  mMCardid = data.card_id;
+                    if (mMCardid != null) {
+                        String       cardNowbalanceMoney = data.balanceMoney;
+                        LUtils.d(TAG, "==========卡号是====" + mMCardid);
+                        LUtils.d(TAG, "==========qian====" + cardNowbalanceMoney);
                         mPandacard_pleaseon.setText(R.string.cardactive_idxcrad_ok);
                         mLly_yanzhengma.setVisibility(View.VISIBLE);
-
+                    } else {
+                        ToastUtils.showToast(this, "检查卡片是否损坏");
                     }
-                });
+
+
+                }
+
+
                 break;
 
             case 1:
@@ -934,15 +937,7 @@ public class CardActiviting extends XLBaseActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == ParamConst.READ_CARD_INFO_CODE) {
-            CardInfoGather cardInfoGather = (CardInfoGather) data.getSerializableExtra(ParamConst.CARD_INFO_GATHER);
-            if (null != cardInfoGather) {
-                String cardId = cardInfoGather.getPublicBasicInfo().getAppletNo();
-                LUtils.i(TAG, "card Id is " + cardInfoGather.getPublicBasicInfo().getAppletNo());
 
-                ToastUtils.showToast(this, "卡号：" + cardId);
-            }
-        }
     }
 
     @Override

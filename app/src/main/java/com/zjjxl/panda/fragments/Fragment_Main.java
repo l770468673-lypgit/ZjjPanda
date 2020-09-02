@@ -1,45 +1,33 @@
 package com.zjjxl.panda.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import android.service.autofill.LuhnChecksumValidator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.LocationSource;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.MyLocationStyle;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zjjxl.panda.R;
-import com.zjjxl.panda.uis.LoginActivity;
-import com.zjjxl.panda.uis.NFCPandaActivity;
 import com.zjjxl.panda.uis.OpenCardActivity;
 import com.zjjxl.panda.uis.ShowAccessChannelActivity;
-import com.zjjxl.panda.uis.ShuangYSaveMoneyActivity;
 import com.zjjxl.panda.utils.Contants;
-import com.zjjxl.panda.utils.LUtils;
 import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.StatusBarUtil;
-import com.zjjxl.panda.utils.ToastUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -167,8 +155,8 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
                     startActivity(intent2);
                     break;
                 case R.id.btn_eidbind:
-                    Intent intent3= new Intent(getActivity(), ShuangYSaveMoneyActivity.class);
-                    startActivity(intent3);
+//                    Intent intent3= new Intent(getActivity(), ShuangYSaveMoneyActivity.class);
+//                    startActivity(intent3);
                     break;
                 case R.id.fragment_main_bycard1:
                 case R.id.fragment_main_bycard2:

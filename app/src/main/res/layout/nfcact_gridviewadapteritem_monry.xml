@@ -11,30 +11,31 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/nfcact_grid_item_boxframe2"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/resalmoney"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#333333"
             android:text="1111"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/salemoney"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:gravity="center"-->
-<!--            android:textSize="12sp" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/salemoney"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginBottom="10dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:textSize="12sp" />-->
 
     </LinearLayout>
 </LinearLayout>

@@ -51,6 +51,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/opencard_tablay"
         style="@style/MyTablayoutstyle"
+        android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/opencard_relytop1"

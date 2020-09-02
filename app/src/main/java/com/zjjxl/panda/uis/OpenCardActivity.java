@@ -40,7 +40,7 @@ public class OpenCardActivity extends XLBaseActivity implements View.OnClickList
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 //            window.setStatusBarColor(getResources().getColor(R.color.black));
-            window.setTitleColor(R.color.black);
+            window.setTitleColor(R.color.B2D5C2);
         }
 
         initView();

@@ -29,7 +29,6 @@ public class ReceivedCookiesInterceptor implements Interceptor {
 
         Response originalResponse = chain.proceed(chain.request());
         Log.i(TAG, "intercept: "+originalResponse.headers().toString());
-//        Log.i(TAG, "intercept: " + originalResponse.headers("Set-Cookie").toString());
 
         //不为空
         if (!originalResponse.headers("Set-Cookie").isEmpty()) {
@@ -39,15 +38,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
                 cookie.add(header);
             }
             ShareUtil.putStringSet("cookie", cookie);
-//            SharedPreferences sharedPreferences =
-//                    MyApplication.getInstance().getSharedPreferences("cookieData", Context.MODE_PRIVATE);
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//
-//            editor.putStringSet("cookie", cookie);
-//
-//            editor.commit();
         }
-
 
 
 
