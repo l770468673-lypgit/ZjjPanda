@@ -10,12 +10,13 @@ public class Contants {
     public static String APP_SESSIONIS = "app_sessionis";
     public static String LOGIN_ORGMEMBERID = "login_orgmemberid";
     public static String LOGIN_USERMEMBERID = "login_usermemberid";
-
+    public static String APP_STAUTS_PERMISSION = "app_stauts_permission";
 
 
     public static String ACCRESS_CHANNEL = "accress_channel";
-    public static String APP_STAUTS_PERMISSION = "app_stauts_permission";
 
+
+    // 虹软
     public static final String APP_ID = "9vrpKPtkuvs4G7kMQwBVhHt6QFj651nGm7A3Cu1D5FwH";
     public static final String SDK_KEY = "EeqqWwu4W8aVrqDNisFCmtPrL3igCGNxpNQbiMWTFxAM";
 

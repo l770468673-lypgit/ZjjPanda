@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".uis.ForgetPassActivity">
 
     <RelativeLayout
@@ -33,291 +34,376 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <LinearLayout
 
-        android:id="@+id/for_reg_lly"
+    <LinearLayout
+        android:id="@+id/forget_username_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/forget_lly_back"
-        tools:ignore="MissingConstraints">
+        android:padding="10dp"
+        android:visibility="gone">
 
-        <LinearLayout
-            android:id="@+id/reset_username_layout"
+
+        <RelativeLayout
+            android:id="@+id/relyreg3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:visibility="gone">
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
-            <RelativeLayout
-                android:id="@+id/reset_relylogin1"
+
+            <EditText
+                android:id="@+id/forget_phonenum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
-
-                <LinearLayout
-                    android:id="@+id/reset_lly_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                android:background="@null"
+                android:hint="请输入手机号"
+                android:inputType="number"
+                android:padding="10dp"
+                android:maxLength="11"
+                android:textSize="14sp" />
 
 
-                    <EditText
-                        android:id="@+id/reset_login_phonenum"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/iv_user"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@null"
-                        android:hint="手机号"
-                        android:inputType="number"
-                        android:textColor="#C2C2C2"
-                        android:textSize="14sp" />
+        </RelativeLayout>
 
-                </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/okregpassword"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/c8c8c" />
 
-                <!--android:hint="@string/login_writenum"-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/reset_lly_phone"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="20dp"
-                    android:background="#5F5F5F" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
-                <ImageView
-                    android:id="@+id/reset_login_passvisvilit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:background="@mipmap/login_closeimg" />
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/reset_relylogin2"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/forget_wordyanzhengmg"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:layout_weight="6.9"
+                android:background="@null"
+                android:hint="验证码"
+                android:inputType="number"
+                android:maxLength="6"
+                android:padding="10dp"
+                android:textSize="14sp" />
 
-                <LinearLayout
-                    android:id="@+id/reset_lly_pass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+                android:background="#78434343" />
 
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/reset_login_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@null"
-                            android:hint="请输入密码"
-                            android:inputType="textPassword"
-                            android:text=""
-                            android:textColor="#C2C2C2"
-                            android:textSize="14sp" />
-                    </RelativeLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/reset_lly_pass"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="20dp"
-                    android:background="#5F5F5F" />
-
-
-            </RelativeLayout>
-
+            <Button
+                android:id="@+id/forget_yanzhengma"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center"
+                android:text="发送验证码"
+                android:textColor="#494949" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/change_username_layout"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/okregpassword"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/c8c8c" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/reset_username_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/reset_relylogin1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
-            <RelativeLayout
-                android:id="@+id/change_relylogin1"
+            <LinearLayout
+                android:id="@+id/reset_lly_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/change_lly_phone"
+
+                <TextView
+                    android:id="@+id/reset_login_phonenum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_below="@+id/iv_user"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:hint="手机号"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:textColor="#C2C2C2"
+                    android:textSize="14sp" />
 
+            </LinearLayout>
+
+            <!--android:hint="@string/login_writenum"-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/reset_lly_phone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:background="#5F5F5F" />
+
+            <ImageView
+                android:id="@+id/reset_login_passvisvilit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/login_closeimg" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:id="@+id/reset_lly_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/change_login_phonenum"
+                        android:id="@+id/reset_login_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/iv_user"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="5dp"
                         android:layout_marginRight="10dp"
                         android:background="@null"
-                        android:hint="手机号"
-                        android:inputType="number"
+                        android:hint="请输入密码"
+                        android:inputType="textPassword"
+                        android:text=""
                         android:textColor="#C2C2C2"
                         android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <!--android:hint="@string/login_writenum"-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/change_lly_phone"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="20dp"
-                    android:background="#5F5F5F" />
-
-                <ImageView
-                    android:id="@+id/change_login_passvisvilit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:background="@mipmap/login_closeimg"
-                    android:visibility="gone" />
-
-            </RelativeLayout>
+                </RelativeLayout>
 
 
-            <RelativeLayout
-                android:id="@+id/change_relylogin2"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/reset_lly_pass"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:background="#5F5F5F" />
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/change_username_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/change_relylogin1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:id="@+id/change_lly_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/change_lly_pass"
+
+                <EditText
+                    android:id="@+id/change_login_phonenum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/change_login_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@null"
-                            android:hint="请输入旧密码"
-                            android:inputType="textPassword"
-                            android:text=""
-                            android:textColor="#C2C2C2"
-                            android:textSize="14sp" />
-                    </RelativeLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/change_lly_pass"
+                    android:layout_below="@+id/iv_user"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="20dp"
-                    android:background="#5F5F5F" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:hint="手机号"
+                    android:inputType="number"
+                    android:textColor="#C2C2C2"
+                    android:textSize="14sp" />
 
+            </LinearLayout>
 
-            </RelativeLayout>
+            <!--android:hint="@string/login_writenum"-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/change_lly_phone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:background="#5F5F5F" />
 
-            <RelativeLayout
-                android:id="@+id/change_relylogin3"
+            <ImageView
+                android:id="@+id/change_login_passvisvilit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/login_closeimg"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/change_relylogin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:id="@+id/change_lly_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/change_lly_pass3"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-
-                    <RelativeLayout
+                    <EditText
+                        android:id="@+id/change_login_password"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/change_login_newpassword"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@null"
-                            android:hint="请输入新密码"
-                            android:inputType="textPassword"
-                            android:text=""
-                            android:textColor="#C2C2C2"
-                            android:textSize="14sp" />
-                    </RelativeLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:hint="请输入旧密码"
+                        android:inputType="textPassword"
+                        android:text=""
+                        android:textColor="#C2C2C2"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
 
-                </LinearLayout>
+            </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/change_lly_pass"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:background="#5F5F5F" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/change_relylogin3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:id="@+id/change_lly_pass3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/change_lly_pass3"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="20dp"
-                    android:background="#5F5F5F" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/change_login_newpassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
+                        android:hint="请输入新密码"
+                        android:inputType="textPassword"
+                        android:text=""
+                        android:textColor="#C2C2C2"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
 
-            </RelativeLayout>
+            </LinearLayout>
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/change_lly_pass3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:background="#5F5F5F" />
+
+
+        </RelativeLayout>
+
     </LinearLayout>
 
     <Button
@@ -340,4 +426,4 @@
         app:layout_constraintTop_toBottomOf="@+id/for_reg_lly"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

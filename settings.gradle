@@ -1,4 +1,4 @@
 rootProject.name='ZjjPanda'
-include ':app'
+include ':app', ':datapicklibrary'
 //, ':zjjkandroid'
 

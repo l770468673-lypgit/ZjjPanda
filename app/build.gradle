@@ -1,5 +1,23 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
 
+MobSDK {
+    appKey "2d5cc07cd96d1"
+    appSecret "aeb65a25de7d3d3b928867419a923d61"
+    ShareSDK {
+        devInfo {
+            Wechat {
+                appId "wx066b02355bf9f39b"
+                appSecret "a0055ed81d85acb3ccde04cf5b762876"
+                userName "熊猫文旅通"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 0
+                bypassApproval false
+            }
+        }
+    }
+}
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -104,4 +122,5 @@ dependencies {
     implementation files('libs/heyue_nfc.jar')
 //    implementation(name:'heyue-pay-1.0.56',ext:'aar')
     implementation 'com.heyue.pay:heyue-pay:1.0.60'
+    implementation project(path: ':datapicklibrary')
 }

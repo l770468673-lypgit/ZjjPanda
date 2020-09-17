@@ -29,19 +29,14 @@ public class ReceivedCookiesInterceptor implements Interceptor {
 
         Response originalResponse = chain.proceed(chain.request());
         Log.i(TAG, "intercept: "+originalResponse.headers().toString());
-
         //不为空
         if (!originalResponse.headers("Set-Cookie").isEmpty()) {
-
             HashSet<String> cookie = new HashSet<>();
             for (String header : originalResponse.headers("Set-Cookie")) {
                 cookie.add(header);
             }
             ShareUtil.putStringSet("cookie", cookie);
         }
-
-
-
         return originalResponse;
     }
 }

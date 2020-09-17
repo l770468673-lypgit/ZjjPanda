@@ -34,7 +34,7 @@
         <LinearLayout
             android:id="@+id/benefit_lly_banner"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:layout_below="@+id/benefit_text_title"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

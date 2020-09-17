@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,17 +24,33 @@ import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zjjxl.panda.R;
+import com.zjjxl.panda.beans.QueryBindCradbean;
+import com.zjjxl.panda.https.HttpManager;
+import com.zjjxl.panda.uis.LoginActivity;
 import com.zjjxl.panda.uis.OpenCardActivity;
 import com.zjjxl.panda.uis.ShowAccessChannelActivity;
 import com.zjjxl.panda.utils.Contants;
+import com.zjjxl.panda.utils.LUtils;
 import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.StatusBarUtil;
+import com.zjjxl.panda.utils.ToastUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.wechat.friends.Wechat;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
-public class Fragment_Main extends Fragment implements View.OnClickListener, AMapLocationListener {
+public class Fragment_Main extends Fragment implements View.OnClickListener, PlatformActionListener, AMapLocationListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -51,6 +68,8 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
     private LinearLayout mFragment_main_bycard1;
     private LinearLayout mFragment_main_bycard2;
     private String mLogin_phone;
+    private Platform mWechat;
+    private String TAG = "Fragment_Main";
 
     public Fragment_Main() {
         // Required empty public constructor
@@ -73,6 +92,7 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
     }
 
     @Override
@@ -85,18 +105,18 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
 
         initView(inflate);
 
-
         return inflate;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        StatusBarUtil.setStatusBarLightMode(getActivity().getWindow());
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
         mLogin_phone = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
     }
 
     private void initView(View inflate) {
-
 
         mBtn_eidbind = inflate.findViewById(R.id.btn_eidbind);
         mBtncard_savemoney = inflate.findViewById(R.id.btncard_savemoney);
@@ -111,7 +131,11 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
         mFragment_main_bycard1.setOnClickListener(this);
         mFragment_main_bycard2.setOnClickListener(this);
         initLocation();
+
+        mWechat = ShareSDK.getPlatform(Wechat.NAME);
+        mWechat.setPlatformActionListener(Fragment_Main.this);
     }
+
 
 
     private void initLocation() {
@@ -144,31 +168,35 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
 
     @Override
     public void onClick(View v) {
-//        if (mLogin_phone != null) {
-            switch (v.getId()) {
-                case R.id.btncard_savemoney:
-                    Intent intent = new Intent(getActivity(), ShowAccessChannelActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.main_opencard:
-                    Intent intent2 = new Intent(getActivity(), OpenCardActivity.class);
-                    startActivity(intent2);
-                    break;
-                case R.id.btn_eidbind:
+        if (mLogin_phone != null) {
+        switch (v.getId()) {
+            case R.id.btncard_savemoney:
+                Intent intent = new Intent(getActivity(), ShowAccessChannelActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.main_opencard:
+                Intent intent2 = new Intent(getActivity(), OpenCardActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.btn_eidbind:
 //                    Intent intent3= new Intent(getActivity(), ShuangYSaveMoneyActivity.class);
 //                    startActivity(intent3);
-                    break;
-                case R.id.fragment_main_bycard1:
-                case R.id.fragment_main_bycard2:
-                    toWeChatproject();
-                    break;
+                break;
+            case R.id.fragment_main_bycard1:
+            case R.id.fragment_main_bycard2:
+                checkWeChatlogin();
+                break;
 
-            }
-//        } else {
-//            ToastUtils.showToast(getActivity(), "请登录后再试");
-//            Intent intent = new Intent(getActivity(), LoginActivity.class);
-//            startActivity(intent);
-//        }
+        }
+        } else {
+            ToastUtils.showToast(getActivity(), "请登录后再试");
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void checkWeChatlogin() {
+        mWechat.showUser(null);
 
     }
 
@@ -223,8 +251,6 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
     //        Bitmap bmp = activity.getWindow().getDecorView().getDrawingCache();
     //        return bmp;
     //    }
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -233,5 +259,56 @@ public class Fragment_Main extends Fragment implements View.OnClickListener, AMa
             mlocationClient.onDestroy();
         }
         mlocationClient = null;
+    }
+
+    @Override
+    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+        LUtils.d(TAG, "微信登录成功!");
+        Iterator ite = hashMap.entrySet().iterator();
+        //        mDialog2.dismiss();
+
+        while (ite.hasNext()) {
+            Map.Entry entry = (Map.Entry) ite.next();
+            Object key = entry.getKey();
+            Object value = entry.getValue();
+            LUtils.d(TAG, key + "：-------------- " + value);
+            LUtils.d(TAG, hashMap.toString());
+            LUtils.d(TAG, (String) hashMap.get("unionid"));
+
+        }
+        queryUserInfoByUserMid((String) hashMap.get("unionid"));
+
+    }
+
+    private void queryUserInfoByUserMid(String unionid) {
+        Call<QueryBindCradbean> queryCZCityCall = HttpManager.getInstance().getHttpClient3().
+                updateUserOpenId(ShareUtil.getString(Contants.LOGIN_USERMEMBERID),unionid);
+        queryCZCityCall.enqueue(new Callback<QueryBindCradbean>() {
+            @Override
+            public void onResponse(Call<QueryBindCradbean> call, Response<QueryBindCradbean> response) {
+                if (response.body() != null) {
+                    toWeChatproject();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QueryBindCradbean> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onError(Platform platform, int i, Throwable throwable) {
+
+        LUtils.d(TAG, "微信登录失败!" + i + throwable);
+        Toast.makeText(getActivity(), "微信登录失败!" + i + throwable, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCancel(Platform platform, int i) {
+        LUtils.d(TAG, "微信取消登录!" + i);
+        Toast.makeText(getActivity(), "微信取消登录!" + i, Toast.LENGTH_SHORT).show();
     }
 }

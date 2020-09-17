@@ -11,8 +11,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * @
@@ -195,6 +201,37 @@ public class ShareUtil {
         }
         return retData;
     }
+    //    public static String CARD_REAL_MONEY = "card_real_money";
+    //    public static String LOGIN_USER_PHONE = "login_user_phone";
+    //    public static String LOGIN_USER_NAME = "login_user_name";
+    //    public static String LOGIN_USER_HEAD = "login_user_head";
+    //    public static String APP_SESSIONIS = "app_sessionis";
+    //    public static String LOGIN_ORGMEMBERID = "login_orgmemberid";
+    //    public static String LOGIN_USERMEMBERID = "login_usermemberid";
+    //    public static String APP_STAUTS_PERMISSION = "app_stauts_permission";
 
+    public static void removeAllKey() {
+        List<String> sPcontant = getSPcontant();
+        Platform platform = ShareSDK.getPlatform(Wechat.NAME);
+        platform.removeAccount(true);
+        for (int i = 0; i < sPcontant.size(); i++) {
+            ShareUtil.removekey(sPcontant.get(i));
+        }
+
+    }
+
+    public  static List<String> getSPcontant() {
+        List<String> ml = new ArrayList<>();
+        ml.add(Contants.CARD_REAL_MONEY);
+        ml.add(Contants.LOGIN_USER_PHONE);
+        ml.add(Contants.LOGIN_USER_NAME);
+        ml.add(Contants.LOGIN_USER_HEAD);
+        ml.add(Contants.APP_SESSIONIS);
+        ml.add(Contants.LOGIN_ORGMEMBERID);
+        ml.add(Contants.LOGIN_USERMEMBERID);
+        ml.add(Contants.APP_STAUTS_PERMISSION);
+
+        return ml;
+    }
 
 }

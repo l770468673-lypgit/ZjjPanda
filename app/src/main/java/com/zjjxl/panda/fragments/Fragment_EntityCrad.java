@@ -16,6 +16,7 @@ import com.zjjxl.panda.adapters.Benefit_CardAdapter;
 import com.zjjxl.panda.adapters.EntityCradAdapter;
 import com.zjjxl.panda.uis.eIDActivity;
 import com.zjjxl.panda.utils.StatusBarUtil;
+import com.zjjxl.panda.utils.ToastUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,7 +54,7 @@ public class Fragment_EntityCrad extends Fragment implements EntityCradAdapter.E
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }  StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
     }
 
     @Override
@@ -84,8 +85,9 @@ public class Fragment_EntityCrad extends Fragment implements EntityCradAdapter.E
 
     @Override
     public void setClickOpen(String s) {
-        Intent in = new Intent(getActivity(), eIDActivity.class);
-        startActivity(in);
+//        Intent in = new Intent(getActivity(), eIDActivity.class);
+//        startActivity(in);
+        ToastUtils.showToast(getActivity(), "正在开发中");
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.zjjxl.panda.beans.LoginBean;
 import com.zjjxl.panda.beans.PramDetal_Bean;
 import com.zjjxl.panda.beans.QueryBindCradbean;
 import com.zjjxl.panda.beans.QueryCZCity;
+import com.zjjxl.panda.beans.QueryUserInfo;
 import com.zjjxl.panda.beans.SessioIdBean;
 import com.zjjxl.panda.beans.SmsCode;
 import com.zjjxl.panda.beans.bean_person;
@@ -112,6 +113,12 @@ public interface ClientRestAPI {
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
     Call<QueryBindCradbean> queryUserInfoByUserMid(@Field("userMid") String userMid);
 
+    //29.更新用户oenid
+    @FormUrlEncoded
+    @POST("/foreign/updateUserOpenId.jspx")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    Call<QueryBindCradbean> updateUserOpenId(@Field("userMid") String userMid, @Field("openId") String openId);
+
 
     //28.请用户绑定卡信息的接口
     @FormUrlEncoded
@@ -138,13 +145,19 @@ public interface ClientRestAPI {
                                            @Field("newPassword") String newPassword
     );
 
+    //忘记密码
+    @FormUrlEncoded
+    @POST("/foreign/queryUserInfoByUserMobile.jspx")
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    Call<QueryUserInfo> queryUserInfoByUserMobile(@Field("userMobile") String userMobile
+    );
+
 //    、、------------------------  下方是关乎于 交通卡 ------------------------------
 
 //    、、------------------------  //充值申请------------------------------
     //充值申请
 
     /**
-     *
      * String unit_code; // 单元编号 平台参数同步接口获得，与卡城市参数一致
      * String terminal_no; // 虚拟终端号 平台参数同步接口获得，与卡城市参数一致
      * String city_code; // 城市代码
@@ -296,6 +309,7 @@ public interface ClientRestAPI {
      * double deposit_amount 押金/工本金额
      * String algorithm_type 加密算法标识 国际算法:0,国密算法:1
      * String mode_version 售卡版本号 当前：1500(2.0.4)
+     *
      * @return
      */
 
@@ -315,9 +329,9 @@ public interface ClientRestAPI {
 
                                            @Field("card_random") String card_random,
                                            @Field("mode_type") String mode_type,
-                                           @Field("deposit_amount") double  deposit_amount,
-                                           @Field("algorithm_type") String algorithm_type ,
-                                           @Field("mode_version") String mode_version );
+                                           @Field("deposit_amount") double deposit_amount,
+                                           @Field("algorithm_type") String algorithm_type,
+                                           @Field("mode_version") String mode_version);
     //    、、------------------------  //用户卡信息同步------------------------------
 
     /**
@@ -455,13 +469,12 @@ public interface ClientRestAPI {
     //-----------------------支付订单退款----------------------------------
 
     /**
-
-     String trade_no; // 平台订单号 TSM平台订单号与业务订单号可以全传，必须传一个。 创建原样返回
-     String out_trade_no; // 业务订单号 TSM平台订单号与业务订单号可以全传，必须传一个。创建原样返回
-     double trade_amount; // 退款金额
-     String out_refund_no; // 业务退款单号 （非必输）
-     String trade_time; // 退款时间 yyyy-MM-dd’T’HH: （非必输）
-     String modify_status; // 变更状态 REFUND:对订单进行退款
+     * String trade_no; // 平台订单号 TSM平台订单号与业务订单号可以全传，必须传一个。 创建原样返回
+     * String out_trade_no; // 业务订单号 TSM平台订单号与业务订单号可以全传，必须传一个。创建原样返回
+     * double trade_amount; // 退款金额
+     * String out_refund_no; // 业务退款单号 （非必输）
+     * String trade_time; // 退款时间 yyyy-MM-dd’T’HH: （非必输）
+     * String modify_status; // 变更状态 REFUND:对订单进行退款
      * 返回数据
      * {
      * "status": "true/false",

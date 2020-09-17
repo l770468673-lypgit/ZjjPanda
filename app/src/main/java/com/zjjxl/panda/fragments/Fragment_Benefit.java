@@ -47,7 +47,7 @@ public class Fragment_Benefit extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }  StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
     }
 
 

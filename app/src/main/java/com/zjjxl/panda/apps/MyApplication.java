@@ -1,11 +1,13 @@
 package com.zjjxl.panda.apps;
 
 import android.app.Application;
+import android.text.style.TtsSpan;
 
 
 import com.blankj.utilcode.util.Utils;
 import com.heyue.pay.TSMPay;
 import com.heyue.pay.utils.ContextHolder;
+import com.mob.MobSDK;
 import com.zjjxl.panda.https.HttpManager;
 import com.zjjxl.panda.utils.ShareUtil;
 
@@ -53,16 +55,20 @@ public class MyApplication extends Application {
         ShareUtil.initShared(this);
         HttpManager.getInstance();
         ignoreSSLHandshake();
-
+        MobSDK.init(this);
+        MobSDK.submitPolicyGrantResult(true, null);
 //        Utils.init(this);
         ContextHolder.initial(this);
-        //X7UES7J5DT19VQ0ZL2JBZA73ON78M63O
-        //appkey E49B0A3AE672E077BA9C75EC903931
-        //SW7HJMGXI9BWK3B6D2LUPYIRNYNP5J6B
-//        TSMPay.init("5ECDDF300FCBE7CD545609C3A927F75E");
-        TSMPay.init("E49B0A3AE672E077BA9C75EC903931",
-                "OYH815GP47CKA5QYHYBDTWXTNVI5A1MH",
-                "http://47.114.7.135:7900/payment/v1/");
+
+        // 测试环境下
+//        TSMPay.init("E49B0A3AE672E077BA9C75EC903931",
+//                "OYH815GP47CKA5QYHYBDTWXTNVI5A1MH",
+//                "http://47.114.7.135:7900/payment/v1/");
+
+        // 正式环境下
+        TSMPay.init("F6AA39D5211E47FFFD12CB4128CEEA03",
+                "U4BRX44GY31524ELP54XMKRJ84XSL6XG",
+                "http://119.53.211.78:9510/payment/v1/");
 
 //        TSMPay.init("E49B0A3AE672E077BA9C75EC903931");//sdk使用默认值SW7HJMGXI9BWK3B6D2LUPYIRNYNP5J6B
 //        TSMPay.init("X7UES7J5DT19VQ0ZL2JBZA73ON78M63O");//sdk使用默认值SW7HJMGXI9BWK3B6D2LUPYIRNYNP5J6B

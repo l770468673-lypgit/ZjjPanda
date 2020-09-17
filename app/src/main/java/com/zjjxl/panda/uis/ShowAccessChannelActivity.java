@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.zjjxl.panda.R;
 import com.zjjxl.panda.adapters.AccessChanneAdapter;
@@ -23,12 +25,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShowAccessChannelActivity extends XLBaseActivity implements AccessChanneAdapter.AccessItenClick {
+public class ShowAccessChannelActivity extends XLBaseActivity implements AccessChanneAdapter.AccessItenClick, View.OnClickListener {
 
     private RecyclerView mAccess_recycle;
     private AccessChanneAdapter mAdapter;
     private List<QueryCZCity.ExtraBean> mExtra;
     private String TAG = "ShowAccessChannelActivity";
+    private TextView mShowaccess_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,7 @@ public class ShowAccessChannelActivity extends XLBaseActivity implements AccessC
 
     private void initView() {
         mAccess_recycle = findViewById(R.id.access_recycle);
+        mShowaccess_back = findViewById(R.id.showaccess_back);
         mAdapter = new AccessChanneAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         //设置布局管理器
@@ -75,6 +79,7 @@ public class ShowAccessChannelActivity extends XLBaseActivity implements AccessC
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         mAccess_recycle.setAdapter(mAdapter);
 
+        mShowaccess_back.setOnClickListener(this);
         mAdapter.setAccessItenClick(this);
         getdate();
 
@@ -96,5 +101,14 @@ public class ShowAccessChannelActivity extends XLBaseActivity implements AccessC
     @Override
     public void setClickSend(int position) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.showaccess_back:
+                finish();
+                break;
+        }
     }
 }

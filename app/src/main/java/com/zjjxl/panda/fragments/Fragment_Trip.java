@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zjjxl.panda.R;
- import com.zjjxl.panda.uis.ShowAccessChannelActivity;
+import com.zjjxl.panda.uis.ShowAccessChannelActivity;
 import com.zjjxl.panda.utils.Contants;
 import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.StatusBarUtil;
@@ -56,6 +56,7 @@ public class Fragment_Trip extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        StatusBarUtil.setDrawable(getActivity(), R.drawable.mine_title_color);
     }
 
     @Override

@@ -9,6 +9,77 @@
     tools:ignore="MissingConstraints">
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/savemoney_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:padding="20dp"
+            android:text="返回"
+            android:textColor="#262626"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/save_money_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="20dp"
+            android:text="充值中心"
+            android:textColor="#262626"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/payquery"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="必须执行平台参数同步" />
+
+
+        <Button
+            android:id="@+id/createoeder"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="创建订单" />
+
+        <Button
+            android:id="@+id/savem"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="支付订单" />
+
+        <Button
+            android:id="@+id/payandquery"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="支付后查询" />
+
+        <Button
+            android:id="@+id/getMac2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="充值申请" />
+
+        <Button
+            android:id="@+id/kaika"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="开卡" />
+    </LinearLayout>
+
+    <RelativeLayout
         android:id="@+id/zjjrelay_recharge"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,6 +113,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+
         android:id="@+id/zjjrely_nfc_bottomlly"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -67,6 +139,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/refund"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="退款" />
 
                     <TextView
                         android:id="@+id/zjjlly_writecardnum"
@@ -124,7 +202,8 @@
                 android:id="@+id/zjjmoney_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numColumns="3" />
+                android:numColumns="3"
+                android:visibility="visible" />
 
 
             <LinearLayout
@@ -142,7 +221,8 @@
                     android:background="@drawable/nfcact_grid_item_boxframe"
                     android:text="@string/nfcact_title_realpaymoney_othermoney"
                     android:textColor="#093B92"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:id="@+id/zjjnfc_paymoney_bottomlly"
@@ -194,90 +274,176 @@
 
 
             </LinearLayout>
-            <Button
-                android:id="@+id/refund"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:text="退款" />
+
 
         </LinearLayout>
 
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/nfc_bottomlly"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentBottom="true"-->
+        <!--            android:layout_marginBottom="20dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:visibility="gone">-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/nfcact_title_fapiao"-->
+        <!--                android:textSize="14sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/nfcact_title_tishi"-->
+        <!--                android:textSize="14sp" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/moredispose_text_hist"-->
+        <!--                android:textSize="14sp" />-->
+        <!--        </LinearLayout>-->
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lly_alipaysuccess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="100dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/opencard_success"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="40dp"
+            android:src="@mipmap/nfc_savesuccess" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/opencard_success"
+            android:gravity="center_horizontal"
+            android:text="充值成功"
+            android:textColor="#ff0000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/opencard_success"
+            android:gravity="center_horizontal"
+            android:text="请贴卡进行圈存"
+            android:textColor="#ff0000"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lly_savemoney_resp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="40dp"
+            android:src="@mipmap/nfc_savesuccess" />
+
         <LinearLayout
-            android:id="@+id/nfc_bottomlly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="#F5F5F5"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="充值卡号：" />
+
+                <TextView
+                    android:id="@+id/success_cardnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2334234234234234" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="充值金额：" />
+
+                <TextView
+                    android:id="@+id/success_savemoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="233" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="可用金额：" />
+
+                <TextView
+                    android:id="@+id/success_countmoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2334 234234" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/savesuccess_nextstep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="160dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/login_travel_btn"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nfcact_title_fapiao"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nfcact_title_tishi"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/moredispose_text_hist"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/payquery"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="必须执行平台参数同步" />
-
-    <Button
-        android:id="@+id/quancun"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="查询是否开卡" />
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="@string/moredispose_backtoact"
+            android:textColor="@color/ffffff" />
 
 
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/createoeder"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="创建订单" />
-
-    <Button
-        android:id="@+id/savem"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="支付订单" />
-
-    <Button
-        android:id="@+id/payandquery"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="支付后查询" />
-
-    <Button
-        android:id="@+id/getMac2"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="充值申请" />
-<!--    <Button-->
-<!--        android:id="@+id/tuikuan"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:text="退款" />-->
-    <Button
-        android:id="@+id/kaika"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="开卡" />
 
 </LinearLayout>

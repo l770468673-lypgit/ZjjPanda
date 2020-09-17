@@ -19,11 +19,12 @@ import com.zjjxl.panda.utils.ShareUtil;
 public class SettingActivity extends XLBaseActivity implements View.OnClickListener {
 
     private RelativeLayout mLife_toptitle;
-    private RatioImageView mSetting_heanimg;
+     private RatioImageView mSetting_heanimg;
     private TextView mSetting_name;
     private TextView mSetting_phone;
     private TextView mSetting_private;
     private TextView mSetting_server;
+    private RelativeLayout mRely_changepass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,12 @@ public class SettingActivity extends XLBaseActivity implements View.OnClickListe
         mSetting_phone = findViewById(R.id.setting_phone);
         mSetting_private = findViewById(R.id.setting_private);
         mSetting_server = findViewById(R.id.setting_server);
+        mRely_changepass = findViewById(R.id.rely_changepass);
 
         mLife_toptitle.setOnClickListener(this);
         mSetting_server.setOnClickListener(this);
         mSetting_private.setOnClickListener(this);
+        mRely_changepass.setOnClickListener(this);
 
 
         String stringph = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
@@ -68,7 +71,13 @@ public class SettingActivity extends XLBaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.life_toptitle:
+            case R.id.rely_changepass:
+                Intent inc = new Intent(this, ForgetPassActivity.class);
+                inc.putExtra("ForgetPassActivity", 1);
+                startActivity(inc);
+                finish();
+                break;
+                case R.id.life_toptitle:
                 finish();
                 break;
             case R.id.setting_private:

@@ -47,7 +47,10 @@ public class CardListActivity extends AppCompatActivity {
         mCardlist_recycle.setLayoutManager(layoutManager);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         mCardlist_recycle.setAdapter(mAdapter);
-        LoadDate();
+       String mLogin_phone = ShareUtil.getString(Contants.LOGIN_USER_PHONE);
+        if (mLogin_phone!=null) {
+            LoadDate();
+        }
 
     }
 

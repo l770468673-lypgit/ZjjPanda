@@ -68,10 +68,16 @@
 
                     </LinearLayout>
 
-                    <ImageView
+                    <!--                    <ImageView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:background="@mipmap/mine_bar_qr" />-->
+                    <TextView
+                        android:id="@+id/loginout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@mipmap/mine_bar_qr" />
+                        android:layout_gravity="center_vertical"
+                        android:text="退出账号" />
 
 
                 </LinearLayout>
@@ -87,7 +93,18 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="2" />
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/mine_bindcard_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="20dp"
+                            android:text="0000 0000 0000 0000"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </LinearLayout>
 
                     <Button
                         android:id="@+id/mine_rely_btn"
@@ -127,13 +144,14 @@
                 </LinearLayout>
 
                 <RelativeLayout
-                    android:id="@+id/mine_rely_cardlist"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/ffffff"
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/mine_button_cardlist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"

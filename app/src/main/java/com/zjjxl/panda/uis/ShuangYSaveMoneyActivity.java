@@ -11,9 +11,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,10 +42,7 @@ import com.zjjxl.panda.utils.LUtils;
 import com.zjjxl.panda.utils.ShareUtil;
 import com.zjjxl.panda.utils.StatusBarUtil;
 import com.zjjxl.panda.utils.ToastUtils;
-import com.zjjxl.panda.utils.Yuan2fen;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,12 +54,7 @@ import java.util.regex.Pattern;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-//import com.heyue.pay.TSMPay;
-//import com.heyue.pay.alipay.Alipay;
-//import com.heyue.pay.api.BaseSubscriber;
-//import com.heyue.pay.listener.BaseCallback;
-//import com.heyue.pay.protocol.BaseResp;
-//import com.heyue.pay.protocol.PayRequestRec;
+
 
 public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private String TAG = "ShuangYSaveMoneyActivity";
@@ -70,10 +62,13 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
     private Button mkaika;
     private Button mPayquery;
     private Button mRefund;
-    private Button mQancun;
+
+
     private Button mCreateoeder;
     private Button mGetMac2;
     private Button mPayandquery;
+    private Button mSavesuccess_nextstep;
+
 
     private double money = 0;
 
@@ -89,7 +84,8 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
     private String mSubject;
     private OpenCardData mOpenCardData;
     private String STATE_OPEN = "01";
-    private String mTrace_id;
+//    private String mTrace_id;
+
     private String mUnit_code;
     private String mTerminal_no;
     private String mCity_code;
@@ -110,6 +106,11 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
     private Button mPaymoney_bottomlly3;
     private EditText mNfc_saveothermoney;
     private TextView mLly_writecardnum;
+    private TextView mSavemoney_back;
+    private TextView mSuccess_cardnum;
+    private TextView mSuccess_savemoney;
+    private TextView mSuccess_countmoney;
+    private LinearLayout mLly_savemoney_resp;
     private double[] moneydate = {10, 20, 30, 50, 100, 200};
     private List<Map<String, Object>> mData_list = new ArrayList<>();
     private String mTrade_no;
@@ -123,7 +124,7 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
 //07H：修改透支限额；
 //            09H：复合应用消费。
     private String mPay_time;
-    private CardCharge_bean.DataBeanX mdate_savemoney;
+    private LinearLayout mLly_alipaysuccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +141,9 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         //========================
         mRely_nfc_bottomlly = findViewById(R.id.zjjrely_nfc_bottomlly);
         mRely_nfc_bottomlly.setVisibility(View.GONE);
+        mSavemoney_back = findViewById(R.id.savemoney_back);
         mMoney_listview = findViewById(R.id.zjjmoney_listview);
+        mLly_alipaysuccess = findViewById(R.id.lly_alipaysuccess);
         mNfc_paymoney_bottomlly = findViewById(R.id.zjjnfc_paymoney_bottomlly);
         mNfc_btnsaveothermoney = findViewById(R.id.zjjnfc_btnsaveothermoney);
         mPaymoney_bottomlly3 = findViewById(R.id.zjjpaymoney_bottomlly3);
@@ -156,23 +159,29 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         //========================
         mRefund = findViewById(R.id.refund);
         mPayquery = findViewById(R.id.payquery);
-        mQancun = findViewById(R.id.quancun);
+
         mSavem = findViewById(R.id.savem);
         mkaika = findViewById(R.id.kaika);
         mCreateoeder = findViewById(R.id.createoeder);
         mGetMac2 = findViewById(R.id.getMac2);
         mPayandquery = findViewById(R.id.payandquery);
+
+        mLly_savemoney_resp = findViewById(R.id.lly_savemoney_resp);
+        mSuccess_cardnum = findViewById(R.id.success_cardnum);
+        mSuccess_savemoney = findViewById(R.id.success_savemoney);
+        mSuccess_countmoney = findViewById(R.id.success_countmoney);
+        mSavesuccess_nextstep = findViewById(R.id.savesuccess_nextstep);
         //---------------
+        mSavemoney_back.setOnClickListener(this);
         mRefund.setOnClickListener(this);
         mGetMac2.setOnClickListener(this);
         mPayandquery.setOnClickListener(this);
         mPayquery.setOnClickListener(this);
-        mQancun.setOnClickListener(this);
         mkaika.setOnClickListener(this);
         mSavem.setOnClickListener(this);
+        mSavesuccess_nextstep.setOnClickListener(this);
         mCreateoeder.setOnClickListener(this);
         initEventAndData();
-
     }
 
     private List<Map<String, Object>> getdate() {
@@ -185,6 +194,16 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //设置处理优于所有其他NFC的处理
+        if (mNfcAdapter != null) {
+            mNfcAdapter.enableForegroundDispatch(this,
+                    mPendingIntent, CardManager.FILTERS, CardManager.TECHLISTS);
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.zjjnfc_btnsaveothermoney:
@@ -192,37 +211,39 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
                 mNfc_paymoney_bottomlly.setVisibility(View.VISIBLE);
                 mPaymoney_bottomlly3.setVisibility(View.VISIBLE);
                 break;
+            case R.id.savemoney_back:
+            case R.id.savesuccess_nextstep:
+                finish();
+
+                break;
             case R.id.createoeder:
-                createOrder(money);
+//                createOrder(money);
                 break;
             case R.id.savem:
-                tozhifuSave();
+//                tozhifuSave();
                 break;
             case R.id.kaika:
                 //                toQuery();
-                ToastUtils.showToast(this, "正在开卡");
-                mNowtime = System.currentTimeMillis();
-                requestOpenCardDialog();
+//                ToastUtils.showToast(this, "正在开卡");
+//                mNowtime = System.currentTimeMillis();
+//                requestOpenCardDialog();
                 break;
-            case R.id.quancun:
-//                queryCardIsOpen();
-                break;
+
             case R.id.payandquery:
-                toQuery();
+//                toQuery();
                 break;
             case R.id.getMac2:
-                saveMoneyCommit();
+//                saveMoneyCommit();
                 break;
             case R.id.payquery:
                 //平台参数同步
-                paramDetail();
+//                paramDetail();
                 break;
             case R.id.refund:
                 //退款
                 refund();
                 break;
         }
-
     }
 
     /**
@@ -236,24 +257,15 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
             mNfcAdapter.disableForegroundDispatch(this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //设置处理优于所有其他NFC的处理
-        if (mNfcAdapter != null)
-            mNfcAdapter.enableForegroundDispatch(this,
-                    mPendingIntent, CardManager.FILTERS, CardManager.TECHLISTS);
-    }
-
-
     protected void initEventAndData() {
         //此处adapter需要重新获取，否则无法获取message
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        //一旦截获NFC消息，就会通过PendingIntent调用窗口
-        mPendingIntent = PendingIntent.getActivity(this,
-                0, new Intent(this,
-                        getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-
+        if (mNfcAdapter != null) {
+            //一旦截获NFC消息，就会通过PendingIntent调用窗口
+            mPendingIntent = PendingIntent.getActivity(this,
+                    0, new Intent(this,
+                            getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        }
     }
 
     @Override
@@ -277,35 +289,37 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
                         } else {
                             ToastUtils.showToast(this, "检查卡片是否损坏");
                         }
-
-
                     }
                     break;
                 case 1:
-                    // 为圈存做请求 获取 MAC2
-                    saveMoneyCommit();
+                    // 为圈存做请求
+
+
+                        saveMoneyCommit();
 
                     break;
             }
-
-            //{"status":true,"msg":"成功","data":{"trace_id":"20200812230824343",
-            // "biz_type":"SERV_CARD_RENT_APP","code":"2001","message":"卡片随机数非法。"}}
         }
     }
 
+    // 更新服务端是否写卡成功
     private void updateResult(CardCharge_bean.DataBeanX mdate_savemoney, double m, String flag) {
         String writestatus;
-         if (flag != null) {
+        final boolean writeSuccess;
+        if (flag != null) {
             writestatus = "0";
+            writeSuccess = true;
         } else {
             writestatus = "1";
             flag = "FFFFFFFF";//写卡失败默认提交ffffff
+            writeSuccess = false;
         }
         String terminal_seq = mdate_savemoney.getData().getTerminal_seq();
         String cardno = mdate_savemoney.getData().getCard_no();
         String time = mdate_savemoney.getData().getTrade_time();
         String cardseq = mdate_savemoney.getData().getCard_seq();
-        Call<Bean_BaseCard> bean_baseCardCall = HttpManager.getInstance().getHttpClient3().cardChargeConfirm(
+        Call<Bean_BaseCard> bean_baseCardCall = HttpManager.getInstance().
+                getHttpClient3().cardChargeConfirm(
                 mUnit_code, mTerminal_no, mCity_code, mIssuer_code, mOut_trade_no,
                 terminal_seq, cardno, mData.cardType,
                 cardseq, time, m, money,
@@ -313,7 +327,17 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         bean_baseCardCall.enqueue(new Callback<Bean_BaseCard>() {
             @Override
             public void onResponse(Call<Bean_BaseCard> call, Response<Bean_BaseCard> response) {
-                ToastUtils.showToast(ShuangYSaveMoneyActivity.this, "充值成功，再次读卡刷新");
+                state = 0;
+                if (writeSuccess) {
+                    mLly_alipaysuccess.setVisibility(View.GONE);
+                    mLly_savemoney_resp.setVisibility(View.VISIBLE);
+                    mRely_nfc_bottomlly.setVisibility(View.GONE);
+                    mSuccess_cardnum.setText(cardno);
+                    mSuccess_savemoney.setText(money + "");
+                    mSuccess_countmoney.setText(m + "");
+                } else {
+                    ToastUtils.showToast(ShuangYSaveMoneyActivity.this, "重新放卡");
+                }
             }
 
             @Override
@@ -323,29 +347,43 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
 
     }
 
-
+    // 退款
     private void refund() {
 
+        //sttsm1dda73ca4cc94279b7a14b12c24bbd1b
+        //20200916188256721463719214241243
         Call<Bean_BaseCard> refund = HttpManager.getInstance().getHttpClient3()
-                .payOrderRefund(mTrade_no,
+                .payOrderRefund(
+//                        "20200916586121979652851142312134",
+//                        "sttsm600d372e7fef4a8389b324e101ebf7be",
+//                        10.0,
+                        mTrade_no,
                         mOut_trade_no,
-                        money, "", "", "REFUND");
+                        money,
+                        "", "", "REFUND");
         refund.enqueue(new Callback<Bean_BaseCard>() {
             @Override
             public void onResponse(Call<Bean_BaseCard> call, Response<Bean_BaseCard> response) {
-
-                state = 0;
+                if (response.body() != null) {
+                    boolean status = response.body().isStatus();
+                    if (status) {
+                        state = 0;
+                        ToastUtils.showToast(ShuangYSaveMoneyActivity.this, response.body().getData().getMessage());
+                    } else {
+                        ToastUtils.showToast(ShuangYSaveMoneyActivity.this, response.body().getData().getMessage());
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<Bean_BaseCard> call, Throwable t) {
-
+                ToastUtils.showToast(ShuangYSaveMoneyActivity.this, "退款失败");
             }
         });
     }
 
+    // 初始化支付平台参数
     private void paramDetail() {
-
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("HH:mm:ss");// HH:mm:ss
         //获取当前时间
@@ -373,7 +411,7 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
                             LUtils.d(TAG, "mTerminal_no==" + mTerminal_no);
                             LUtils.d(TAG, "mCity_code==" + mCity_code);
                             LUtils.d(TAG, "mIssuer_code==" + mIssuer_code);
-//                            createOrder(0.00);
+
                         }
 
                     }
@@ -395,7 +433,7 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         String currdate = simpleDateFormat.format(date) + "T" + simpleDateFormat2.format(date);
         LUtils.d(TAG, "Date获取当前日期时间  m " + currdate);
         Call<Bean_zjjCreateOrder> bean_baseCardCall = HttpManager.getInstance().getHttpClient3().create(
-                "15689123357",
+                ShareUtil.getString(Contants.LOGIN_USER_PHONE),
                 "",
                 channel_type,
                 currdate,
@@ -419,7 +457,7 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
                     mOut_trade_no = data.getData().getOut_trade_no();
                     mTrade_no = data.getData().getTrade_no();
                     mSubject = data.getData().getSubject();
-                    mTrace_id = data.getTrace_id();
+//                    mTrace_id = data.getTrace_id();
                     if (moneys > 1) {
                         tozhifuSave();
                     }
@@ -432,10 +470,13 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
             }
         });
     }
-    //     充值申请
+
+    //充值申请
     private void saveMoneyCommit() {
         if (mParcelableExtra != null) {
-            mData = CardManager.charge(mParcelableExtra, money, true, mTerminal_no);
+            if (mData == null) {
+                mData = CardManager.charge(mParcelableExtra, money, true, mTerminal_no);
+            }
             Log.e(TAG, " 充值申请  money==" + money);
             Log.e(TAG, " 充值申请  mTerminal_no==" + mTerminal_no);
             if (mData != null) {
@@ -443,9 +484,9 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
                     tosaveMoneyCommit();
                     LUtils.d(TAG, "卡片已激活");
                 } else {
-                    //提示开卡
+//                    提示开卡
+                    LUtils.d(TAG, "卡片未激活");
                     ToastUtils.showToast(this, "卡片正在开卡，请务离开");
-                    mNowtime = System.currentTimeMillis();
                     requestOpenCardDialog();
                 }
             }
@@ -453,6 +494,7 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
 
     }
 
+    //充值申请 圈存
     private void tosaveMoneyCommit() {
         Call<CardCharge_bean> bean_baseCardCall = HttpManager.getInstance().getHttpClient3().
                 cardChargeApply(mUnit_code, mTerminal_no,
@@ -464,37 +506,32 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
             @Override
             public void onResponse(Call<CardCharge_bean> call, Response<CardCharge_bean> response) {
                 if (response.body() != null) {
-                    mdate_savemoney = response.body().getData();
-                    CardCharge_bean.DataBeanX.DataBean data1 = mdate_savemoney.getData();
+                    CardCharge_bean.DataBeanX.DataBean data1 = response.body().getData().getData();
                     String card_mac = data1.getCard_mac();
                     //写入mac2
                     if (card_mac != null) {
                         LUtils.d(TAG, "card_mac====" + card_mac);
                         try {
                             String mtag = null;
-
                             String REGEX = "[^(0-9)]";
-                            String da = "2020-08-25T09:51:37";
-                            String ticket = Pattern.compile(REGEX).matcher(mPay_time).replaceAll("").trim();
+                            String ticket = Pattern.compile(REGEX).matcher(mPay_time)
+                                    .replaceAll("").trim();
                             LUtils.d(TAG, "ticket===========" + ticket);
                             mtag = CardManager.getTag(mParcelableExtra, card_mac, ticket);
-                            LUtils.d(TAG, "format====" + ticket);
                             LUtils.d(TAG, "tag====" + mtag);
-                            state = 0;
+
                             if (mtag != null) {
-                                updateResult(mdate_savemoney, Double.parseDouble(cardNowbalanceMoney) + money, mtag);
+                                updateResult(response.body().getData(), Double.parseDouble(cardNowbalanceMoney) + money, mtag);
                             } else {
-                                updateResult(mdate_savemoney, Double.parseDouble(cardNowbalanceMoney), mtag);
+                                refund();
+                                updateResult(response.body().getData(), Double.parseDouble(cardNowbalanceMoney), mtag);
                             }
                         } catch (Exception q) {
                             LUtils.d(TAG, "Exception)====" + q);
-                        } finally {
-//                                refund();
                         }
                     } else {
-                        refund();
                         ToastUtils.showToast(ShuangYSaveMoneyActivity.this,
-                                mdate_savemoney.getMessage().toString());
+                                response.body().getData().getMessage().toString());
                     }
                 }
             }
@@ -507,9 +544,9 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         });
     }
 
-
     //开卡申请
     private void OpencardApply() {
+
         LUtils.d(TAG, " 开卡申请 algorithmType" + mOpenCardData.algorithmType);
         Log.e(TAG, " 开卡申请  mOut_trade_no==" + mOut_trade_no);
         Call<CardRentApply_Bean> CardRentApply_BeanCall = HttpManager.getInstance().getHttpClient3()
@@ -523,7 +560,7 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         CardRentApply_BeanCall.enqueue(new Callback<CardRentApply_Bean>() {
             @Override
             public void onResponse(Call<CardRentApply_Bean> call, Response<CardRentApply_Bean> response) {
-                if (response.body() != null) {
+                if (response.body().isStatus()) {
                     try {
                         String mode_command = response.body().getData().getData().getMode_command();
                         int account_no = response.body().getData().getData().getAccount_no();
@@ -535,12 +572,12 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
                             boolean success = CardManager.commitRequestOpenCard(mParcelableExtra, mode_command);
                             if (success) {
                                 OpencardCommit(account_no, terminal_seq, server_time, mode_version, "0");
-                                LUtils.d(TAG, "------------写卡 success--------" + success);
-                                ToastUtils.showToast(ShuangYSaveMoneyActivity.this, "写卡成功");
+                                LUtils.d(TAG, "------------开卡 success--------" + success);
+                                ToastUtils.showToast(ShuangYSaveMoneyActivity.this, "开卡成功");
                             } else {
                                 OpencardCommit(account_no, terminal_seq, server_time, mode_version, "1");
-                                LUtils.d(TAG, "------------false--写卡失败------" + success);
-                                ToastUtils.showToast(ShuangYSaveMoneyActivity.this, "写卡失败");
+                                LUtils.d(TAG, "------------false--开卡失败------" + success);
+                                ToastUtils.showToast(ShuangYSaveMoneyActivity.this, "开卡失败");
                             }
 
                         }
@@ -550,6 +587,8 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
                         ToastUtils.showToast(ShuangYSaveMoneyActivity.this, response.body().getData().getMessage());
                     }
 
+                } else {
+                    refund();
                 }
             }
 
@@ -558,8 +597,6 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
 
             }
         });
-
-
     }
 
     //开卡提交
@@ -575,7 +612,11 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
         bean_baseCardCall.enqueue(new Callback<Bean_BaseCard>() {
             @Override
             public void onResponse(Call<Bean_BaseCard> call, Response<Bean_BaseCard> response) {
-                tosaveMoneyCommit();
+                if (response.body().isStatus()) {
+                    tosaveMoneyCommit();
+//                    state = 1;
+                    LUtils.d(TAG, response.body().getData().getMessage());
+                }
             }
 
             @Override
@@ -589,12 +630,14 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
     private void requestOpenCardDialog() {
         //        获取开卡请求的基本参数
         if (mParcelableExtra != null) {
-            mOpenCardData = CardManager.requestOpenCard(mParcelableExtra);
-            if (mOpenCardData != null) {
+            if (mOpenCardData == null) {
+                mOpenCardData = CardManager.requestOpenCard(mParcelableExtra);
+            } else if (mOpenCardData != null) {
                 Log.e(TAG, " 获取开卡请求的基本参数  mOpenCardData =" + mOpenCardData.issuerCode);
                 Log.e(TAG, " mOpenCardData " + mOpenCardData.cardId);
                 Log.e(TAG, " mOpenCardData " + mOpenCardData.cardType);
                 Log.e(TAG, " mOpenCardData " + mOpenCardData.algorithmType);
+                mNowtime = System.currentTimeMillis();
                 OpencardApply();
             } else {
                 ToastUtils.showToast(this, "请将卡片贴在读卡区域");
@@ -615,7 +658,6 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
             public void onNext(PayRequestRec payRequestRec) {
                 //服务器返回结果
                 super.onNext(payRequestRec);
-                state = 1;
                 Log.e(TAG, "   支付服务器返回结果  payAli: " + payRequestRec.trace_id);
                 Log.e(TAG, "   支付服务器返回结果  payAli: " + payRequestRec.message);
                 Log.e(TAG, "   支付服务器返回结果  payAli: " + payRequestRec.biz_content);
@@ -628,6 +670,10 @@ public class ShuangYSaveMoneyActivity extends AppCompatActivity implements View.
                 Log.e(TAG, "   支付服务器返回结果  payAli: " + payRequestRec.sign_type);
                 Gson_AlipayRes gson_alipayRes = new Gson().fromJson(payRequestRec.data, Gson_AlipayRes.class);
                 mPay_time = gson_alipayRes.getPay_time();
+                state = 1;
+                mRely_nfc_bottomlly.setVisibility(View.GONE);
+                mLly_alipaysuccess.setVisibility(View.VISIBLE);
+
 
             }
             //////////

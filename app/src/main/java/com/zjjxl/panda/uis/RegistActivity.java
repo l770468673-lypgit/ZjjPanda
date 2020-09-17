@@ -160,7 +160,6 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                         && mReal_regist_password.getText().toString() != null) {
                     toRegist(mReal_regist_phonenum.getText().toString(),
                             mReal_regist_password.getText().toString());
-
                 } else {
                     ToastUtils.showToast(this, R.string.login_wx_editokphone);
                 }
@@ -187,8 +186,6 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                         mDialog.show();
                     }
                 }
-
-
             }
 
             @Override
@@ -302,7 +299,6 @@ public class RegistActivity extends AppCompatActivity implements View.OnClickLis
                 if (response.body() != null) {
                     String data = response.body().getResult();
 //                    ToastUtils.showToast(RegistActivity.this, "data==" + data);
-
                     LUtils.d(TAG, "onResponse== data==" + data);
                 }
             }
